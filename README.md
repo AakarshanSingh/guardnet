@@ -1,3 +1,0 @@
-# GuardNet
-
-Website Vulnerability Scanner
