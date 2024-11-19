@@ -1,0 +1,1 @@
+COMMAND_INJECTION_PAYLOADS = ["; ls", "| ls", "`ls`"]
