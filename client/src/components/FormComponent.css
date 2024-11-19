@@ -1,0 +1,97 @@
+/* Form Styles */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f8f8;
+  font-family: 'Roboto', sans-serif;
+}
+
+.form-wrapper {
+  background-color: #fff;
+  padding: 3rem;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.form-description {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.form-field {
+  margin-bottom: 1.5rem;
+}
+
+.form-field label {
+  display: block;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+input[type="url"],
+input[type="email"],
+input[type="text"] {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  transition: border-color 0.3s ease;
+}
+
+input[type="url"]:focus,
+input[type="email"]:focus,
+input[type="text"]:focus {
+  border-color: #3498db;
+}
+
+.placeholder {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 0.3rem;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.checkbox-container input {
+  margin-right: 0.5rem;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #3498db;
+  color: #fff;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #2980b9;
+}
+
+.error-message {
+  color: red;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
