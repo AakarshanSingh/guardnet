@@ -1,0 +1,8 @@
+requests
+beautifulsoup4
+fastapi
+uvicorn
+pydantic
+python-multipart
+sqlalchemy
+pydantic[email]

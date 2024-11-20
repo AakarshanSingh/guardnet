@@ -1,1 +1,32 @@
-node_modules/
+# Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment folder
+env/
+
+# .env file for environment variables
+.env
+
+# IDE/editor-specific files
+.vscode/
+.idea/
+
+# Backup and temporary files
+*~
+*.bak
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# FastAPI specific (if any)
+*.db
+
+# Coverage reports
+.coverage
+*.cover
+*.hypothesis/

