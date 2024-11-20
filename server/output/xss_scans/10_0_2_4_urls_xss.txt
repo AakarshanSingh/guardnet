@@ -1,0 +1,16 @@
+XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r
+XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r
+XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r
+XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r
+XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r
+XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r
+XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r
+XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r
+XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r
+XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r
+XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r
+XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r
+XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r
+XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r
+XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r
+XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r

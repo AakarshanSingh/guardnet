@@ -2,7 +2,8 @@ from fastapi import FastAPI, HTTPException
 import os
 from pydantic import BaseModel
 from tools.crawler.crawler import crawl, save_urls_to_file
-from tools.scanner.sql import scan_urls_from_file  # Import the new SQL scanning function
+from tools.scanner.sql import sql_scan_from_file  # Import the new SQL scanning function
+from tools.scanner.xss import xss_scan_from_file
 
 # Directory to store output files
 OUTPUT_DIR = "./output"
@@ -35,7 +36,9 @@ async def crawl_website(request: CrawlRequest):
 
         # Step 3: Scan the URLs from the output file for SQL Injection vulnerabilities
 
-        scan_urls_from_file(output_file, cookies)
+        sql_scan_from_file(output_file, cookies)
+        
+        xss_scan_from_file(output_file, cookies)
 
 
         return {
