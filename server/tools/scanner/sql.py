@@ -28,7 +28,7 @@ def scan_url_parameters(url, query_params, cookies, result_file):
             check_sql_injection(url, param_name, payload, cookies, result_file)
 
 # Function to read the URLs from the file and scan them for SQL injection vulnerabilities
-def scan_urls_from_file(filename, cookies):
+def sql_scan_from_file(filename, cookies):
     try:
         # Create the output directory for SQL injection scan results
         output_dir = "./output/sql_scans"
