@@ -1,86 +1,117 @@
 import requests
 from bs4 import BeautifulSoup
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin, urlparse, urldefrag
 import time
-import argparse
-import json
+import os
 
-def get_all_urls_from_website(base_url, cookies, visited_urls):
+def login_to_website(base_url, cookies):
+    """
+    Logs into the website using the provided cookies.
+    Returns a session object.
+    """
     session = requests.Session()
     session.cookies.update(cookies)
-    
-    if base_url in visited_urls:
-        return []
 
-    visited_urls.add(base_url)
+    login_url = urljoin(base_url, "login.php")  # Adjust based on the website
+    response = session.get(login_url, timeout=10)
 
-    response = session.get(base_url)
     if response.status_code != 200:
+        raise Exception(f"Failed to access login page: {login_url}")
+
+
+    return session
+
+
+def normalize_url(url):
+    """
+    Normalize the URL by removing fragments and ensuring consistent formatting.
+    """
+    url, _ = urldefrag(url)  # Remove fragments (e.g., #section)
+    return url.rstrip('/')
+
+
+def get_all_urls_from_website(base_url, session, visited_urls):
+    """
+    Scrapes all URLs from the provided base URL.
+    """
+    try:
+        response = session.get(base_url, timeout=10)
+        if response.status_code != 200:
+            print(f"Skipping URL due to HTTP error {response.status_code}: {base_url}")
+            return []
+
+        soup = BeautifulSoup(response.content, 'html.parser')
+        links = soup.find_all('a', href=True)
+        urls = []
+
+        for link in links:
+            url = link['href']
+            full_url = normalize_url(urljoin(base_url, url))
+            parsed_base_url = urlparse(base_url)
+            parsed_full_url = urlparse(full_url)
+
+            # Only add valid, same-domain URLs
+            if parsed_base_url.netloc == parsed_full_url.netloc and full_url not in visited_urls:
+                if 'logout' not in full_url.lower():
+                    urls.append(full_url)
+        return urls
+
+    except requests.RequestException as e:
+        print(f"Error fetching URL {base_url}: {e}")
         return []
 
-    soup = BeautifulSoup(response.content, 'html.parser')
 
-    links = soup.find_all('a', href=True)
-    urls = []
-    
-    for link in links:
-        url = link['href']
-        full_url = urljoin(base_url, url)
-        
-        parsed_base_url = urlparse(base_url)
-        parsed_full_url = urlparse(full_url)
-        
-        if parsed_base_url.netloc == parsed_full_url.netloc:
-            if 'logout' in full_url.lower():
-                print(f"Skipping logout URL: {full_url}")
-                continue
-            urls.append(full_url)
-
-    return urls
-
-def crawl(base_url, cookies):
+def crawl(base_url, cookies, max_depth=3):
+    """
+    Logs into the website and performs crawling with a depth limit.
+    """
     visited_urls = set()
-    to_visit = [base_url]
+    to_visit = [(base_url, 0)]  # Include depth information
     all_urls = []
 
+    try:
+        session = login_to_website(base_url, cookies)
+    except Exception as e:
+        print(f"Login failed: {e}")
+        return []
+
     while to_visit:
-        current_url = to_visit.pop(0)
-        print(f"Crawling: {current_url}")
-        
-        urls = get_all_urls_from_website(current_url, cookies, visited_urls)
+        current_url, depth = to_visit.pop(0)
+
+        if current_url in visited_urls or depth > max_depth:
+            continue
+
+
+        visited_urls.add(current_url)
+
+        # Fetch and process URLs
+        urls = get_all_urls_from_website(current_url, session, visited_urls)
+
+
         all_urls.extend(urls)
-        
+
+        # Add new URLs to the queue for further crawling
         for url in urls:
             if url not in visited_urls:
-                to_visit.append(url)
-        
+                to_visit.append((url, depth + 1))
+
+        # Respectful crawling delay
         time.sleep(1)
 
-    return all_urls
+    return list(set(all_urls))
 
-def save_urls_to_file(urls, base_url):
+
+def save_urls_to_file(urls, base_url, output_dir):
+    """
+    Save the list of URLs to a file in the output directory.
+    """
     parsed_url = urlparse(base_url)
     domain = parsed_url.netloc
     filename = f"{domain.replace('.', '_')}_urls.txt"
+    file_path = os.path.join(output_dir, filename)
 
-    with open(filename, 'w') as file:
+    with open(file_path, 'w') as file:
         for url in urls:
             file.write(url + '\n')
 
-    print(f"All URLs saved to {filename}")
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Crawl URLs from a website.")
-    parser.add_argument("url", help="Base URL to start crawling.")
-    parser.add_argument("cookies", help="Cookies to be used for the session. Provide as a JSON string.")
-    
-    args = parser.parse_args()
-
-    # Parse cookies from the passed JSON string
-    cookies = json.loads(args.cookies)
-    
-    # Start crawling from the base URL
-    all_crawled_urls = crawl(args.url, cookies)
-
-    # Save all crawled URLs to a file
-    save_urls_to_file(all_crawled_urls, args.url)
+    return file_path
