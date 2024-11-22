@@ -22,9 +22,6 @@ const FormComponent = () => {
     acceptTerms: false,
   });
 
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -62,50 +59,35 @@ const FormComponent = () => {
       return;
     }
 
-    setIsSubmitting(true);
-    setSubmitError(null);
+    const websiteUrl = formData.website_url.endsWith('/')
+      ? formData.website_url
+      : formData.website_url + '/';
 
-    try {
-      const websiteUrl = formData.website_url.endsWith('/')
-        ? formData.website_url
-        : formData.website_url + '/';
+    const data = {
+      website_url: websiteUrl,
+      email: formData.email,
+      cookies: formData.cookies,
+    };
 
-      const data = {
-        website_url: websiteUrl,
-        email: formData.email,
-        cookies: formData.cookies,
-      };
-
-      const response = await axios.post(
-        'http://localhost:8000/api/scan',
-        data,
-        { headers: { 'Content-Type': 'application/json' } }
-      );
-
-      if (response.status === 200) {
-        toast.success('Scanning started');
-      } else {
-        throw new Error('Failed to submit the form.');
+    await toast.promise(
+      axios.post('http://localhost:8000/api/scan', data, {
+        headers: { 'Content-Type': 'application/json' },
+      }),
+      {
+        loading: 'Submitting the scan request...',
+        success: 'Scanning started successfully!',
+        error: 'Failed to submit the form. Please try again.',
       }
-    } catch (error) {
-      setSubmitError('There was an error submitting the form.');
-      toast.error('Error submitting the form.');
-    } finally {
-      setIsSubmitting(false);
-    }
+    );
   };
 
   return (
     <div className="min-h-screen bg-gray-900 text-white flex justify-center items-center">
-      <div className="w-full max-w-3xl bg-gray-800 rounded-lg shadow-lg p-8">
+      <div className="w-full max-w-2xl bg-gray-800 rounded-lg shadow-lg p-6">
         <h2 className="text-2xl font-bold mb-4 text-center">GuardNet - Vulnerability Testing</h2>
-        <p className="text-gray-400 text-sm mb-6 text-center">
-          Please enter your website's information, and we'll run a full security scan for vulnerabilities.
-        </p>
-
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="website_url" className="block text-sm font-medium mb-2">
+            <label htmlFor="website_url" className="block text-sm font-medium mb-1">
               Website URL
             </label>
             <input
@@ -114,14 +96,14 @@ const FormComponent = () => {
               name="website_url"
               value={formData.website_url}
               onChange={handleChange}
-              className="w-full px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+              className="w-full px-3 py-2 bg-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
               placeholder="https://example.com"
               required
             />
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-2">
+            <label htmlFor="email" className="block text-sm font-medium mb-1">
               Email
             </label>
             <input
@@ -130,7 +112,7 @@ const FormComponent = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+              className="w-full px-3 py-2 bg-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
               placeholder="youremail@example.com"
               required
             />
@@ -139,13 +121,13 @@ const FormComponent = () => {
           <div>
             <h3 className="text-sm font-medium mb-2">Cookies</h3>
             {formData.cookies.map((cookie, index) => (
-              <div key={index} className="flex space-x-4 items-center mb-2">
+              <div key={index} className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 items-center mb-2">
                 <input
                   type="text"
                   name="name"
                   value={cookie.name}
                   onChange={(e) => handleCookieChange(e, index)}
-                  className="flex-1 px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                  className="w-full sm:flex-1 px-3 py-2 bg-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                   placeholder="Cookie Name"
                   required
                 />
@@ -154,23 +136,23 @@ const FormComponent = () => {
                   name="value"
                   value={cookie.value}
                   onChange={(e) => handleCookieChange(e, index)}
-                  className="flex-1 px-4 py-2 bg-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+                  className="w-full sm:flex-1 px-3 py-2 bg-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                   placeholder="Cookie Value"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => removeCookie(index)}
-                  className="text-red-500 hover:text-red-700 transition-colors"
+                  className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm"
                 >
-                  &times;
+                  Delete
                 </button>
               </div>
             ))}
             <button
               type="button"
               onClick={addCookie}
-              className="px-4 py-2 bg-indigo-600 rounded-lg text-sm hover:bg-indigo-500 transition"
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md text-sm text-white"
             >
               + Add Cookie
             </button>
@@ -182,25 +164,16 @@ const FormComponent = () => {
               name="acceptTerms"
               checked={formData.acceptTerms}
               onChange={handleChange}
-              className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
             />
-            <label className="text-sm">
-              I accept the terms and conditions
-            </label>
+            <label className="text-sm">I accept the terms and conditions</label>
           </div>
-
-          {submitError && <p className="text-red-500 text-sm">{submitError}</p>}
 
           <button
             type="submit"
-            disabled={isSubmitting}
-            className={`w-full py-2 rounded-lg text-sm font-medium ${
-              isSubmitting
-                ? 'bg-gray-600 cursor-not-allowed'
-                : 'bg-indigo-600 hover:bg-indigo-500 transition'
-            }`}
+            className="w-full py-2 rounded-md text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white transition"
           >
-            {isSubmitting ? 'Submitting...' : 'Submit'}
+            Scan Now
           </button>
         </form>
       </div>
