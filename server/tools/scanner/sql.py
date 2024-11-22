@@ -1,5 +1,4 @@
 import requests
-import json
 import os
 
 # List of basic SQL Injection payloads

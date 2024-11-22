@@ -97,7 +97,6 @@ def crawl(base_url, cookies, max_depth=3):
 
         # Respectful crawling delay
         time.sleep(1)
-
     return list(set(all_urls))
 
 
