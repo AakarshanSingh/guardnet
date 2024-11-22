@@ -1,97 +1,195 @@
-/* Form Styles */
+/* General Container Styling */
 .form-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #f8f8f8;
-  font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #121212; /* Dark background for consistency */
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
 }
 
+/* Form Wrapper */
 .form-wrapper {
-  background-color: #fff;
-  padding: 3rem;
-  width: 100%;
+  background: #1a1a1a; /* Subtle dark background for form */
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
   max-width: 500px;
-  border-radius: 8px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  text-align: center;
 }
 
+/* Header */
 h2 {
-  font-size: 2.5rem;
-  color: #333;
-  margin-bottom: 1rem;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #ffffff;
 }
 
 .form-description {
-  font-size: 1.1rem;
-  color: #555;
-  margin-bottom: 2rem;
-}
-
-.form-field {
+  font-size: 1rem;
+  color: #a3a3a3;
   margin-bottom: 1.5rem;
 }
 
-.form-field label {
+/* Input Fields */
+.form-field {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+label {
   display: block;
-  font-weight: 500;
-  color: #333;
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #ffffff;
 }
 
 input[type="url"],
 input[type="email"],
 input[type="text"] {
   width: 100%;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  padding: 12px 15px;
+  border: 1px solid #4d4d4d;
+  border-radius: 6px;
+  background: #1a1a1a;
+  color: #ffffff;
   font-size: 1rem;
-  margin-bottom: 0.5rem;
   transition: border-color 0.3s ease;
 }
 
 input[type="url"]:focus,
 input[type="email"]:focus,
 input[type="text"]:focus {
-  border-color: #3498db;
+  outline: none;
+  border-color: #4d90fe; /* Subtle blue focus */
 }
 
-.placeholder {
+/* Cookies Section */
+.cookies-container h3 {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.cookie-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.cookie-field input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #4d4d4d;
+  border-radius: 6px;
+  background: #1a1a1a;
+  color: #ffffff;
   font-size: 0.9rem;
-  color: #888;
-  margin-top: 0.3rem;
 }
 
+.remove-cookie-button {
+  background: #d9534f; /* Red button for remove */
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.remove-cookie-button:hover {
+  background: #c9302c;
+}
+
+.add-cookie-button {
+  background: #4d90fe; /* Blue button for adding */
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-cookie-button:hover {
+  background: #357ae8;
+}
+
+/* Checkbox Section */
 .checkbox-container {
   display: flex;
   align-items: center;
-  margin: 1rem 0;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-.checkbox-container input {
-  margin-right: 0.5rem;
+.checkbox-container input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #4d90fe; /* Matches the theme color */
 }
 
+.checkbox-container label {
+  font-size: 0.9rem;
+  color: #a3a3a3;
+}
+
+/* Error Message */
+.error-message {
+  color: #d9534f;
+  margin: 10px 0;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+/* Submit Button */
 .submit-button {
   width: 100%;
-  padding: 1rem;
-  background-color: #3498db;
-  color: #fff;
-  font-size: 1.2rem;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  background: #4d90fe;
+  color: #ffffff;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .submit-button:hover {
-  background-color: #2980b9;
+  background: #357ae8;
 }
 
-.error-message {
-  color: red;
-  font-size: 1rem;
-  margin-top: 1rem;
+.submit-button:disabled {
+  background: #a3a3a3;
+  cursor: not-allowed;
+  color: #ffffff;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .form-wrapper {
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .form-description {
+    font-size: 0.9rem;
+  }
+
+  .add-cookie-button,
+  .submit-button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
 }
