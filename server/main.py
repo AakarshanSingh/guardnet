@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 import os
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -11,13 +11,15 @@ from tools.scanner.wp import run_wpscan
 from dotenv import load_dotenv
 from typing import List
 from fastapi.responses import FileResponse
+from urllib.parse import urlparse
 
 
 # Directory to store output files
 OUTPUT_DIR = "./output"
+FINAL_REPORT_DIR = "./finalreport"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
-SCANS_DIR = os.path.join(OUTPUT_DIR, "scans")
-SUMMARY_FILE = os.path.join(OUTPUT_DIR, "combined_report.txt")
+os.makedirs(FINAL_REPORT_DIR, exist_ok=True)
+
 
 class Cookie(BaseModel):
     name: str
@@ -28,6 +30,10 @@ class CrawlRequest(BaseModel):
     website_url: str
     email: str
     cookies: List[Cookie]
+
+
+class ReportRequest(BaseModel):
+    website_url: str
 
 
 app = FastAPI()
@@ -47,22 +53,17 @@ app.add_middleware(
 
 @app.post("/api/scan")
 async def crawl_website(request: CrawlRequest):
-    """
-    Endpoint to crawl a website, save URLs, and associate results with a user's email.
-    """
     try:
-        # Extract parameters from the request body
         website_url = request.website_url
         email = request.email
         cookies = {cookie.name: cookie.value for cookie in request.cookies}
 
         crawled_urls = crawl(website_url, cookies)
 
-        # Step 2: Save crawled URLs to a file
+        # Save crawled URLs to a file
         output_file = save_urls_to_file(crawled_urls, website_url, OUTPUT_DIR)
 
-        # Step 3: Scan the URLs from the output file for SQL Injection vulnerabilities
-
+        # Perform vulnerability scans
         sql_scan_from_file(output_file, cookies)
         xss_scan_from_file(output_file, cookies)
         lfi_scan_from_file(output_file, cookies)
@@ -70,7 +71,7 @@ async def crawl_website(request: CrawlRequest):
         run_wpscan(website_url, WP_SCAN)
 
         return {
-            "message": "Crawling and SQL injection scan completed successfully.",
+            "message": "Crawling and scanning completed successfully.",
             "crawled_urls_file": output_file,
             "total_urls_found": len(crawled_urls),
         }
@@ -79,61 +80,143 @@ async def crawl_website(request: CrawlRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-
-@app.get("/api/combined-report")
-async def get_combined_report():
-    """
-    Combines all vulnerability scan results into a single file and returns it.
-    """
+@app.post("/api/combined-report")
+async def get_combined_report(request: ReportRequest):
     try:
-        # Ensure directories exist
-        os.makedirs(SCANS_DIR, exist_ok=True)
+        # Extract and sanitize the website URL
+        website_url = request.website_url
+        parsed_url = urlparse(website_url)
+        domain = parsed_url.netloc.replace(".", "_")
+        sanitized_url = domain
 
-        # List of files to combine
-        scan_files = [
-            os.path.join(SCANS_DIR, "sql_scan.txt"),
-            os.path.join(SCANS_DIR, "xss_scan.txt"),
-            os.path.join(SCANS_DIR, "lfi_scan.txt"),
-            os.path.join(SCANS_DIR, "cmd_scan.txt"),
-            os.path.join(SCANS_DIR, "wpscan.txt"),
-        ]
+        # Define scan directories and file suffixes
+        scan_directories = {
+            "SQLi": os.path.join(OUTPUT_DIR, "sql_scans"),
+            "XSS": os.path.join(OUTPUT_DIR, "xss_scans"),
+            "LFI": os.path.join(OUTPUT_DIR, "lfi_scans"),
+            "CMD": os.path.join(OUTPUT_DIR, "cmd_scans"),
+            "WordPress": os.path.join(OUTPUT_DIR, "wp_scans"),
+        }
+        file_suffixes = {
+            "SQLi": "_urls_sql.txt",
+            "XSS": "_urls_xss.txt",
+            "LFI": "_urls_lfi.txt",
+            "CMD": "_urls_cmd.txt",
+            "WordPress": "__wpscan.txt",
+        }
 
-        vulnerabilities = []  # To store all vulnerability details
-        counts = {"SQLi": 0, "XSS": 0, "LFI": 0, "CMD": 0, "WordPress": 0}
+        vulnerabilities = []
+        filtered_vulnerabilities = []  # Store only found vulnerabilities for frontend
+        counts = {key: 0 for key in scan_directories.keys()}
 
-        # Read all scan files and aggregate vulnerabilities
-        for scan_file in scan_files:
-            if os.path.exists(scan_file):
-                with open(scan_file, "r") as f:
-                    lines = f.readlines()
-                    vulnerabilities.extend(lines)
+        # If no files exist, return an error
+        files_found = False
+        for scan_type, directory in scan_directories.items():
+            if not os.path.exists(directory):
+                continue
 
-                    # Count vulnerabilities for each type
-                    if "sql_scan" in scan_file:
-                        counts["SQLi"] += len(lines)
-                    elif "xss_scan" in scan_file:
-                        counts["XSS"] += len(lines)
-                    elif "lfi_scan" in scan_file:
-                        counts["LFI"] += len(lines)
-                    elif "cmd_scan" in scan_file:
-                        counts["CMD"] += len(lines)
-                    elif "wpscan" in scan_file:
-                        counts["WordPress"] += len(lines)
+            if scan_type == "WordPress":
+                for filename in os.listdir(directory):
+                    if filename.startswith(sanitized_url) and filename.endswith(
+                        file_suffixes[scan_type]
+                    ):
+                        scan_file = os.path.join(directory, filename)
+                        with open(scan_file, "r") as f:
+                            lines = f.readlines()
+                            for line in lines:
+                                detail = line.strip()
+                                vulnerabilities.append(
+                                    {"type": scan_type, "detail": detail}
+                                )
+                                if "vulnerability found" in detail:
+                                    filtered_vulnerabilities.append(
+                                        {"type": scan_type, "detail": detail}
+                                    )
+                            counts[scan_type] += len(lines)
+                        files_found = True
+                        break
+            else:
+                scan_file = os.path.join(
+                    directory, f"{sanitized_url}{file_suffixes[scan_type]}"
+                )
+                if os.path.exists(scan_file):
+                    with open(scan_file, "r") as f:
+                        lines = f.readlines()
+                        for line in lines:
+                            detail = line.strip()
+                            vulnerabilities.append(
+                                {"type": scan_type, "detail": detail}
+                            )
+                            if "vulnerability found" in detail:
+                                filtered_vulnerabilities.append(
+                                    {"type": scan_type, "detail": detail}
+                                )
+                        counts[scan_type] += len(lines)
+                    files_found = True
 
-        # Write the combined report
-        with open(SUMMARY_FILE, "w") as summary:
-            summary.write("GuardNet Combined Vulnerability Report\n")
-            summary.write("=" * 40 + "\n\n")
-            summary.write(f"Total Vulnerabilities: {sum(counts.values())}\n\n")
-            for scan_type, count in counts.items():
-                summary.write(f"{scan_type} Vulnerabilities: {count}\n")
-            summary.write("\nDetailed Vulnerabilities:\n")
-            summary.write("=" * 40 + "\n")
-            summary.writelines(vulnerabilities)
+        if not files_found:
+            raise HTTPException(
+                status_code=404,
+                detail="No vulnerabilities found. Please scan the website first.",
+            )
 
-        # Send the report as a downloadable file
-        return FileResponse(SUMMARY_FILE, filename="combined_report.txt")
+        # Create a summary
+        filtered_counts = {k: v for k, v in counts.items() if v > 0}
 
+        # Create the combined report file
+        report_filename = f"{sanitized_url}_combined_report.txt"
+        combined_report_path = os.path.join(FINAL_REPORT_DIR, report_filename)
+
+        with open(combined_report_path, "w") as report_file:
+            report_file.write(f"Combined Vulnerability Report for {website_url}\n\n")
+            report_file.write("Summary:\n")
+            for vuln_type, count in filtered_counts.items():
+                report_file.write(f"- {vuln_type}: {count}\n")
+            report_file.write(
+                f"\nTotal Vulnerabilities: {sum(filtered_counts.values())}\n\n"
+            )
+
+            report_file.write("Details:\n")
+            for (
+                vuln
+            ) in (
+                vulnerabilities
+            ):  # Write all vulnerabilities (both found and not found)
+                report_file.write(f"[{vuln['type']}] {vuln['detail']}\n")
+
+        response = {
+            "website_url": f"/api/download?filename={report_filename}",
+            "total_vulnerabilities": len(filtered_vulnerabilities),
+            "summary": {k: v for k, v in filtered_counts.items() if v > 0},
+            "details": filtered_vulnerabilities,  # Only include found vulnerabilities
+        }
+
+        return response
+
+    except HTTPException as e:
+        raise e
     except Exception as e:
         print(f"Error generating report: {e}")
-        raise HTTPException(status_code=500, detail="Failed to generate report.")
+        raise HTTPException(status_code=500, detail="Failed to generate the report.")
+
+
+@app.get("/api/download")
+async def download_report(
+    filename: str = Query(..., description="The name of the report file to download.")
+):
+    try:
+        file_path = os.path.join(FINAL_REPORT_DIR, filename)
+        print(file_path)
+        if not os.path.exists(file_path):
+            raise HTTPException(status_code=404, detail="File not found.")
+
+        return FileResponse(
+            path=file_path,
+            filename=filename,
+            media_type="text/plain",
+        )
+    except HTTPException as e:
+        raise e
+    except Exception as e:
+        print(f"Error serving file: {e}")
+        raise HTTPException(status_code=500, detail="Failed to download the file.")

