@@ -4,6 +4,7 @@ from urllib.parse import urljoin, urlparse, urldefrag
 import time
 import os
 
+
 def login_to_website(base_url, cookies):
     """
     Logs into the website using the provided cookies.
@@ -18,7 +19,6 @@ def login_to_website(base_url, cookies):
     if response.status_code != 200:
         raise Exception(f"Failed to access login page: {login_url}")
 
-
     return session
 
 
@@ -27,7 +27,7 @@ def normalize_url(url):
     Normalize the URL by removing fragments and ensuring consistent formatting.
     """
     url, _ = urldefrag(url)  # Remove fragments (e.g., #section)
-    return url.rstrip('/')
+    return url.rstrip("/")
 
 
 def get_all_urls_from_website(base_url, session, visited_urls):
@@ -40,19 +40,22 @@ def get_all_urls_from_website(base_url, session, visited_urls):
             print(f"Skipping URL due to HTTP error {response.status_code}: {base_url}")
             return []
 
-        soup = BeautifulSoup(response.content, 'html.parser')
-        links = soup.find_all('a', href=True)
+        soup = BeautifulSoup(response.content, "html.parser")
+        links = soup.find_all("a", href=True)
         urls = []
 
         for link in links:
-            url = link['href']
+            url = link["href"]
             full_url = normalize_url(urljoin(base_url, url))
             parsed_base_url = urlparse(base_url)
             parsed_full_url = urlparse(full_url)
 
             # Only add valid, same-domain URLs
-            if parsed_base_url.netloc == parsed_full_url.netloc and full_url not in visited_urls:
-                if 'logout' not in full_url.lower():
+            if (
+                parsed_base_url.netloc == parsed_full_url.netloc
+                and full_url not in visited_urls
+            ):
+                if "logout" not in full_url.lower():
                     urls.append(full_url)
         return urls
 
@@ -81,12 +84,10 @@ def crawl(base_url, cookies, max_depth=3):
         if current_url in visited_urls or depth > max_depth:
             continue
 
-
         visited_urls.add(current_url)
 
         # Fetch and process URLs
         urls = get_all_urls_from_website(current_url, session, visited_urls)
-
 
         all_urls.extend(urls)
 
@@ -109,8 +110,8 @@ def save_urls_to_file(urls, base_url, output_dir):
     filename = f"{domain.replace('.', '_')}_urls.txt"
     file_path = os.path.join(output_dir, filename)
 
-    with open(file_path, 'w') as file:
+    with open(file_path, "w") as file:
         for url in urls:
-            file.write(url + '\n')
+            file.write(url + "\n")
 
     return file_path

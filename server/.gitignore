@@ -4,12 +4,6 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Virtual environment folder
-env/
-
-# .env file for environment variables
-.env
-
 # IDE/editor-specific files
 .vscode/
 .idea/
