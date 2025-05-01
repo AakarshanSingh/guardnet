@@ -1,7 +1,5 @@
 # GuardNet
 
-![GuardNet Banner](https://via.placeholder.com/800x200/0046FF/FFFFFF?text=GuardNet+Security+Scanner)
-
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115.12-009688.svg?style=flat&logo=fastapi)](https://fastapi.tiangolo.com/)
