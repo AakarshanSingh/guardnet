@@ -1,20 +1,32 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router';
 import { Toaster } from 'react-hot-toast';
-import FormComponent from './components/FormComponent';
-import LandingPage from './components/LandingPage';
-import ResultsPage from './components/ResultsPage.tsx';
+import AuthProvider from './context/AuthContext';
+import ScanProvider from './context/ScanContext';
+import HomePage from './pages/HomePage';
+import ScanPage from './pages/ScanPage';
+import DashboardPage from './pages/DashboardPage';
+import ScanDetailsPage from './pages/ScanDetailsPage';
+import './App.css';
 
-const App = () => {
+function App() {
   return (
     <Router>
-      <Toaster />
-      <Routes>
-        <Route path='/' element={<LandingPage />} />
-        <Route path='/check' element={<FormComponent />} />
-        <Route path='/results' element={<ResultsPage />} />
-      </Routes>
+      <AuthProvider>
+        <ScanProvider>
+          {/* Main Content */}
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/scan' element={<ScanPage />} />
+            <Route path='/dashboard' element={<DashboardPage />} />
+            <Route path='/scans/:scanId' element={<ScanDetailsPage />} />
+          </Routes>
+
+          {/* Toast notifications */}
+          <Toaster position='top-center' />
+        </ScanProvider>
+      </AuthProvider>
     </Router>
   );
-};
+}
 
 export default App;
