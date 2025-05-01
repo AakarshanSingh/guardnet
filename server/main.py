@@ -1,222 +1,149 @@
-from fastapi import FastAPI, HTTPException, Query
+import logging
+import traceback
 import os
+import uvicorn
+
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-from tools.crawler.crawler import crawl, save_urls_to_file
-from tools.scanner.sql import sql_scan_from_file
-from tools.scanner.xss import xss_scan_from_file
-from tools.scanner.lfi import lfi_scan_from_file
-from tools.scanner.cmd import cmd_injection_scan_from_file
-from tools.scanner.wp import run_wpscan
-from dotenv import load_dotenv
-from typing import List
-from fastapi.responses import FileResponse
-from urllib.parse import urlparse
+from fastapi.responses import JSONResponse
+from fastapi.exceptions import RequestValidationError
+from sqlalchemy.exc import SQLAlchemyError
+from app.api.endpoints import router as api_router
+from app.api.auth import router as auth_router
+from app.core.config import settings
+from app.database.base import Base, engine
+from app.utils.api.responses import error_response, validation_error_response
+from app.utils.browser_manager import browser_manager
+from app.utils.api.json_encoder import CustomJSONEncoder
+from urllib3.exceptions import NewConnectionError, MaxRetryError
 
+# Set up logging
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+)
+logger = logging.getLogger(__name__)
 
-# Directory to store output files
-OUTPUT_DIR = "./output"
-FINAL_REPORT_DIR = "./finalreport"
-os.makedirs(OUTPUT_DIR, exist_ok=True)
-os.makedirs(FINAL_REPORT_DIR, exist_ok=True)
-
-
-class Cookie(BaseModel):
-    name: str
-    value: str
-
-
-class CrawlRequest(BaseModel):
-    website_url: str
-    email: str
-    cookies: List[Cookie]
-
-
-class ReportRequest(BaseModel):
-    website_url: str
-
-
-app = FastAPI()
-
-load_dotenv()
-
-WP_SCAN = os.getenv("WP_SCAN")
+app = FastAPI(
+    title=settings.PROJECT_NAME,
+    openapi_url="/openapi.json",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    json_encoder=CustomJSONEncoder,  # Use custom JSON encoder for handling UUIDs
+)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=settings.BACKEND_CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["Content-Disposition"],
 )
 
+try:
+    Base.metadata.create_all(bind=engine)
+    logger.info("Database tables created successfully")
+except SQLAlchemyError as e:
+    logger.error(f"Error creating database tables: {str(e)}")
+    raise
 
-@app.post("/api/scan")
-async def crawl_website(request: CrawlRequest):
+app.include_router(auth_router, prefix=settings.API_V1_STR, tags=["auth"])
+app.include_router(api_router, prefix=settings.API_V1_STR, tags=["scan"])
+
+
+@app.get("/")
+def root():
+    """Root endpoint for API health check"""
+    return {
+        "message": "Welcome to GuardNet Security Scanner API",
+        "status": "OK",
+        "success": True,
+    }
+
+
+@app.get("/health")
+def health_check():
+    """Health check endpoint"""
+    return {"status": "OK", "success": True}
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    """Handle validation errors with clear messages"""
+    errors = []
+    for error in exc.errors():
+        error_msg = {
+            "loc": error.get("loc", []),
+            "msg": error.get("msg", ""),
+            "type": error.get("type", ""),
+        }
+        errors.append(error_msg)
+
+    return validation_error_response(errors=errors)
+
+
+@app.exception_handler(SQLAlchemyError)
+async def sqlalchemy_exception_handler(request: Request, exc: SQLAlchemyError):
+    """Handle database errors safely"""
+    logger.error(f"Database error: {str(exc)}\n{traceback.format_exc()}")
+    return error_response(message="Database error occurred", status_code=500)
+
+
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request: Request, exc: HTTPException):
+    """Handle HTTP exceptions"""
+    return error_response(
+        message=exc.detail,
+        status_code=exc.status_code,
+        errors=[{"type": "http_error", "detail": exc.detail}],
+    )
+
+
+@app.exception_handler(Exception)
+async def general_exception_handler(request: Request, exc: Exception):
+    """Handle all other exceptions"""
+    logger.error(f"Unhandled exception: {str(exc)}\n{traceback.format_exc()}")
+    return error_response(message="Internal server error", status_code=500)
+
+
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    """Log all incoming requests"""
+    method = request.method
+    path = request.url.path
+    logger.debug(f"Request: {method} {path}")
+
     try:
-        website_url = request.website_url
-        email = request.email
-        cookies = {cookie.name: cookie.value for cookie in request.cookies}
-
-        crawled_urls = crawl(website_url, cookies)
-
-        # Save crawled URLs to a file
-        output_file = save_urls_to_file(crawled_urls, website_url, OUTPUT_DIR)
-
-        # Perform vulnerability scans
-        sql_scan_from_file(output_file, cookies)
-        xss_scan_from_file(output_file, cookies)
-        lfi_scan_from_file(output_file, cookies)
-        cmd_injection_scan_from_file(output_file, cookies)
-        run_wpscan(website_url, WP_SCAN)
-
-        return {
-            "message": "Crawling and scanning completed successfully.",
-            "crawled_urls_file": output_file,
-            "total_urls_found": len(crawled_urls),
-        }
-    except Exception as e:
-        print(f"Error during crawling: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-@app.post("/api/combined-report")
-async def get_combined_report(request: ReportRequest):
-    try:
-        # Extract and sanitize the website URL
-        website_url = request.website_url
-        parsed_url = urlparse(website_url)
-        domain = parsed_url.netloc.replace(".", "_")
-        sanitized_url = domain
-
-        # Define scan directories and file suffixes
-        scan_directories = {
-            "SQLi": os.path.join(OUTPUT_DIR, "sql_scans"),
-            "XSS": os.path.join(OUTPUT_DIR, "xss_scans"),
-            "LFI": os.path.join(OUTPUT_DIR, "lfi_scans"),
-            "CMD": os.path.join(OUTPUT_DIR, "cmd_scans"),
-            "WordPress": os.path.join(OUTPUT_DIR, "wp_scans"),
-        }
-        file_suffixes = {
-            "SQLi": "_urls_sql.txt",
-            "XSS": "_urls_xss.txt",
-            "LFI": "_urls_lfi.txt",
-            "CMD": "_urls_cmd.txt",
-            "WordPress": "__wpscan.txt",
-        }
-
-        vulnerabilities = []
-        filtered_vulnerabilities = []  # Store only found vulnerabilities for frontend
-        counts = {key: 0 for key in scan_directories.keys()}
-
-        # If no files exist, return an error
-        files_found = False
-        for scan_type, directory in scan_directories.items():
-            if not os.path.exists(directory):
-                continue
-
-            if scan_type == "WordPress":
-                for filename in os.listdir(directory):
-                    if filename.startswith(sanitized_url) and filename.endswith(
-                        file_suffixes[scan_type]
-                    ):
-                        scan_file = os.path.join(directory, filename)
-                        with open(scan_file, "r") as f:
-                            lines = f.readlines()
-                            for line in lines:
-                                detail = line.strip()
-                                vulnerabilities.append(
-                                    {"type": scan_type, "detail": detail}
-                                )
-                                if "vulnerability found" in detail:
-                                    filtered_vulnerabilities.append(
-                                        {"type": scan_type, "detail": detail}
-                                    )
-                            counts[scan_type] += len(lines)
-                        files_found = True
-                        break
-            else:
-                scan_file = os.path.join(
-                    directory, f"{sanitized_url}{file_suffixes[scan_type]}"
-                )
-                if os.path.exists(scan_file):
-                    with open(scan_file, "r") as f:
-                        lines = f.readlines()
-                        for line in lines:
-                            detail = line.strip()
-                            vulnerabilities.append(
-                                {"type": scan_type, "detail": detail}
-                            )
-                            if "vulnerability found" in detail:
-                                filtered_vulnerabilities.append(
-                                    {"type": scan_type, "detail": detail}
-                                )
-                        counts[scan_type] += len(lines)
-                    files_found = True
-
-        if not files_found:
-            raise HTTPException(
-                status_code=404,
-                detail="No vulnerabilities found. Please scan the website first.",
-            )
-
-        # Create a summary
-        filtered_counts = {k: v for k, v in counts.items() if v > 0}
-
-        # Create the combined report file
-        report_filename = f"{sanitized_url}_combined_report.txt"
-        combined_report_path = os.path.join(FINAL_REPORT_DIR, report_filename)
-
-        with open(combined_report_path, "w") as report_file:
-            report_file.write(f"Combined Vulnerability Report for {website_url}\n\n")
-            report_file.write("Summary:\n")
-            for vuln_type, count in filtered_counts.items():
-                report_file.write(f"- {vuln_type}: {count}\n")
-            report_file.write(
-                f"\nTotal Vulnerabilities: {sum(filtered_counts.values())}\n\n"
-            )
-
-            report_file.write("Details:\n")
-            for (
-                vuln
-            ) in (
-                vulnerabilities
-            ):  # Write all vulnerabilities (both found and not found)
-                report_file.write(f"[{vuln['type']}] {vuln['detail']}\n")
-
-        response = {
-            "website_url": f"/api/download?filename={report_filename}",
-            "total_vulnerabilities": len(filtered_vulnerabilities),
-            "summary": {k: v for k, v in filtered_counts.items() if v > 0},
-            "details": filtered_vulnerabilities,  # Only include found vulnerabilities
-        }
-
+        response = await call_next(request)
         return response
-
-    except HTTPException as e:
-        raise e
     except Exception as e:
-        print(f"Error generating report: {e}")
-        raise HTTPException(status_code=500, detail="Failed to generate the report.")
+        logger.error(f"Request error: {method} {path} - {str(e)}")
+        raise
 
 
-@app.get("/api/download")
-async def download_report(
-    filename: str = Query(..., description="The name of the report file to download.")
-):
+@app.on_event("shutdown")
+def shutdown_event():
+    """Clean up resources on shutdown"""
     try:
-        file_path = os.path.join(FINAL_REPORT_DIR, filename)
-        print(file_path)
-        if not os.path.exists(file_path):
-            raise HTTPException(status_code=404, detail="File not found.")
-
-        return FileResponse(
-            path=file_path,
-            filename=filename,
-            media_type="text/plain",
+        browser_manager.close_browser()
+        logger.info("Application shutdown: Browser instance closed successfully")
+    except (NewConnectionError, ConnectionError, MaxRetryError) as e:
+        logger.warning(
+            f"Connection error during browser shutdown (expected behavior): {str(e)}"
         )
-    except HTTPException as e:
-        raise e
+        if os.name == "nt":
+            try:
+                os.system("taskkill /f /im chromedriver.exe")
+                logger.info("Force-killed chromedriver processes during shutdown")
+            except Exception as kill_error:
+                logger.error(
+                    f"Failed to force kill browser processes: {str(kill_error)}"
+                )
     except Exception as e:
-        print(f"Error serving file: {e}")
-        raise HTTPException(status_code=500, detail="Failed to download the file.")
+        logger.error(f"Error during shutdown: {str(e)}")
+
+    logger.info("Application shutdown complete")
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
