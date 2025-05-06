@@ -10,7 +10,6 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
   
-  // Check if current path is a protected route to apply different styling
   const isProtectedRoute = ['/dashboard', '/scan', '/scans'].some(route => 
     location.pathname.startsWith(route)
   );

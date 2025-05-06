@@ -25,18 +25,23 @@ const Dashboard = () => {
     }
 
     loadScans();
-    
-    // Listen for pagination updates from the API response
+
     const handlePaginationUpdate = (event: CustomEvent) => {
       if (event.detail) {
         setTotalPages(event.detail.totalPages || 1);
       }
     };
-    
-    window.addEventListener('pagination:update', handlePaginationUpdate as EventListener);
-    
+
+    window.addEventListener(
+      'pagination:update',
+      handlePaginationUpdate as EventListener
+    );
+
     return () => {
-      window.removeEventListener('pagination:update', handlePaginationUpdate as EventListener);
+      window.removeEventListener(
+        'pagination:update',
+        handlePaginationUpdate as EventListener
+      );
     };
   }, [isAuthenticated, authLoading, currentPage]);
 

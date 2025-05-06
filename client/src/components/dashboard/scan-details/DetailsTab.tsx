@@ -46,7 +46,6 @@ const DetailsTab: React.FC<DetailsTabProps> = ({
   results, 
   extractDataFromResults 
 }) => {
-  // Helper function to check if a specific scan result exists
   const hasScanType = (scanType: string): boolean => {
     if (!results || !scanId || !results[scanId]) return false;
     
@@ -55,7 +54,6 @@ const DetailsTab: React.FC<DetailsTabProps> = ({
     );
   };
 
-  // Vulnerability section component for consistent rendering
   const VulnerabilitySection = ({ 
     title, 
     icon, 

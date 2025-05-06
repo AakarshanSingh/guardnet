@@ -15,7 +15,6 @@ const Navbar: React.FC = () => {
     setIsMenuOpen(false);
   }, [location]);
 
-  // Listen for global auth modal events
   useEffect(() => {
     const openLogin = () => {
       setAuthMode('login');
@@ -33,7 +32,6 @@ const Navbar: React.FC = () => {
     };
   }, []);
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Element;
@@ -73,7 +71,9 @@ const Navbar: React.FC = () => {
               <div className='h-8 w-8 rounded-lg bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-md'>
                 G
               </div>
-              <span className='text-xl font-bold text-indigo-900'>GuardNet</span>
+              <span className='text-xl font-bold text-indigo-900'>
+                GuardNet
+              </span>
             </Link>
 
             {/* Mobile menu button */}

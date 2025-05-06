@@ -11,7 +11,6 @@ const UserMenu: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Close dropdown when clicking outside
     const handleClickOutside = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
@@ -118,7 +117,6 @@ const UserMenu: React.FC = () => {
           </div>
         )}
       </div>
-
       <PasswordChangeModal
         isOpen={showPasswordModal}
         onClose={() => setShowPasswordModal(false)}

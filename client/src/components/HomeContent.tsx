@@ -10,7 +10,6 @@ const HomeContent = () => {
     if (isAuthenticated) {
       navigate('/scan');
     } else {
-      // Event will be handled by parent component
       window.dispatchEvent(new CustomEvent('open:register'));
     }
   };

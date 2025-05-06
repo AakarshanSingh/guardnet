@@ -71,7 +71,7 @@ const PasswordChangeModal: React.FC<PasswordChangeModalProps> = ({
         className='fixed w-screen h-screen inset-0 bg-indigo-900/20 backdrop-blur-sm z-40'
         onClick={handleClose}
       ></div>
-      <div className='fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4'>
+      <div className='fixed top-96 inset-0 z-50 flex items-center justify-center p-2 sm:p-4'>
         <div className='bg-gradient-to-br from-white/95 to-blue-50/95 backdrop-blur-sm rounded-2xl border border-blue-200/50 shadow-xl overflow-hidden m-2 sm:m-4 w-full max-w-md'>
           <div className='p-6 max-h-[90vh] overflow-y-auto'>
             {/* Header */}
