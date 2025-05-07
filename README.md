@@ -172,5 +172,5 @@ If you have any questions or feedback, please open an issue in this repository.
 
 ## 👥 Contributors
 
-### [Aakarshan Singh](https://github.com/AakarshanSingh)
+### [Aakarshan Singh](https://github.com/AakarshanSingh), [Aditya Bansal](https://github.com/Aditya3403)
 
