@@ -150,6 +150,7 @@ npm run dev
 
 - This tool should only be used on websites you own or have explicit permission to test
 - Unauthorized security testing may be illegal in many jurisdictions
+- Understand and respect the scope of testing you are authorized to perform.
 - Always follow responsible disclosure practices if you discover vulnerabilities
 
 ## 📝 License
