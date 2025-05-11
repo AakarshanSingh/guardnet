@@ -166,7 +166,7 @@ class ZoneTransferScanner(BaseScanner):
             self.logger.info(f"Timeout connecting to nameserver {nameserver}")
             return False
         except Exception as e:
-            # Zone transfer not allowed (good) or other error
+
             self.logger.info(
                 f"Zone transfer not allowed on {nameserver} for {self.hostname}: {e}"
             )

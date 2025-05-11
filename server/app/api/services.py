@@ -51,19 +51,17 @@ class ScanService:
         if not user_id:
             raise ValueError("User ID is required")
 
-        # Verify the user exists
         user = db.query(User).filter(User.id == user_id).first()
         if not user:
             raise ValueError(f"User with ID {user_id} not found")
 
         try:
-            # Create a new website entry
+
             website = Website(user_id=user_id, url=url, cookies=cookies)
             db.add(website)
             db.commit()
             db.refresh(website)
 
-            # Now create a scan for this website
             scan = Scan(website_id=website.id, status="pending")
             db.add(scan)
             db.commit()
@@ -82,18 +80,16 @@ class ScanService:
         """
         Create a new scan for a website
         """
-        # Get website
+
         website = db.query(Website).filter(Website.id == website_id).first()
         if not website:
             raise ValueError(f"Website with ID {website_id} not found")
 
-        # Create scan record
         scan = Scan(website_id=website_id, status="pending")
         db.add(scan)
         db.commit()
         db.refresh(scan)
 
-        # Start scan in background
         asyncio.create_task(ScanService.run_scan(db, scan.id, scan_types))
 
         return scan
@@ -113,25 +109,22 @@ class ScanService:
         if not user_id:
             raise ValueError("User ID is required")
 
-        # Verify the user exists
         user = db.query(User).filter(User.id == user_id).first()
         if not user:
             raise ValueError(f"User with ID {user_id} not found")
 
         try:
-            # Create a new website entry - UUID handling is now managed by the model
+
             website = Website(user_id=user_id, url=url, cookies=cookies)
             db.add(website)
             db.commit()
             db.refresh(website)
 
-            # Now create a scan for this website
             scan = Scan(website_id=website.id, status="pending")
             db.add(scan)
             db.commit()
             db.refresh(scan)
 
-            # Start scan in background
             asyncio.create_task(ScanService.run_scan(db, scan.id, scan_types))
 
             return scan
@@ -185,14 +178,13 @@ class ScanService:
                     scan_type in scan_types for scan_type in ["xss", "sqli", "lfi"]
                 )
 
-                # 1. WordPress scan
                 if "wordpress" in scan_types:
                     current_scanner = "wordpress"
                     scanner = WordPressScanner(website.url, website.cookies)
                     results = scanner.run()
 
                     if results.get("is_wordpress"):
-                        # Save WordPress scan results
+
                         wp_result = WPScanResult(
                             scan_id=scan.id,
                             vulnerabilities_found=json.dumps(
@@ -205,13 +197,11 @@ class ScanService:
                         db.add(wp_result)
                         db.commit()
 
-                # 2. Command Injection scan
                 if "command_injection" in scan_types:
                     current_scanner = "command_injection"
                     scanner = CommandInjectionScanner(website.url, website.cookies)
                     results = scanner.run()
 
-                    # Save Command Injection scan results
                     cmd_injection_result = CommandInjectionResult(
                         scan_id=scan.id,
                         vulnerable_endpoints=json.dumps(
@@ -227,14 +217,12 @@ class ScanService:
                     db.add(cmd_injection_result)
                     db.commit()
 
-                # 3. SSL scan
                 if "ssl" in scan_types:
                     current_scanner = "ssl"
                     if website.url.startswith("https://"):
                         scanner = SSLScanner(website.url, website.cookies)
                         results = scanner.run()
 
-                        # Save SSL scan results
                         ssl_result = SSLResult(
                             scan_id=scan.id,
                             ssl_grade=results.get("ssl_grade"),
@@ -246,13 +234,11 @@ class ScanService:
                         db.add(ssl_result)
                         db.commit()
 
-                # 4. DNS scan
                 if "dns" in scan_types:
                     current_scanner = "dns"
                     scanner = DNSScanner(website.url, website.cookies)
                     results = scanner.run()
 
-                    # Save DNS scan results
                     dns_result = DNSResult(
                         scan_id=scan.id,
                         records=json.dumps(results.get("records", {})),
@@ -263,13 +249,11 @@ class ScanService:
                     db.add(dns_result)
                     db.commit()
 
-                # 5. Port scan
                 if "ports" in scan_types:
                     current_scanner = "ports"
                     scanner = PortScanner(website.url, website.cookies)
                     results = scanner.run()
 
-                    # Save port scan results
                     port_result = OpenPortsResult(
                         scan_id=scan.id,
                         open_ports=json.dumps(results.get("open_ports", [])),
@@ -280,13 +264,11 @@ class ScanService:
                     db.add(port_result)
                     db.commit()
 
-                # 6. Zone Transfer scan
                 if "zone_transfer" in scan_types:
                     current_scanner = "zone_transfer"
                     scanner = ZoneTransferScanner(website.url, website.cookies)
                     results = scanner.run()
 
-                    # Save Zone Transfer scan results
                     zone_transfer_result = ZoneTransferResult(
                         scan_id=scan.id,
                         transferable_domains=json.dumps(
@@ -297,13 +279,11 @@ class ScanService:
                     db.add(zone_transfer_result)
                     db.commit()
 
-                # 7. Directory scan
                 if "directory" in scan_types:
                     current_scanner = "directory"
                     scanner = DirectoryScanner(website.url, website.cookies)
                     results = scanner.run()
 
-                    # Save directory scan results
                     dir_result = DirectoryScanningResult(
                         scan_id=scan.id,
                         directories_found=json.dumps(
@@ -316,20 +296,16 @@ class ScanService:
                     db.add(dir_result)
                     db.commit()
 
-                # 8. Run crawler-based scanners LAST if they're requested
                 if needs_crawling:
                     current_scanner = "advanced_scanners"
                     try:
-                        # Launch a coordinator that handles crawling and running these scanners
+
                         ScanService._run_advanced_scanners(
                             db, scan, website, scan_types
                         )
                     except Exception as e:
                         logger.error(f"Error in advanced scanners: {str(e)}")
-                        # Continue with the scan even if advanced scanners fail
-                        # This ensures other results are still saved
 
-                # Update scan status on completion
                 scan.status = "completed"
                 scan.completed_at = datetime.utcnow()
                 db.commit()
@@ -370,10 +346,8 @@ class ScanService:
                 f"Starting advanced vulnerability scan for website {website.url}"
             )
 
-            # Create and run the vulnerability scan coordinator in a new thread
             loop = asyncio.new_event_loop()
 
-            # Run the coordinator in a separate thread to avoid blocking
             def run_coordinator():
                 asyncio.set_event_loop(loop)
                 coordinator = VulnerabilityScanCoordinator(db, scan.id, website)
@@ -385,7 +359,6 @@ class ScanService:
             coordinator_thread.daemon = True
             coordinator_thread.start()
 
-            # Wait for the coordinator to complete or timeout after 15 minutes
             coordinator_thread.join(timeout=900)
 
             if coordinator_thread.is_alive():
@@ -416,7 +389,6 @@ class ScanService:
             Dict with scan details and success status
         """
 
-        # Check if scan exists and belongs to the user
         scan = (
             db.query(Scan)
             .join(Website)
@@ -429,7 +401,6 @@ class ScanService:
                 f"Scan with ID {scan_id} not found or does not belong to user"
             )
 
-        # Only stop if the scan is running or pending
         if scan.status not in ["running", "pending"]:
             return {
                 "id": scan.id,
@@ -438,17 +409,13 @@ class ScanService:
                 "success": False,
             }
 
-        # Only close the browser instance if WordPress scanning is involved
-        # as other scanners use direct HTTP requests, not browser automation
         try:
-            # Get scan types from the original scan request if available
-            # For now assume WordPress scan is included in default scans
+
             logger.info(f"Closing browser instance for scan {scan_id}")
             browser_manager.close_browser()
         except Exception as e:
             logger.error(f"Error closing browser instance: {e}")
 
-        # Update scan status to stopped
         scan.status = "stopped"
         scan.completed_at = datetime.utcnow()
         db.commit()
@@ -468,7 +435,7 @@ class ScanService:
         results = scanner.run()
 
         if results.get("is_wordpress"):
-            # Save WordPress scan results
+
             wp_result = WPScanResult(
                 scan_id=scan.id,
                 vulnerabilities_found=json.dumps(results.get("vulnerabilities", [])),
@@ -483,13 +450,12 @@ class ScanService:
     async def _run_ssl_scan(db: Session, scan: Scan, website: Website) -> None:
         """Run SSL scan"""
         if not website.url.startswith("https://"):
-            # Skip SSL scan for non-HTTPS sites
+
             return
 
         scanner = SSLScanner(website.url, website.cookies)
         results = scanner.run()
 
-        # Save SSL scan results
         ssl_result = SSLResult(
             scan_id=scan.id,
             ssl_grade=results.get("ssl_grade"),
@@ -505,7 +471,6 @@ class ScanService:
         scanner = DNSScanner(website.url, website.cookies)
         results = scanner.run()
 
-        # Save DNS scan results
         dns_result = DNSResult(
             scan_id=scan.id,
             records=json.dumps(results.get("records", {})),
@@ -520,7 +485,6 @@ class ScanService:
         scanner = PortScanner(website.url, website.cookies)
         results = scanner.run()
 
-        # Save port scan results
         port_result = OpenPortsResult(
             scan_id=scan.id,
             open_ports=json.dumps(results.get("open_ports", [])),
@@ -535,7 +499,6 @@ class ScanService:
         scanner = DirectoryScanner(website.url, website.cookies)
         results = scanner.run()
 
-        # Save directory scan results
         dir_result = DirectoryScanningResult(
             scan_id=scan.id,
             directories_found=json.dumps(results.get("directories_found", [])),
@@ -550,7 +513,6 @@ class ScanService:
         scanner = LFIScanner(website.url, website.cookies)
         results = scanner.run()
 
-        # Save LFI scan results
         lfi_result = LFIResult(
             scan_id=scan.id,
             vulnerable_endpoints=json.dumps(results.get("vulnerable_endpoints", [])),
@@ -566,7 +528,6 @@ class ScanService:
         scanner = ZoneTransferScanner(website.url, website.cookies)
         results = scanner.run()
 
-        # Save Zone Transfer scan results
         zone_transfer_result = ZoneTransferResult(
             scan_id=scan.id,
             transferable_domains=json.dumps(results.get("transferable_domains", [])),
@@ -583,7 +544,6 @@ class ScanService:
         scanner = CommandInjectionScanner(website.url, website.cookies)
         results = scanner.run()
 
-        # Save Command Injection scan results
         cmd_injection_result = CommandInjectionResult(
             scan_id=scan.id,
             vulnerable_endpoints=json.dumps(results.get("vulnerable_endpoints", [])),
@@ -624,7 +584,6 @@ class ScanService:
         if not scan:
             raise ValueError(f"Scan with ID {scan_id} not found")
 
-        # Base result with scan metadata
         result = {
             "scan": {
                 "id": scan.id,
@@ -637,7 +596,6 @@ class ScanService:
             "website": {"id": scan.website.id, "url": scan.website.url},
         }
 
-        # 1. WordPress scan results
         wp_result = (
             db.query(WPScanResult).filter(WPScanResult.scan_id == scan_id).first()
         )
@@ -662,7 +620,6 @@ class ScanService:
         else:
             result["wordpress"] = {"is_wordpress": False}
 
-        # 2. SSL scan results
         ssl_result = db.query(SSLResult).filter(SSLResult.scan_id == scan_id).first()
         if ssl_result:
             result["ssl"] = {
@@ -679,7 +636,6 @@ class ScanService:
                 ),
             }
 
-        # 3. DNS scan results
         dns_result = db.query(DNSResult).filter(DNSResult.scan_id == scan_id).first()
         if dns_result:
             result["dns"] = {
@@ -691,7 +647,6 @@ class ScanService:
                 ),
             }
 
-        # 4. Port scan results
         port_result = (
             db.query(OpenPortsResult).filter(OpenPortsResult.scan_id == scan_id).first()
         )
@@ -707,7 +662,6 @@ class ScanService:
                 ),
             }
 
-        # 5. Directory scan results
         dir_result = (
             db.query(DirectoryScanningResult)
             .filter(DirectoryScanningResult.scan_id == scan_id)
@@ -727,7 +681,6 @@ class ScanService:
                 ),
             }
 
-        # 6. LFI scan results
         lfi_result = db.query(LFIResult).filter(LFIResult.scan_id == scan_id).first()
         if lfi_result:
             result["lfi"] = {
@@ -738,7 +691,6 @@ class ScanService:
                 ),
             }
 
-        # 7. Command Injection scan results
         cmd_injection_result = (
             db.query(CommandInjectionResult)
             .filter(CommandInjectionResult.scan_id == scan_id)
@@ -753,7 +705,6 @@ class ScanService:
                 ),
             }
 
-        # 8. Zone Transfer scan results
         zone_transfer_result = (
             db.query(ZoneTransferResult)
             .filter(ZoneTransferResult.scan_id == scan_id)
@@ -773,15 +724,13 @@ class ScanService:
                 ),
             }
 
-        # 9. SQLi and XSS results (these are linked to website_url, not directly to scan)
-        # First get all website_url_ids associated with this website
         website_urls = (
             db.query(WebsiteUrl).filter(WebsiteUrl.website_id == scan.website_id).all()
         )
         website_url_ids = [url.id for url in website_urls]
 
         if website_url_ids:
-            # XSS results
+
             xss_results = (
                 db.query(XSSResult)
                 .filter(XSSResult.website_url_id.in_(website_url_ids))
@@ -801,7 +750,6 @@ class ScanService:
                         }
                     )
 
-            # SQLi results
             sqli_results = (
                 db.query(SQLiResult)
                 .filter(SQLiResult.website_url_id.in_(website_url_ids))
@@ -822,7 +770,6 @@ class ScanService:
                         }
                     )
 
-        # Convert any UUIDs to strings before returning
         return ScanService.convert_uuid_to_str(result)
 
     @staticmethod
@@ -832,13 +779,11 @@ class ScanService:
         """
         List scans for a user with pagination
         """
-        # Get total count
+
         total = db.query(Scan).join(Website).filter(Website.user_id == user_id).count()
 
-        # Calculate pages
         pages = (total + page_size - 1) // page_size
 
-        # Get scans
         scans = (
             db.query(Scan)
             .join(Website)
@@ -870,22 +815,18 @@ class ScanService:
         import io
         import urllib.parse
 
-        # Get scan result
         scan_result = ScanService.get_scan_result(db, scan_id)
 
-        # Get scan info for filename
         scan = db.query(Scan).filter(Scan.id == scan_id).first()
         if not scan:
             raise ValueError(f"Scan with ID {scan_id} not found")
 
-        # Extract domain from URL for filename
         website = db.query(Website).filter(Website.id == scan.website_id).first()
         parsed_url = urllib.parse.urlparse(website.url)
         domain = parsed_url.netloc.replace(":", "_").replace(".", "_")
         timestamp = scan.created_at.strftime("%Y%m%d_%H%M%S")
         filename_base = f"security_scan_{domain}_{timestamp}"
 
-        # Format and return based on requested format
         report_format = report_format.lower()
 
         if report_format == "json":
@@ -893,14 +834,11 @@ class ScanService:
 
         elif report_format == "excel":
             try:
-                # Convert to Excel format
+
                 output = io.BytesIO()
 
-                # Create a pandas Excel writer
                 with pd.ExcelWriter(output, engine="xlsxwriter") as writer:
-                    # Create worksheets for each scan type
 
-                    # Overview sheet
                     overview_data = {
                         "Property": [
                             "URL",
@@ -929,11 +867,10 @@ class ScanService:
                         writer, sheet_name="Overview", index=False
                     )
 
-                    # Handle each scan result section
                     if "wordpress" in scan_result and scan_result["wordpress"].get(
                         "is_wordpress"
                     ):
-                        # WordPress vulnerabilities
+
                         if scan_result["wordpress"].get("vulnerabilities"):
                             vulns = scan_result["wordpress"]["vulnerabilities"]
                             if vulns:
@@ -942,14 +879,12 @@ class ScanService:
                                     writer, sheet_name="WordPress Vulns", index=False
                                 )
 
-                    # SSL issues
                     if "ssl" in scan_result and scan_result["ssl"].get("issues_found"):
                         issues = scan_result["ssl"]["issues_found"]
                         if issues:
                             df = pd.json_normalize(issues)
                             df.to_excel(writer, sheet_name="SSL Issues", index=False)
 
-                    # DNS misconfigurations
                     if "dns" in scan_result and scan_result["dns"].get(
                         "misconfigurations"
                     ):
@@ -958,7 +893,6 @@ class ScanService:
                             df = pd.json_normalize(issues)
                             df.to_excel(writer, sheet_name="DNS Issues", index=False)
 
-                    # Port scan results
                     if "ports" in scan_result and scan_result["ports"].get(
                         "open_ports"
                     ):
@@ -973,7 +907,6 @@ class ScanService:
                                 writer, sheet_name="Open Ports", index=False
                             )
 
-                    # LFI vulnerabilities
                     if "lfi" in scan_result and scan_result["lfi"].get(
                         "vulnerable_endpoints"
                     ):
@@ -982,10 +915,8 @@ class ScanService:
                             df = pd.json_normalize(vulns)
                             df.to_excel(writer, sheet_name="LFI Vulns", index=False)
 
-                # Reset the buffer position to the beginning
                 output.seek(0)
 
-                # Create response with Excel file
                 filename = f"{filename_base}.xlsx"
                 media_type = (
                     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -1013,15 +944,12 @@ class ScanService:
                 from reportlab.lib import colors
                 from reportlab.lib.enums import TA_LEFT
 
-                # Create a buffer for the PDF
                 buffer = io.BytesIO()
 
-                # Set up page size with margins
                 page_width, page_height = letter
-                margin = 36  # 0.5 inch margins
+                margin = 36
                 effective_width = page_width - (2 * margin)
 
-                # Create the PDF document with proper margins
                 doc = SimpleDocTemplate(
                     buffer,
                     pagesize=letter,
@@ -1031,13 +959,11 @@ class ScanService:
                     bottomMargin=margin,
                 )
 
-                # Create styles for the document
                 styles = getSampleStyleSheet()
                 title_style = styles["Heading1"]
                 heading2_style = styles["Heading2"]
                 normal_style = styles["Normal"]
 
-                # Create a custom style for table cells with word wrapping
                 table_cell_style = ParagraphStyle(
                     "TableCell",
                     parent=normal_style,
@@ -1047,22 +973,18 @@ class ScanService:
                     alignment=TA_LEFT,
                 )
 
-                # Helper function to create wrapped paragraphs for table cells
                 def wrap_text(text):
                     if not text:
                         return Paragraph("Unknown", table_cell_style)
                     return Paragraph(str(text), table_cell_style)
 
-                # Build story (content)
                 story = []
 
-                # Title
                 story.append(
                     Paragraph(f"Security Scan Report: {website.url}", title_style)
                 )
                 story.append(Spacer(1, 12))
 
-                # Overview section
                 story.append(Paragraph("Scan Overview", heading2_style))
                 story.append(Spacer(1, 6))
 
@@ -1103,7 +1025,6 @@ class ScanService:
                 story.append(overview_table)
                 story.append(Spacer(1, 12))
 
-                # 1. WordPress scan results
                 if "wordpress" in scan_result:
                     story.append(Paragraph("WordPress Scan Results", heading2_style))
                     story.append(Spacer(1, 6))
@@ -1116,7 +1037,6 @@ class ScanService:
                             )
                         )
 
-                        # Add plugins if any
                         plugins = scan_result["wordpress"].get("plugins", [])
                         if plugins:
                             story.append(Spacer(1, 6))
@@ -1153,7 +1073,6 @@ class ScanService:
                             )
                             story.append(plugin_table)
 
-                        # Add themes if any
                         themes = scan_result["wordpress"].get("themes", [])
                         if themes:
                             story.append(Spacer(1, 6))
@@ -1190,7 +1109,6 @@ class ScanService:
                             )
                             story.append(theme_table)
 
-                        # Add vulnerabilities if any
                         vulnerabilities = scan_result["wordpress"].get(
                             "vulnerabilities", []
                         )
@@ -1239,7 +1157,6 @@ class ScanService:
 
                     story.append(Spacer(1, 12))
 
-                # 2. SSL section
                 if "ssl" in scan_result:
                     story.append(Paragraph("SSL Scan Results", heading2_style))
                     story.append(Spacer(1, 6))
@@ -1251,7 +1168,6 @@ class ScanService:
                         )
                     )
 
-                    # Certificate details
                     cert_details = scan_result["ssl"].get("certificate_details", {})
                     if cert_details:
                         story.append(Spacer(1, 6))
@@ -1284,7 +1200,6 @@ class ScanService:
                             )
                             story.append(cert_table)
 
-                    # SSL issues
                     issues = scan_result["ssl"].get("issues_found", [])
                     if issues:
                         story.append(Spacer(1, 6))
@@ -1315,12 +1230,10 @@ class ScanService:
 
                     story.append(Spacer(1, 12))
 
-                # 3. DNS section
                 if "dns" in scan_result:
                     story.append(Paragraph("DNS Scan Results", heading2_style))
                     story.append(Spacer(1, 6))
 
-                    # DNS Records
                     records = scan_result["dns"].get("records", {})
                     if records:
                         story.append(Paragraph("DNS Records", styles["Heading3"]))
@@ -1355,7 +1268,6 @@ class ScanService:
                                 story.append(record_table)
                                 story.append(Spacer(1, 6))
 
-                    # DNS Misconfigurations
                     misconfigurations = scan_result["dns"].get("misconfigurations", [])
                     if misconfigurations:
                         story.append(
@@ -1389,7 +1301,6 @@ class ScanService:
 
                     story.append(Spacer(1, 12))
 
-                # 4. Port scan results
                 if "ports" in scan_result:
                     story.append(Paragraph("Open Ports Scan Results", heading2_style))
                     story.append(Spacer(1, 6))
@@ -1421,14 +1332,12 @@ class ScanService:
 
                     story.append(Spacer(1, 12))
 
-                # 5. Directory scanning results
                 if "directories" in scan_result:
                     story.append(
                         Paragraph("Directory Scanning Results", heading2_style)
                     )
                     story.append(Spacer(1, 6))
 
-                    # Directories found
                     directories = scan_result["directories"].get(
                         "directories_found", []
                     )
@@ -1453,7 +1362,6 @@ class ScanService:
                         story.append(dir_table)
                         story.append(Spacer(1, 6))
 
-                    # Sensitive files found
                     sensitive_files = scan_result["directories"].get(
                         "sensitive_files_found", []
                     )
@@ -1489,7 +1397,6 @@ class ScanService:
 
                     story.append(Spacer(1, 12))
 
-                # 6. LFI scan results
                 if "lfi" in scan_result:
                     story.append(Paragraph("LFI Scan Results", heading2_style))
                     story.append(Spacer(1, 6))
@@ -1525,7 +1432,6 @@ class ScanService:
 
                     story.append(Spacer(1, 12))
 
-                # 7. Command Injection scan results
                 if "command_injection" in scan_result:
                     story.append(
                         Paragraph("Command Injection Scan Results", heading2_style)
@@ -1565,7 +1471,6 @@ class ScanService:
 
                     story.append(Spacer(1, 12))
 
-                # 8. Zone Transfer scan results
                 if "zone_transfer" in scan_result:
                     story.append(
                         Paragraph("Zone Transfer Scan Results", heading2_style)
@@ -1632,7 +1537,6 @@ class ScanService:
 
                     story.append(Spacer(1, 12))
 
-                # 9. XSS scan results
                 if "xss" in scan_result and scan_result["xss"]:
                     story.append(Paragraph("XSS Scan Results", heading2_style))
                     story.append(Spacer(1, 6))
@@ -1675,7 +1579,6 @@ class ScanService:
 
                     story.append(Spacer(1, 12))
 
-                # 10. SQLi scan results
                 if "sqli" in scan_result and scan_result["sqli"]:
                     story.append(
                         Paragraph("SQL Injection Scan Results", heading2_style)
@@ -1728,13 +1631,10 @@ class ScanService:
 
                     story.append(Spacer(1, 12))
 
-                # Build PDF
                 doc.build(story)
 
-                # Reset buffer position
                 buffer.seek(0)
 
-                # Create response with PDF file
                 filename = f"{filename_base}.pdf"
                 media_type = "application/pdf"
                 headers = {"Content-Disposition": f'attachment; filename="{filename}"'}

@@ -47,7 +47,7 @@ async def create_scan(
     Accepts URL, cookies, and scan types.
     """
     try:
-        # Create scan record but don't run the scan yet
+
         scan = await ScanService.create_scan_record(
             db=db,
             url=scan_data.url,
@@ -55,7 +55,6 @@ async def create_scan(
             user_id=current_user.id,
         )
 
-        # Add the scan task to background tasks
         background_tasks.add_task(
             ScanService.run_scan,
             db=db,
@@ -63,10 +62,9 @@ async def create_scan(
             scan_types=scan_data.scan_types,
         )
 
-        # Convert Scan object to a serializable dictionary
         scan_dict = {
-            "scan_id": str(scan.id),  # Convert UUID to string
-            "website_id": str(scan.website_id),  # Convert UUID to string
+            "scan_id": str(scan.id),
+            "website_id": str(scan.website_id),
             "status": scan.status,
             "started_at": scan.started_at,
             "completed_at": scan.completed_at,
@@ -100,7 +98,7 @@ def get_scan_status(
     """
     Get the status of a specific scan.
     """
-    # Only try to parse as UUID - no longer supporting numeric IDs
+
     try:
         scan_id = UUID(id)
     except ValueError:
@@ -109,7 +107,6 @@ def get_scan_status(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
         )
 
-    # Check if scan exists and belongs to the current user
     scan = (
         db.query(Website.user_id)
         .join(Website.scans)
@@ -123,10 +120,9 @@ def get_scan_status(
             message=f"Scan with ID {id} not found or does not belong to you",
         )
 
-    # Get scan status
     try:
         result = ScanService.get_scan_status(db=db, scan_id=scan_id)
-        # Ensure UUIDs are converted to strings in result
+
         if "id" in result and isinstance(result["id"], UUID):
             result["id"] = str(result["id"])
         if "website_id" in result and isinstance(result["website_id"], UUID):
@@ -164,7 +160,7 @@ def get_scan_result(
     9. Zone Transfer Scan
     10. Directory Scanning
     """
-    # Only accept UUID format for scan ID
+
     try:
         scan_id = UUID(id)
     except ValueError:
@@ -173,7 +169,6 @@ def get_scan_result(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
         )
 
-    # Check if scan exists and belongs to the current user
     scan = (
         db.query(Scan, Website)
         .join(Website, Scan.website_id == Website.id)
@@ -187,44 +182,38 @@ def get_scan_result(
             message=f"Scan with ID {id} not found or does not belong to you",
         )
 
-    # Get comprehensive scan result
     try:
-        # This will fetch all data from all related tables
+
         result = ScanService.get_scan_result(db=db, scan_id=scan_id)
         import logging
 
         logger = logging.getLogger(__name__)
 
-        # Get all URLs and cookies associated with this website
         website = db.query(Website).filter(Website.id == scan[0].website_id).first()
         all_urls = (
             db.query(WebsiteUrl).filter(WebsiteUrl.website_id == website.id).all()
         )
 
-        # Add URLs and cookies to the result
         urls_data = []
         for url_obj in all_urls:
-            # Create URL data without accessing non-existent attributes
+
             url_data = {
                 "id": str(url_obj.id),
                 "url": url_obj.url,
                 "status": url_obj.status,
             }
 
-            # Only add is_main if it exists as an attribute
             if hasattr(url_obj, "is_main"):
                 url_data["is_main"] = url_obj.is_main
 
             urls_data.append(url_data)
 
-        # Add website cookies and metadata to the result
         result["website_data"] = {
             "url": website.url,
             "cookies": website.cookies,
             "all_urls": urls_data,
         }
 
-        # Ensure all scan types are represented in the response
         scan_types = [
             "wordpress",
             "xss",
@@ -238,7 +227,6 @@ def get_scan_result(
             "directories",
         ]
 
-        # Initialize empty objects for any missing scan types
         for scan_type in scan_types:
             if scan_type not in result:
                 if scan_type == "wordpress":
@@ -270,7 +258,6 @@ def get_scan_result(
                         "commands_executed": [],
                     }
 
-        # Add summary information
         result["summary"] = {
             "scan_completed": scan[0].status == "completed",
             "scan_status": scan[0].status,
@@ -312,7 +299,7 @@ def get_scan_report(
     """
     Generate and download a report for a scan.
     """
-    # Only accept UUID format for scan ID
+
     try:
         scan_id = UUID(id)
     except ValueError:
@@ -321,7 +308,6 @@ def get_scan_report(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
         )
 
-    # Check if scan exists and belongs to the current user
     scan = (
         db.query(Website.user_id)
         .join(Website.scans)
@@ -335,23 +321,20 @@ def get_scan_report(
             message=f"Scan with ID {id} not found or does not belong to you",
         )
 
-    # Generate report
     try:
         report = ScanService.generate_report(
             db=db, scan_id=scan_id, report_format=format
         )
-        # The report might be a file download or JSON data
+
         if isinstance(report, dict):
             return success_response(
                 data=report,
                 message=f"Report generated in {format} format",
             )
         else:
-            # For file downloads, ensure CORS headers are included
-            # Get CORS headers from settings
+
             origin = request.headers.get("origin")
 
-            # Only add CORS headers if the origin is in the allowed list
             if origin and origin in settings.BACKEND_CORS_ORIGINS:
                 headers = dict(report.headers)
                 headers["Access-Control-Allow-Origin"] = origin
@@ -362,7 +345,6 @@ def get_scan_report(
                 headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
                 headers["Access-Control-Expose-Headers"] = "Content-Disposition"
 
-                # Create a new response with the same content but with CORS headers
                 from fastapi.responses import Response
 
                 return Response(
@@ -372,7 +354,6 @@ def get_scan_report(
                     media_type=report.media_type,
                 )
 
-            # Return the raw response for file downloads
             return report
     except ValueError as e:
         return error_response(
@@ -401,14 +382,12 @@ def list_scans(
     List all scans for the current user with pagination.
     """
     try:
-        # Log user ID for debugging
+
         print(f"Fetching scans for user_id: {current_user.id}")
 
-        # Use limit parameter if provided (backwards compatibility)
         if limit is not None:
             page_size = limit
 
-        # Get scans with the user ID filter
         result = ScanService.list_scans(
             db=db, user_id=current_user.id, page=page, page_size=page_size
         )
@@ -417,18 +396,16 @@ def list_scans(
             f"Found {len(result.get('items', []))} scans for user_id: {current_user.id}"
         )
 
-        # Convert Scan objects to dictionaries to make them JSON serializable
         serialized_items = []
         for scan in result.get("items", []):
             scan_dict = {
-                "id": str(scan.id),  # Convert UUID to string
-                "website_id": str(scan.website_id),  # Convert UUID to string
+                "id": str(scan.id),
+                "website_id": str(scan.website_id),
                 "status": scan.status,
                 "started_at": scan.started_at,
                 "completed_at": scan.completed_at,
                 "created_at": scan.created_at,
                 "url": scan.website.url if scan.website else None,
-                # Add a summary of vulnerabilities if available
                 "vulnerabilities_summary": {
                     "total": _count_vulnerabilities_for_scan(db, scan.id),
                     "high": _count_vulnerabilities_by_severity(db, scan.id, "high"),
@@ -438,7 +415,6 @@ def list_scans(
             }
             serialized_items.append(scan_dict)
 
-        # Replace the items with serialized versions
         result["items"] = serialized_items
 
         return success_response(
@@ -453,22 +429,17 @@ def list_scans(
         )
 
 
-# Helper functions for vulnerability counting
 def _count_vulnerabilities_for_scan(db: Session, scan_id: UUID) -> int:
     """Count total vulnerabilities across all scan results"""
     total = 0
 
-    # Check SSL issues
     ssl_result = db.query(SSLResult).filter(SSLResult.scan_id == scan_id).first()
     if ssl_result and ssl_result.issues_found:
         total += len(json.loads(ssl_result.issues_found))
 
-    # Check DNS misconfigurations
     dns_result = db.query(DNSResult).filter(DNSResult.scan_id == scan_id).first()
     if dns_result and dns_result.misconfigurations:
         total += len(json.loads(dns_result.misconfigurations))
-
-    # Add counts from other result types as needed
 
     return total
 
@@ -479,18 +450,14 @@ def _count_vulnerabilities_by_severity(
     """Count vulnerabilities of a specific severity"""
     count = 0
 
-    # Check SSL issues of specified severity
     ssl_result = db.query(SSLResult).filter(SSLResult.scan_id == scan_id).first()
     if ssl_result and ssl_result.issues_found:
         issues = json.loads(ssl_result.issues_found)
         count += sum(1 for issue in issues if issue.get("severity") == severity)
 
-    # Check DNS misconfigurations of specified severity
     dns_result = db.query(DNSResult).filter(DNSResult.scan_id == scan_id).first()
     if dns_result and dns_result.misconfigurations:
         issues = json.loads(dns_result.misconfigurations)
         count += sum(1 for issue in issues if issue.get("severity") == severity)
-
-    # Add counts from other result types as needed
 
     return count

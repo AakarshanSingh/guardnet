@@ -29,15 +29,13 @@ class DNSScanner(BaseScanner):
         self.progress = 10
 
         try:
-            # Get DNS records
+
             dns_records = self._get_dns_records()
             self.progress = 50
 
-            # Check for DNS misconfigurations
             misconfigurations = self._check_dns_misconfigurations(dns_records)
             self.progress = 90
 
-            # Additional checks like zone transfers
             self._check_zone_transfers(dns_records)
             self.progress = 100
 
@@ -75,20 +73,18 @@ class DNSScanner(BaseScanner):
                 dns.resolver.NXDOMAIN,
                 dns.resolver.NoNameservers,
             ):
-                # No records of this type
+
                 records[record_type] = []
             except Exception as e:
                 self.logger.warning(f"Error getting {record_type} records: {e}")
                 records[record_type] = []
 
-        # Get SPF record specially (it's actually a TXT record)
         try:
             answers = dns.resolver.resolve(self.hostname, "TXT")
             records["SPF"] = [str(rdata) for rdata in answers if "v=spf1" in str(rdata)]
         except Exception:
             records["SPF"] = []
 
-        # Get DMARC record (which is at _dmarc.domain.com)
         try:
             answers = dns.resolver.resolve(f"_dmarc.{self.hostname}", "TXT")
             records["DMARC"] = [
@@ -105,7 +101,6 @@ class DNSScanner(BaseScanner):
         """Check for common DNS misconfigurations"""
         misconfigurations = []
 
-        # Check for missing SPF record
         if not dns_records.get("SPF", []):
             misconfigurations.append(
                 {
@@ -115,7 +110,6 @@ class DNSScanner(BaseScanner):
                 }
             )
 
-        # Check for missing DMARC record
         if not dns_records.get("DMARC", []):
             misconfigurations.append(
                 {
@@ -125,7 +119,6 @@ class DNSScanner(BaseScanner):
                 }
             )
 
-        # Check for missing CAA record
         if not dns_records.get("CAA", []):
             misconfigurations.append(
                 {
@@ -135,7 +128,6 @@ class DNSScanner(BaseScanner):
                 }
             )
 
-        # Check for DNSSec
         try:
             answers = dns.resolver.resolve(self.hostname, "DNSKEY")
             if not answers:
@@ -155,7 +147,6 @@ class DNSScanner(BaseScanner):
                 }
             )
 
-        # Check nameserver configurations
         ns_records = dns_records.get("NS", [])
         if len(ns_records) < 2:
             misconfigurations.append(
@@ -166,7 +157,6 @@ class DNSScanner(BaseScanner):
                 }
             )
 
-        # Check for nameserver single point of failure
         ns_ips = set()
         for ns in ns_records:
             try:
@@ -196,12 +186,12 @@ class DNSScanner(BaseScanner):
         for ns in ns_records:
             try:
                 ns = ns.rstrip(".")
-                # Attempt zone transfer
+
                 zone = dns.zone.from_xfr(dns.query.xfr(ns, self.hostname, timeout=10))
                 if zone:
                     zone_transfers.append(ns)
             except Exception:
-                # Zone transfer not allowed (good)
+
                 pass
 
         if zone_transfers:

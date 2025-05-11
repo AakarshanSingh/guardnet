@@ -16,7 +16,6 @@ class CommandInjectionScanner(BaseScanner):
     name = "Command Injection Scanner"
     description = "Detects Command Injection vulnerabilities in web applications"
 
-    # Command Injection payloads to try
     PAYLOADS = [
         "; ls",
         "& ls",
@@ -42,21 +41,20 @@ class CommandInjectionScanner(BaseScanner):
         "& ping -c 2 127.0.0.1",
         "| ping -c 2 127.0.0.1",
         "|| ping -c 2 127.0.0.1",
-        "& ping -n 2 127.0.0.1",  # Windows version
-        "; ping -n 2 127.0.0.1",  # Windows version
+        "& ping -n 2 127.0.0.1",
+        "; ping -n 2 127.0.0.1",
     ]
 
-    # Patterns that indicate a successful command injection
     SUCCESS_PATTERNS = [
-        r"((root|daemon|bin|sys|sync|games|man|mail|news|www-data|postgres):.*:0:[01]:|[0-9]:[0-9]:\/)",  # Linux user list
-        r"(\s+[0-9]+\s+[0-9]+\s+[0-9]+\s+[a-zA-Z]+\s+[a-zA-Z]+\s+[0-9]+\s+[0-9][0-9]:[0-9][0-9]:[0-9][0-9])",  # ls output
-        r"(uid=[0-9]+\(.+\)\s+gid=[0-9]+\(.+\)\s+groups=[0-9]+\(.+\))",  # id command output
-        r"(Linux .+ [0-9]+(?:\.[0-9]+){2,3} .+ GNU\/Linux)",  # Linux version
-        r"(Microsoft Windows \[Version [0-9\.]+\]|Windows \[\w+\])",  # Windows version
-        r"(Directory of |<DIR>|Volume in drive|Volume Serial Number)",  # Windows dir command
-        r"(bytes from 127.0.0.1|64 bytes from|PING: transmit failed|ping statistics|Pinging 127.0.0.1)",  # ping output
-        r"(vulnerable)",  # echo output
-        r"(NT AUTHORITY\\|Administrator|SYSTEM)",  # Windows user
+        r"((root|daemon|bin|sys|sync|games|man|mail|news|www-data|postgres):.*:0:[01]:|[0-9]:[0-9]:\/)",
+        r"(\s+[0-9]+\s+[0-9]+\s+[0-9]+\s+[a-zA-Z]+\s+[a-zA-Z]+\s+[0-9]+\s+[0-9][0-9]:[0-9][0-9]:[0-9][0-9])",
+        r"(uid=[0-9]+\(.+\)\s+gid=[0-9]+\(.+\)\s+groups=[0-9]+\(.+\))",
+        r"(Linux .+ [0-9]+(?:\.[0-9]+){2,3} .+ GNU\/Linux)",
+        r"(Microsoft Windows \[Version [0-9\.]+\]|Windows \[\w+\])",
+        r"(Directory of |<DIR>|Volume in drive|Volume Serial Number)",
+        r"(bytes from 127.0.0.1|64 bytes from|PING: transmit failed|ping statistics|Pinging 127.0.0.1)",
+        r"(vulnerable)",
+        r"(NT AUTHORITY\\|Administrator|SYSTEM)",
     ]
 
     def __init__(self, target_url: str, cookies: Optional[str] = None):
@@ -73,16 +71,14 @@ class CommandInjectionScanner(BaseScanner):
         """Run Command Injection scan"""
         self.progress = 10
 
-        # Set cookies if provided
         if self.cookies:
             self._set_cookies()
 
         try:
-            # Find potential vulnerable parameters
+
             params = self._find_parameters()
             self.progress = 30
 
-            # Test each parameter for Command Injection
             if params:
                 self._test_parameters(params)
             self.progress = 100
@@ -112,17 +108,15 @@ class CommandInjectionScanner(BaseScanner):
         potential_params = []
 
         try:
-            # Get the page content
+
             response = self.session.get(self.base_url, headers=self.headers, timeout=10)
             soup = BeautifulSoup(response.text, "html.parser")
 
-            # Find forms and their inputs
             for form in soup.find_all("form"):
                 form_action = form.get("action", "")
                 form_method = form.get("method", "get").lower()
                 form_url = urllib.parse.urljoin(self.base_url, form_action)
 
-                # Find inputs
                 inputs = {}
                 for input_tag in form.find_all("input"):
                     input_name = input_tag.get("name")
@@ -135,27 +129,22 @@ class CommandInjectionScanner(BaseScanner):
                         {"url": form_url, "method": form_method, "params": inputs}
                     )
 
-            # Find links with parameters
             for link in soup.find_all("a", href=True):
                 href = link["href"]
                 parsed_url = urllib.parse.urlparse(href)
 
-                # If link has query parameters
                 if parsed_url.query:
                     query_params = dict(urllib.parse.parse_qsl(parsed_url.query))
                     if query_params:
                         full_url = urllib.parse.urljoin(self.base_url, href)
                         potential_params.append(
                             {
-                                "url": full_url.split("?")[
-                                    0
-                                ],  # Base URL without parameters
+                                "url": full_url.split("?")[0],
                                 "method": "get",
                                 "params": query_params,
                             }
                         )
 
-            # Additional check for common parameter names that might be vulnerable
             common_params = [
                 "cmd",
                 "exec",
@@ -197,7 +186,6 @@ class CommandInjectionScanner(BaseScanner):
             method = param_info["method"]
             params = param_info["params"]
 
-            # Test each parameter
             for param_name, param_value in params.items():
                 self._test_parameter(url, method, param_name, params)
 
@@ -205,12 +193,12 @@ class CommandInjectionScanner(BaseScanner):
         self, url: str, method: str, target_param: str, all_params: Dict[str, str]
     ):
         """Test a specific parameter for Command Injection"""
-        # Test with different payloads
+
         with ThreadPoolExecutor(max_workers=self.max_threads) as executor:
             test_tasks = []
 
             for payload in self.PAYLOADS:
-                # Create a copy of params and modify the target parameter
+
                 params = all_params.copy()
                 params[target_param] = payload
 
@@ -227,7 +215,6 @@ class CommandInjectionScanner(BaseScanner):
                         )
                     )
 
-            # Wait for all tasks to complete
             for task in test_tasks:
                 task.result()
 
@@ -263,7 +250,7 @@ class CommandInjectionScanner(BaseScanner):
         self, response, url: str, method: str, param_name: str, payload: str
     ):
         """Check if response indicates successful Command Injection"""
-        # Check if response contains patterns of successful Command Injection
+
         content = response.text
 
         is_vulnerable = False
@@ -275,7 +262,6 @@ class CommandInjectionScanner(BaseScanner):
                 matched_pattern = match.group(0)
                 break
 
-        # If vulnerable, add to the list of vulnerable endpoints
         if is_vulnerable:
             vulnerability = {
                 "url": url,
@@ -290,7 +276,6 @@ class CommandInjectionScanner(BaseScanner):
                 "severity": "critical",
             }
 
-            # Add only if not already added for this URL and parameter
             if not any(
                 v["url"] == url and v["parameter"] == param_name
                 for v in self.vulnerable_endpoints
@@ -302,14 +287,13 @@ class CommandInjectionScanner(BaseScanner):
 
     def _extract_evidence(self, content: str) -> str:
         """Extract a snippet of evidence from the response content"""
-        # Try to find the most relevant portion of the content as evidence
+
         for pattern in self.SUCCESS_PATTERNS:
             match = re.search(pattern, content, re.IGNORECASE)
             if match:
-                # Get a window of text around the match
+
                 start = max(0, match.start() - 50)
                 end = min(len(content), match.end() + 50)
                 return content[start:end]
 
-        # Default: return a short portion of the content
         return content[:200] if len(content) > 200 else content

@@ -16,7 +16,6 @@ class DirectoryScanner(BaseScanner):
     name = "Directory Scanner"
     description = "Scans for directories and sensitive files on the web server"
 
-    # Common directories to check
     COMMON_DIRECTORIES = [
         "/admin",
         "/wp-admin",
@@ -59,9 +58,7 @@ class DirectoryScanner(BaseScanner):
         "/api/v2",
     ]
 
-    # Potentially sensitive files
     SENSITIVE_FILES = [
-        # Configuration and information files
         "/.env",
         "/config.php",
         "/wp-config.php",
@@ -74,7 +71,6 @@ class DirectoryScanner(BaseScanner):
         "/.htpasswd",
         "/robots.txt",
         "/sitemap.xml",
-        # Backup and temporary files
         "/.git/config",
         "/.git/HEAD",
         "/backup.sql",
@@ -87,7 +83,6 @@ class DirectoryScanner(BaseScanner):
         "/*.old",
         "/*.swp",
         "/*.tmp",
-        # Information disclosure files
         "/README.md",
         "/CHANGELOG.md",
         "/LICENSE",
@@ -96,7 +91,6 @@ class DirectoryScanner(BaseScanner):
         "/info.php",
         "/test.php",
         "/server-status",
-        # Default CMS files
         "/wp-login.php",
         "/wp-admin",
         "/administrator",
@@ -104,13 +98,11 @@ class DirectoryScanner(BaseScanner):
         "/joomla.xml",
         "/drupal",
         "/user/login",
-        # Common framework files
         "/laravel/.env",
         "/symfony/.env",
         "/index.php.bak",
         "/app/config/parameters.yml",
         "/config/app.php",
-        # Log files
         "/logs/errors.log",
         "/logs/access.log",
         "/error_log",
@@ -144,19 +136,16 @@ class DirectoryScanner(BaseScanner):
             self._set_cookies()
 
         try:
-            # Extract directories from robots.txt and sitemap.xml
+
             self._check_common_files()
             self.progress = 20
 
-            # Check common directories
             self._scan_common_directories()
             self.progress = 60
 
-            # Check sensitive files
             self._scan_sensitive_files()
             self.progress = 90
 
-            # Extract additional directories from HTML
             self._extract_directories_from_html()
             self.progress = 100
 
@@ -192,7 +181,7 @@ class DirectoryScanner(BaseScanner):
     def _check_common_files(self):
         """Check robots.txt and sitemap.xml for directory information"""
         try:
-            # Check robots.txt
+
             robots_url = urllib.parse.urljoin(self.base_url, "robots.txt")
             response = self.session.get(robots_url, timeout=self.request_timeout)
 
@@ -205,7 +194,6 @@ class DirectoryScanner(BaseScanner):
                             directory = urllib.parse.urljoin(self.base_url, path)
                             self.found_directories.append(path)
 
-            # Check sitemap.xml
             sitemap_url = urllib.parse.urljoin(self.base_url, "sitemap.xml")
             response = self.session.get(sitemap_url, timeout=self.request_timeout)
 
@@ -243,7 +231,6 @@ class DirectoryScanner(BaseScanner):
                 full_url, timeout=self.request_timeout, allow_redirects=False
             )
 
-            # Consider 2xx status codes as "found"
             if 200 <= response.status_code < 300:
                 return {
                     "url": full_url,
@@ -252,7 +239,7 @@ class DirectoryScanner(BaseScanner):
                     "content_type": response.headers.get("content-type", "unknown"),
                     "content_length": len(response.content),
                 }
-            # Special case for directory listing
+
             elif response.status_code == 403 and "Index of" in response.text:
                 return {
                     "url": full_url,
@@ -293,11 +280,9 @@ class DirectoryScanner(BaseScanner):
             if response.status_code == 200:
                 soup = BeautifulSoup(response.text, "html.parser")
 
-                # Find all links
                 for link in soup.find_all("a", href=True):
                     href = link["href"]
 
-                    # Skip external links and anchors
                     if href.startswith(
                         ("http://", "https://", "mailto:", "tel:", "#", "javascript:")
                     ):
@@ -306,7 +291,7 @@ class DirectoryScanner(BaseScanner):
                     try:
                         path = urllib.parse.urlparse(href).path
                         if path and path not in ("/", ""):
-                            # Try to determine if it's a directory (ends with slash or no extension)
+
                             if path.endswith("/") or "." not in path.split("/")[-1]:
                                 directory = path if path.endswith("/") else path + "/"
                                 if directory not in self.found_directories:
@@ -323,11 +308,9 @@ class DirectoryScanner(BaseScanner):
         """
         risks = []
 
-        # Check for sensitive files
         for file in self.found_sensitive_files:
             path = file["path"]
 
-            # Config files
             if any(
                 pattern in path.lower() for pattern in ["config", ".env", ".htaccess"]
             ):
@@ -340,7 +323,6 @@ class DirectoryScanner(BaseScanner):
                     }
                 )
 
-            # Backup files
             elif any(
                 pattern in path.lower()
                 for pattern in ["backup", ".bak", ".old", "dump", ".sql"]
@@ -354,7 +336,6 @@ class DirectoryScanner(BaseScanner):
                     }
                 )
 
-            # Git information
             elif ".git/" in path.lower():
                 risks.append(
                     {
@@ -365,7 +346,6 @@ class DirectoryScanner(BaseScanner):
                     }
                 )
 
-            # Debug/Information files
             elif any(
                 pattern in path.lower()
                 for pattern in ["phpinfo", "info.php", "test.php"]
@@ -379,7 +359,6 @@ class DirectoryScanner(BaseScanner):
                     }
                 )
 
-            # Log files
             elif any(pattern in path.lower() for pattern in ["log", "error", "debug"]):
                 risks.append(
                     {

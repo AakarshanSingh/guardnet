@@ -57,7 +57,6 @@ class WebCrawler:
         self.max_depth = max_depth
         self.scan_external = scan_external
 
-        # Tracking collections
         self.visited_urls: Set[str] = set()
         self.url_queue = Queue()
         self.forms_found: List[Dict[str, Any]] = []
@@ -65,12 +64,10 @@ class WebCrawler:
         self.links_found: Dict[str, List[str]] = {}
         self.parameters_found: Dict[str, List[str]] = {}
 
-        # Scanning flags
         self.scanning = True
         self.threads_count = threads
         self.workers = []
 
-        # Mutex for thread-safe operations
         self.lock = threading.RLock()
 
     def set_cookies(self):
@@ -80,22 +77,19 @@ class WebCrawler:
 
         try:
             browser = browser_manager.get_browser()
-            # First navigate to the domain to set cookies
+
             browser_manager.safe_get(self.base_url)
 
-            # Parse and add cookies
             for cookie in self.cookies.split(";"):
                 if "=" in cookie:
                     name, value = cookie.strip().split("=", 1)
                     try:
-                        # Extract the domain from base_url for the cookie
+
                         domain = urlparse(self.base_url).netloc
 
-                        # Remove port number if present
                         if ":" in domain:
                             domain = domain.split(":")[0]
 
-                        # Add cookie with proper domain setting
                         browser.add_cookie(
                             {"name": name, "value": value, "domain": domain}
                         )
@@ -164,7 +158,6 @@ class WebCrawler:
         with self.lock:
             self.visited_urls.add(url)
 
-        # Load the page with Selenium
         browser = browser_manager.get_browser()
         if not browser_manager.safe_get(url):
             logger.warning(f"Failed to load page: {url}")
@@ -203,11 +196,9 @@ class WebCrawler:
                 href = a_tag["href"]
                 link_text = a_tag.get_text().lower().strip()
 
-                # Skip empty, javascript and anchor links
                 if not href or href.startswith("javascript:") or href == "#":
                     continue
 
-                # Skip logout/signout links to avoid logging out during crawling
                 logout_keywords = [
                     "logout",
                     "log out",
@@ -224,11 +215,9 @@ class WebCrawler:
                     logger.info(f"Skipping potential logout link: {href}")
                     continue
 
-                # Normalize the URL
                 full_url = urljoin(current_url, href)
                 parsed_url = urlparse(full_url)
 
-                # Clean up the URL - remove fragments and normalize
                 clean_url = urlunparse(
                     (
                         parsed_url.scheme,
@@ -236,22 +225,19 @@ class WebCrawler:
                         parsed_url.path,
                         parsed_url.params,
                         parsed_url.query,
-                        "",  # Remove fragment
+                        "",
                     )
                 )
 
-                # Skip links outside the base domain if not scanning external sites
                 if not self.scan_external and parsed_url.netloc != self.base_domain:
                     continue
 
-                # Add the URL to our results and queue
                 with self.lock:
                     if current_url not in self.links_found:
                         self.links_found[current_url] = []
                     if clean_url not in self.links_found[current_url]:
                         self.links_found[current_url].append(clean_url)
 
-                    # Add to queue if not visited
                     if (
                         clean_url not in self.visited_urls
                         and depth + 1 <= self.max_depth
@@ -275,12 +261,10 @@ class WebCrawler:
                     "inputs": [],
                 }
 
-                # Extract form inputs
                 for input_field in form.find_all(["input", "textarea", "select"]):
                     input_type = input_field.get("type", "")
                     input_name = input_field.get("name", "")
 
-                    # Skip buttons, submits, and unnamed fields
                     if (
                         input_type in ["button", "submit", "reset", "image"]
                         or not input_name
@@ -289,7 +273,6 @@ class WebCrawler:
 
                     form_data["inputs"].append({"name": input_name, "type": input_type})
 
-                # Only add forms that have inputs
                 if form_data["inputs"]:
                     with self.lock:
                         self.forms_found.append(form_data)
@@ -319,7 +302,7 @@ class WebCrawler:
     def _extract_api_endpoints(self, content: str, url: str):
         """Extract API endpoints and URLs from JavaScript code"""
         try:
-            # Look for URLs in JavaScript
+
             url_pattern = r'(https?:\/\/[^\s\'"]+)'
             api_pattern = r'(\/api\/[^\s\'"]+)'
 
@@ -327,16 +310,13 @@ class WebCrawler:
             apis = re.findall(api_pattern, content)
 
             for found_url in urls + apis:
-                # Normalize and clean the URL
+
                 full_url = urljoin(url, found_url)
                 parsed = urlparse(full_url)
 
-                # Skip URLs outside the base domain if not scanning external
                 if not self.scan_external and parsed.netloc != self.base_domain:
                     continue
 
-                # Add to queue if not visited and looks like a valid endpoint
-                # Check if URL looks like an API endpoint or resource URL
                 if (
                     parsed.path.endswith(".json")
                     or "/api/" in parsed.path
@@ -357,12 +337,9 @@ class WebCrawler:
                         )
                     )
 
-                    # Add to queue
                     with self.lock:
                         if clean_url not in self.visited_urls:
-                            self.url_queue.put(
-                                (clean_url, self.max_depth)
-                            )  # Check APIs at max depth
+                            self.url_queue.put((clean_url, self.max_depth))
         except Exception as e:
             logger.error(f"Error extracting API endpoints from {url}: {str(e)}")
 
@@ -382,7 +359,6 @@ class WebCrawler:
         logger.info("Stopping crawler...")
         self.scanning = False
 
-        # Wait for threads to finish
         for worker in self.workers:
             if worker.is_alive():
                 worker.join(timeout=2)

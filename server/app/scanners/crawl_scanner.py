@@ -38,7 +38,6 @@ class VulnerabilityScanCoordinator:
         self.url = website.url
         self.cookies = website.cookies
 
-        # Tracking containers
         self.crawl_results = None
         self.website_urls = {}
         self.scan_complete = threading.Event()
@@ -48,13 +47,12 @@ class VulnerabilityScanCoordinator:
         logger.info(f"Starting vulnerability scan for {self.url}")
 
         try:
-            # Start the crawler in a separate thread
+
             crawler_thread = threading.Thread(target=self._run_crawler)
             crawler_thread.daemon = True
             crawler_thread.start()
 
-            # Wait for crawler to finish or timeout
-            crawler_thread.join(timeout=600)  # 10 minute timeout for crawling
+            crawler_thread.join(timeout=600)
 
             if crawler_thread.is_alive():
                 logger.warning(
@@ -65,10 +63,8 @@ class VulnerabilityScanCoordinator:
                 logger.error(f"Crawler failed to produce results for {self.url}")
                 return
 
-            # Save discovered URLs to database
             self._save_website_urls()
 
-            # Run vulnerability scans in parallel
             await asyncio.gather(
                 self._run_sqli_scan(),
                 self._run_xss_scan(),
@@ -80,13 +76,13 @@ class VulnerabilityScanCoordinator:
         except Exception as e:
             logger.error(f"Error during vulnerability scan: {str(e)}", exc_info=True)
         finally:
-            # Signal completion
+
             self.scan_complete.set()
 
     def _run_crawler(self):
         """Run the web crawler to discover potential targets"""
         try:
-            # Parse the URL to get domain information for cookies
+
             parsed_url = urllib.parse.urlparse(self.url)
             domain = parsed_url.netloc
 
@@ -95,13 +91,12 @@ class VulnerabilityScanCoordinator:
             crawler = WebCrawler(
                 base_url=self.url,
                 cookies=self.cookies,
-                max_pages=100,  # Limit to 100 pages for performance
-                max_depth=3,  # Limit depth to 3 levels
+                max_pages=100,
+                max_depth=3,
                 scan_external=False,
-                threads=3,  # Use 3 crawler threads
+                threads=3,
             )
 
-            # Start crawling
             self.crawl_results = crawler.start_crawl()
             logger.info(
                 f"Crawling completed for {self.url}, found {len(self.crawl_results.get('visited_urls', []))} URLs"
@@ -109,7 +104,7 @@ class VulnerabilityScanCoordinator:
 
         except Exception as e:
             logger.error(f"Error during web crawling: {str(e)}", exc_info=True)
-            # Create minimal results if crawling failed completely
+
             if not self.crawl_results:
                 self.crawl_results = {
                     "visited_urls": [self.url],
@@ -125,13 +120,11 @@ class VulnerabilityScanCoordinator:
             if not self.crawl_results:
                 return
 
-            # Create WebsiteUrl entries for all discovered URLs
             for url in self.crawl_results.get("visited_urls", []):
-                # Skip invalid URLs
+
                 if not url or not url.startswith(("http://", "https://")):
                     continue
 
-                # Create or get website URL entry
                 website_url = (
                     self.db.query(WebsiteUrl)
                     .filter(
@@ -144,7 +137,6 @@ class VulnerabilityScanCoordinator:
                     website_url = WebsiteUrl(website_id=self.website.id, url=url)
                     self.db.add(website_url)
 
-                # Save parameters if found
                 if url in self.crawl_results.get("parameters_found", {}):
                     website_url.parameters = json.dumps(
                         self.crawl_results["parameters_found"][url]
@@ -153,7 +145,6 @@ class VulnerabilityScanCoordinator:
                 self.db.commit()
                 self.db.refresh(website_url)
 
-                # Store for later use during scanning
                 self.website_urls[url] = website_url
 
             logger.info(f"Saved {len(self.website_urls)} URLs to database")
@@ -170,10 +161,8 @@ class VulnerabilityScanCoordinator:
 
             logger.info(f"Starting LFI scan for {self.url}")
 
-            # Create scanner
             lfi_scanner = LFIScanner(self.url, self.cookies)
 
-            # Inject form targets from crawler results
             form_targets = []
             for form in self.crawl_results.get("forms_found", []):
                 form_targets.append(
@@ -186,15 +175,12 @@ class VulnerabilityScanCoordinator:
                     }
                 )
 
-            # Add URL parameter targets
             for url, params in self.crawl_results.get("parameters_found", {}).items():
                 form_targets.append({"url": url, "method": "get", "params": params})
 
-            # Set targets and run scan
             lfi_scanner.injectable_targets = form_targets
             results = lfi_scanner.run()
 
-            # Save results to database
             lfi_result = LFIResult(
                 scan_id=self.scan_id,
                 vulnerable_endpoints=json.dumps(
@@ -220,10 +206,8 @@ class VulnerabilityScanCoordinator:
 
             logger.info(f"Starting SQLi scan for {self.url}")
 
-            # Create scanner
             sqli_scanner = SQLiScanner(self.url, self.cookies)
 
-            # Inject form targets from crawler results
             form_targets = []
             for form in self.crawl_results.get("forms_found", []):
                 form_targets.append(
@@ -236,24 +220,20 @@ class VulnerabilityScanCoordinator:
                     }
                 )
 
-            # Add URL parameter targets
             for url, params in self.crawl_results.get("parameters_found", {}).items():
                 form_targets.append({"url": url, "method": "get", "params": params})
 
-            # Set targets and run scan
             sqli_scanner.injectable_targets = form_targets
             results = sqli_scanner.run()
 
-            # Process results for each URL
             vulnerable_endpoints = results.get("vulnerable_params", [])
 
-            # Group results by URL for saving to database
             for url, website_url_obj in self.website_urls.items():
-                # Find vulnerabilities for this URL
+
                 url_vulns = [v for v in vulnerable_endpoints if v.get("url") == url]
 
                 if url_vulns:
-                    # Create SQLi result for this URL
+
                     sqli_result = SQLiResult(
                         website_url_id=website_url_obj.id,
                         vulnerable_params=json.dumps(url_vulns),
@@ -279,10 +259,8 @@ class VulnerabilityScanCoordinator:
 
             logger.info(f"Starting XSS scan for {self.url}")
 
-            # Create scanner
             xss_scanner = XSSScanner(self.url, self.cookies)
 
-            # Inject form targets from crawler results
             form_targets = []
             for form in self.crawl_results.get("forms_found", []):
                 form_targets.append(
@@ -295,24 +273,20 @@ class VulnerabilityScanCoordinator:
                     }
                 )
 
-            # Add URL parameter targets
             for url, params in self.crawl_results.get("parameters_found", {}).items():
                 form_targets.append({"url": url, "method": "get", "params": params})
 
-            # Set targets and run scan
             xss_scanner.form_targets = form_targets
             results = xss_scanner.run()
 
-            # Process results for each URL
             vulnerable_endpoints = results.get("vulnerable_endpoints", [])
 
-            # Group results by URL for saving to database
             for url, website_url_obj in self.website_urls.items():
-                # Find vulnerabilities for this URL
+
                 url_vulns = [v for v in vulnerable_endpoints if v.get("url") == url]
 
                 if url_vulns:
-                    # Create XSS result for this URL
+
                     xss_result = XSSResult(
                         website_url_id=website_url_obj.id,
                         vulnerable_endpoints=json.dumps(url_vulns),

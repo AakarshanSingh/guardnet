@@ -15,7 +15,6 @@ class Website(Base):
     cookies = Column(Text, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    # Relationships
     user = relationship("User", back_populates="websites")
     website_urls = relationship(
         "WebsiteUrl", back_populates="website", cascade="all, delete-orphan"
@@ -32,10 +31,9 @@ class WebsiteUrl(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, index=True, default=uuid.uuid4)
     website_id = Column(UUID(as_uuid=True), ForeignKey("websites.id"), nullable=False)
     url = Column(Text, nullable=False)
-    status = Column(String(20), default="pending")  # pending, scanned, skipped, error
+    status = Column(String(20), default="pending")
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    # Relationships
     website = relationship("Website", back_populates="website_urls")
     xss_results = relationship(
         "XSSResult", back_populates="website_url", cascade="all, delete-orphan"

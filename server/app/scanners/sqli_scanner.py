@@ -21,16 +21,13 @@ class SQLiScanner(BaseScanner):
     name = "SQLi Scanner"
     description = "Detects SQL Injection vulnerabilities in web applications"
 
-    # SQL Injection payloads
     PAYLOADS = [
-        # Boolean-based blind
         "' OR '1'='1",
         '" OR "1"="1',
         "') OR ('1'='1",
         '") OR ("1"="1',
         "1' OR '1'='1' --",
         '1" OR "1"="1" --',
-        # Error-based
         "'",
         '"',
         "\\",
@@ -45,14 +42,12 @@ class SQLiScanner(BaseScanner):
         "' OR '1'='1",
         "' OR 1=1#",
         '" OR 1=1#',
-        # UNION-based
         "' UNION SELECT 1,2,3-- -",
         '" UNION SELECT 1,2,3-- -',
         "' UNION SELECT 1,2,3,4-- -",
         '" UNION SELECT 1,2,3,4-- -',
         "' UNION ALL SELECT 1,2,3,4-- -",
         '" UNION ALL SELECT 1,2,3,4-- -',
-        # Time-based
         "'; WAITFOR DELAY '0:0:5'--",
         "\"; WAITFOR DELAY '0:0:5'--",
         "'; SELECT pg_sleep(5)--",
@@ -63,37 +58,30 @@ class SQLiScanner(BaseScanner):
         '" OR SLEEP(5)#',
     ]
 
-    # SQL error patterns to detect
     ERROR_PATTERNS = [
-        # MySQL
         r"SQL syntax.*?MySQL",
         r"Warning.*?mysqli?",
         r"MySQLSyntaxErrorException",
         r"valid MySQL result",
         r"check the manual that corresponds to your (MySQL|MariaDB) server version",
-        # PostgreSQL
         r"PostgreSQL.*?ERROR",
         r"Warning.*?\\Wpg_",
         r"valid PostgreSQL result",
         r"Npgsql\\.",
-        # MS SQL
         r"Driver.*? SQL[\\-_ ]*Server",
         r"OLE DB.*? SQL Server",
         r"(\\W|\\w)SQL Server.*?Driver",
         r"Warning.*?\\W(mssql|sqlsrv)_",
         r"\\[SQL Server\\]",
         r"Incorrect syntax near",
-        # Oracle
         r"\\bORA-[0-9][0-9][0-9][0-9]",
         r"Oracle error",
-        # SQLite
         r"SQLite/JDBCDriver",
         r"SQLite\\.Exception",
         r"System\\.Data\\.SQLite\\.SQLiteException",
         r"Warning.*?\\Wsqlite_",
         r"Warning.*?\\WSQLITE_",
         r"near \".*?\": syntax error",
-        # Generic
         r"SQL syntax.*",
         r"Syntax error.*?SQL",
         r"Unclosed quotation mark after the character string",
@@ -105,18 +93,16 @@ class SQLiScanner(BaseScanner):
         self.headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
         }
-        # We'll still keep a requests session for cases where browser navigation isn't ideal
+
         self.session = requests.Session()
-        self.max_threads = (
-            5  # Lower thread count for SQLi to avoid overloading the server
-        )
+        self.max_threads = 5
         self.vulnerable_endpoints = []
         self.tested_urls = set()
         self.logger = logging.getLogger(__name__)
         self.dbms_info = None
-        # Get the shared browser instance
+
         self.browser = None
-        # Injectable targets provided by coordinator
+
         self.injectable_targets = []
 
     def scan(self) -> Dict[str, Any]:
@@ -133,7 +119,6 @@ class SQLiScanner(BaseScanner):
         """Run SQL Injection scan using the injectable targets provided by coordinator"""
         self.progress = 10
 
-        # Set cookies if provided
         if self.cookies:
             self._set_cookies()
 
@@ -141,10 +126,14 @@ class SQLiScanner(BaseScanner):
             self.progress = 20
 
             if self.injectable_targets:
-                self.logger.info(f"Using {len(self.injectable_targets)} targets provided by coordinator")
+                self.logger.info(
+                    f"Using {len(self.injectable_targets)} targets provided by coordinator"
+                )
                 endpoints = self._prepare_injectable_params()
             else:
-                self.logger.info("No targets from coordinator, finding injectable parameters")
+                self.logger.info(
+                    "No targets from coordinator, finding injectable parameters"
+                )
                 endpoints = self._find_injectable_params()
 
             self.progress = 30
@@ -177,13 +166,12 @@ class SQLiScanner(BaseScanner):
                 url = target.get("url", "")
                 method = target.get("method", "get").lower()
 
-                # Handle different param formats: list of param names or dict of param values
                 params = target.get("params", {})
                 if isinstance(params, list):
-                    # Convert list of param names to dict with default values
+
                     param_dict = {}
                     for param_name in params:
-                        param_dict[param_name] = "1"  # Default value for testing
+                        param_dict[param_name] = "1"
                     params = param_dict
 
                 if params:
@@ -207,17 +195,15 @@ class SQLiScanner(BaseScanner):
         if not self.cookies:
             return
 
-        # Set cookies in requests session
         cookie_pairs = self.cookies.split(";")
         for cookie_pair in cookie_pairs:
             if "=" in cookie_pair:
                 name, value = cookie_pair.strip().split("=", 1)
                 self.session.cookies.set(name, value)
 
-        # Set cookies in browser
         browser = self._get_browser()
         try:
-            # Visit the site once to be able to set cookies for the domain
+
             browser_manager.safe_get(self.target_url)
 
             for cookie_pair in cookie_pairs:
@@ -238,7 +224,7 @@ class SQLiScanner(BaseScanner):
         injectable_params = []
 
         try:
-            # Use browser for more authentic page rendering
+
             browser = self._get_browser()
             success = browser_manager.safe_get(self.target_url)
 
@@ -246,7 +232,7 @@ class SQLiScanner(BaseScanner):
                 self.logger.warning(
                     f"Failed to load {self.target_url} in browser, falling back to requests"
                 )
-                # Fallback to requests
+
                 response = self.session.get(
                     self.target_url, headers=self.headers, timeout=10
                 )
@@ -260,7 +246,6 @@ class SQLiScanner(BaseScanner):
 
             soup = BeautifulSoup(html_content, "html.parser")
 
-            # Find forms
             for form in soup.find_all("form"):
                 form_action = form.get("action", "")
                 form_method = form.get("method", "get").lower()
@@ -282,7 +267,6 @@ class SQLiScanner(BaseScanner):
                         }
                     )
 
-            # Find URLs with query parameters
             parsed_url = urllib.parse.urlparse(self.target_url)
             if parsed_url.query:
                 query_params = dict(urllib.parse.parse_qsl(parsed_url.query))
@@ -298,7 +282,6 @@ class SQLiScanner(BaseScanner):
                     }
                 )
 
-            # Also add common parameter names that might be vulnerable
             common_params = [
                 "id",
                 "page",
@@ -338,7 +321,7 @@ class SQLiScanner(BaseScanner):
                 params = endpoint["params"]
 
                 for param_name in params.keys():
-                    # First test with normal value to establish baseline
+
                     baseline_params = params.copy()
                     baseline_params[param_name] = "safe1234"
 
@@ -365,7 +348,6 @@ class SQLiScanner(BaseScanner):
                     except Exception:
                         continue
 
-                    # Now test with each payload
                     for payload in self.PAYLOADS:
                         test_params = params.copy()
                         test_params[param_name] = payload
@@ -399,13 +381,12 @@ class SQLiScanner(BaseScanner):
                                 )
                             )
 
-            # Wait for all futures to complete
             completed = 0
             total = len(futures)
             for future in futures:
                 future.result()
                 completed += 1
-                # Update progress
+
                 if total > 0:
                     self.progress = 30 + int(60 * (completed / total))
 
@@ -429,7 +410,6 @@ class SQLiScanner(BaseScanner):
 
             self.tested_urls.add(cache_key)
 
-            # First try with browser for more realistic testing
             browser = self._get_browser()
             try:
                 full_url = f"{url}?{urllib.parse.urlencode(params)}"
@@ -440,7 +420,7 @@ class SQLiScanner(BaseScanner):
 
                 if success:
                     content = browser.page_source
-                    status = 200  # Browser doesn't provide status code, assume 200 if page loaded
+                    status = 200
 
                     self._analyze_response(
                         {"text": content, "status_code": status},
@@ -456,7 +436,7 @@ class SQLiScanner(BaseScanner):
                     )
                     return
             except (TimeoutException, WebDriverException) as e:
-                # Check if it's a time-based injection that caused timeout
+
                 if (
                     "WAITFOR DELAY" in payload
                     or "pg_sleep" in payload
@@ -475,13 +455,12 @@ class SQLiScanner(BaseScanner):
                     f"Browser error for {url}, falling back to requests: {e}"
                 )
 
-            # Fall back to requests for reliability
             start_time = time.time()
             response = self.session.get(
                 url,
                 params=params,
                 headers=self.headers,
-                timeout=15,  # Longer timeout for time-based SQLi
+                timeout=15,
             )
             response_time = time.time() - start_time
 
@@ -499,7 +478,7 @@ class SQLiScanner(BaseScanner):
             )
 
         except requests.Timeout:
-            # Timeout could indicate a successful time-based injection
+
             if (
                 "WAITFOR DELAY" in payload
                 or "pg_sleep" in payload
@@ -537,16 +516,14 @@ class SQLiScanner(BaseScanner):
 
             self.tested_urls.add(cache_key)
 
-            # First try with browser for more realistic testing
             browser = self._get_browser()
             try:
-                # Navigate to the page containing the form
+
                 browser_manager.safe_get(url)
 
-                # Attempt to fill out the form
                 try:
                     for field_name, field_value in data.items():
-                        # Try to find and fill the input field
+
                         try:
                             input_field = browser.find_element(By.NAME, field_name)
                             input_field.clear()
@@ -554,14 +531,13 @@ class SQLiScanner(BaseScanner):
                         except Exception as e:
                             self.logger.debug(f"Could not fill field {field_name}: {e}")
 
-                    # Try to submit the form
                     forms = browser.find_elements(By.TAG_NAME, "form")
                     start_time = time.time()
                     if forms:
                         forms[0].submit()
                         response_time = time.time() - start_time
                         content = browser.page_source
-                        status = 200  # Assume 200 if successful
+                        status = 200
 
                         self._analyze_response(
                             {"text": content, "status_code": status},
@@ -579,7 +555,7 @@ class SQLiScanner(BaseScanner):
                 except Exception as form_ex:
                     self.logger.debug(f"Error submitting form in browser: {form_ex}")
             except (TimeoutException, WebDriverException) as e:
-                # Check if it's a time-based injection that caused timeout
+
                 if (
                     "WAITFOR DELAY" in payload
                     or "pg_sleep" in payload
@@ -598,13 +574,12 @@ class SQLiScanner(BaseScanner):
                     f"Browser error for POST to {url}, falling back to requests: {e}"
                 )
 
-            # Fall back to requests for reliability
             start_time = time.time()
             response = self.session.post(
                 url,
                 data=data,
                 headers=self.headers,
-                timeout=15,  # Longer timeout for time-based SQLi
+                timeout=15,
             )
             response_time = time.time() - start_time
 
@@ -622,7 +597,7 @@ class SQLiScanner(BaseScanner):
             )
 
         except requests.Timeout:
-            # Timeout could indicate a successful time-based injection
+
             if (
                 "WAITFOR DELAY" in payload
                 or "pg_sleep" in payload
@@ -655,7 +630,7 @@ class SQLiScanner(BaseScanner):
     ):
         """Analyze response for SQL injection vulnerabilities"""
         try:
-            # Handle both requests Response objects and our custom dict format from browser tests
+
             if hasattr(response, "text"):
                 content = response.text
                 status = response.status_code
@@ -663,7 +638,6 @@ class SQLiScanner(BaseScanner):
                 content = response["text"]
                 status = response["status_code"]
 
-            # Check for SQL errors in response
             for pattern in self.ERROR_PATTERNS:
                 if re.search(pattern, content, re.IGNORECASE) and not re.search(
                     pattern, baseline_content, re.IGNORECASE
@@ -680,11 +654,10 @@ class SQLiScanner(BaseScanner):
                     )
                     return
 
-            # Check for boolean-based injections (significant change in response)
             if ("OR" in payload or "or" in payload) and (
                 "1=1" in payload or "'1'='1'" in payload or '"1"="1"' in payload
             ):
-                # If response is significantly different (status change or content length change > 20%)
+
                 content_diff_ratio = abs(len(content) - baseline_length) / max(
                     baseline_length, 1
                 )
@@ -699,13 +672,12 @@ class SQLiScanner(BaseScanner):
                     )
                     return
 
-            # Check for time-based injections
             if (
                 "WAITFOR DELAY" in payload
                 or "pg_sleep" in payload
                 or "SLEEP" in payload
             ):
-                # If response time is significantly longer (3+ seconds)
+
                 if response_time > baseline_time + 3.0:
                     self._add_vulnerability(
                         url,
@@ -717,17 +689,14 @@ class SQLiScanner(BaseScanner):
                     )
                     return
 
-            # Check for UNION-based injections
             if "UNION SELECT" in payload:
-                # Look for patterns that might indicate a successful UNION injection
-                # For example, numbers from the UNION SELECT showing up in the response
+
                 union_pattern = re.compile(
                     r"(data-sql-)?([0-9]+)(</[a-z]+>)?", re.IGNORECASE
                 )
                 baseline_matches = set(re.findall(union_pattern, baseline_content))
                 response_matches = set(re.findall(union_pattern, content))
 
-                # If we find new matches that weren't in the baseline
                 new_matches = response_matches - baseline_matches
                 if new_matches:
                     self._add_vulnerability(
@@ -758,7 +727,6 @@ class SQLiScanner(BaseScanner):
         elif "sqlite" in pattern_lower:
             return "SQLite"
 
-        # If pattern doesn't clearly indicate DB type, try to determine from content
         content_lower = content.lower()
         if "mysql" in content_lower:
             return "MySQL"
@@ -783,12 +751,11 @@ class SQLiScanner(BaseScanner):
         details: str,
     ):
         """Add a vulnerability to the list if not already present"""
-        # Check if we already have this vulnerability
+
         for vuln in self.vulnerable_endpoints:
             if vuln["url"] == url and vuln["parameter"] == param_name:
                 return
 
-        # Add new vulnerability
         vulnerability = {
             "url": url,
             "method": method,

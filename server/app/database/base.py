@@ -24,7 +24,7 @@ class Base:
         for column in self.__table__.columns:
             value = getattr(self, column.name)
             if isinstance(value, UUID):
-                # Convert UUID to string
+
                 value = str(value)
             result[column.name] = value
         return result
@@ -33,7 +33,6 @@ class Base:
 Base = declarative_base(cls=Base)
 
 
-# Helper function to get a database session
 def get_db():
     db = SessionLocal()
     try:

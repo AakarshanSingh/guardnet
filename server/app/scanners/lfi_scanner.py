@@ -19,7 +19,6 @@ class LFIScanner(BaseScanner):
     name = "LFI Scanner"
     description = "Detects Local File Inclusion vulnerabilities"
 
-    # LFI payloads to try
     LFI_PAYLOADS = [
         "../etc/passwd",
         "../../../etc/passwd",
@@ -42,13 +41,12 @@ class LFIScanner(BaseScanner):
         "../../../../../../../../boot.ini",
     ]
 
-    # File contents patterns that indicate a successful LFI
     SUCCESS_PATTERNS = [
-        r"root:.*:0:0:",  # Linux /etc/passwd pattern
-        r"\[boot loader\]",  # Windows boot.ini pattern
-        r"for 16-bit app support",  # Windows hosts file
-        r"localhost",  # Common in hosts files
-        r"# Copyright \(c\)",  # Common comment in system files
+        r"root:.*:0:0:",
+        r"\[boot loader\]",
+        r"for 16-bit app support",
+        r"localhost",
+        r"# Copyright \(c\)",
     ]
 
     def __init__(self, target_url: str, cookies: Optional[str] = None):
@@ -58,12 +56,12 @@ class LFIScanner(BaseScanner):
         self.headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
         }
-        # Keep requests session for fallback
+
         self.session = requests.Session()
         self.max_threads = 10
-        # Shared browser instance
+
         self.browser = None
-        # Injectable targets provided by coordinator
+
         self.injectable_targets = []
 
     def scan(self) -> Dict[str, Any]:
@@ -80,28 +78,25 @@ class LFIScanner(BaseScanner):
         """Run LFI scan using the injectable targets provided by coordinator"""
         self.progress = 10
 
-        # Set cookies if provided
         if self.cookies:
             self._set_cookies()
 
         try:
             self.progress = 20
 
-            # Check if we have injectable targets from coordinator
             if self.injectable_targets:
                 self.logger.info(
                     f"Using {len(self.injectable_targets)} targets provided by coordinator"
                 )
-                # Transform the targets into the format _test_parameters expects
+
                 params = self._prepare_injectable_params()
             else:
-                # Fall back to finding parameters ourselves if no targets provided
+
                 self.logger.info("No targets from coordinator, finding parameters")
                 params = self._find_parameters()
 
             self.progress = 30
 
-            # Test each parameter for LFI
             if params:
                 self._test_parameters(params)
 
@@ -122,15 +117,12 @@ class LFIScanner(BaseScanner):
                 url = target.get("url", "")
                 method = target.get("method", "get").lower()
 
-                # Handle different param formats: list of param names or dict of param values
                 params = target.get("params", {})
                 if isinstance(params, list):
-                    # Convert list of param names to dict with default values
+
                     param_dict = {}
                     for param_name in params:
-                        param_dict[param_name] = (
-                            "index.php"  # Default value for testing
-                        )
+                        param_dict[param_name] = "index.php"
                     params = param_dict
 
                 if params:
@@ -149,17 +141,15 @@ class LFIScanner(BaseScanner):
         if not self.cookies:
             return
 
-        # Set cookies in requests session
         cookie_pairs = self.cookies.split(";")
         for cookie_pair in cookie_pairs:
             if "=" in cookie_pair:
                 name, value = cookie_pair.strip().split("=", 1)
                 self.session.cookies.set(name, value)
 
-        # Set cookies in browser
         browser = self._get_browser()
         try:
-            # Visit the site once to be able to set cookies for the domain
+
             browser_manager.safe_get(self.base_url)
 
             for cookie_pair in cookie_pairs:
@@ -180,7 +170,7 @@ class LFIScanner(BaseScanner):
         potential_params = []
 
         try:
-            # Use browser for more authentic page rendering
+
             browser = self._get_browser()
             success = browser_manager.safe_get(self.base_url)
 
@@ -188,7 +178,7 @@ class LFIScanner(BaseScanner):
                 self.logger.warning(
                     f"Failed to load {self.base_url} in browser, falling back to requests"
                 )
-                # Fallback to requests
+
                 response = self.session.get(
                     self.base_url, headers=self.headers, timeout=10
                 )
@@ -198,13 +188,11 @@ class LFIScanner(BaseScanner):
 
             soup = BeautifulSoup(html_content, "html.parser")
 
-            # Find forms and their inputs
             for form in soup.find_all("form"):
                 form_action = form.get("action", "")
                 form_method = form.get("method", "get").lower()
                 form_url = urllib.parse.urljoin(self.base_url, form_action)
 
-                # Find inputs
                 inputs = {}
                 for input_tag in form.find_all("input"):
                     input_name = input_tag.get("name")
@@ -217,27 +205,22 @@ class LFIScanner(BaseScanner):
                         {"url": form_url, "method": form_method, "params": inputs}
                     )
 
-            # Find links with parameters
             for link in soup.find_all("a", href=True):
                 href = link["href"]
                 parsed_url = urllib.parse.urlparse(href)
 
-                # If link has query parameters
                 if parsed_url.query:
                     query_params = dict(urllib.parse.parse_qsl(parsed_url.query))
                     if query_params:
                         full_url = urllib.parse.urljoin(self.base_url, href)
                         potential_params.append(
                             {
-                                "url": full_url.split("?")[
-                                    0
-                                ],  # Base URL without parameters
+                                "url": full_url.split("?")[0],
                                 "method": "get",
                                 "params": query_params,
                             }
                         )
 
-            # Additional check for common parameter names
             common_params = [
                 "file",
                 "page",
@@ -272,7 +255,6 @@ class LFIScanner(BaseScanner):
             method = param_info["method"]
             params = param_info["params"]
 
-            # Test each parameter
             for param_name, param_value in params.items():
                 self._test_parameter(url, method, param_name, params)
 
@@ -280,12 +262,12 @@ class LFIScanner(BaseScanner):
         self, url: str, method: str, target_param: str, all_params: Dict[str, str]
     ):
         """Test a specific parameter for LFI"""
-        # Test with different payloads
+
         with ThreadPoolExecutor(max_workers=self.max_threads) as executor:
             test_tasks = []
 
             for payload in self.LFI_PAYLOADS:
-                # Create a copy of params and modify the target parameter
+
                 params = all_params.copy()
                 params[target_param] = payload
 
@@ -302,13 +284,12 @@ class LFIScanner(BaseScanner):
                         )
                     )
 
-            # Wait for all tasks to complete
             completed = 0
             total = len(test_tasks)
             for task in test_tasks:
                 task.result()
                 completed += 1
-                # Update progress based on completion
+
                 if total > 0:
                     self.progress = 30 + int(60 * (completed / total))
 
@@ -317,7 +298,7 @@ class LFIScanner(BaseScanner):
     ):
         """Test a GET request with LFI payload using browser and requests"""
         try:
-            # First try with the browser
+
             browser = self._get_browser()
             try:
                 full_url = f"{url}?{urllib.parse.urlencode(params)}"
@@ -326,7 +307,7 @@ class LFIScanner(BaseScanner):
                 if success:
                     content = browser.page_source.lower()
                     self._check_response(
-                        {"text": content, "status_code": 200},  # Assume 200 if loaded
+                        {"text": content, "status_code": 200},
                         url,
                         "GET",
                         param_name,
@@ -338,7 +319,6 @@ class LFIScanner(BaseScanner):
                     f"Browser error for {url}, falling back to requests: {e}"
                 )
 
-            # Fall back to requests if browser approach fails
             response = self.session.get(
                 url,
                 params=params,
@@ -355,13 +335,12 @@ class LFIScanner(BaseScanner):
     ):
         """Test a POST request with LFI payload using browser and requests"""
         try:
-            # First try with browser
+
             browser = self._get_browser()
             try:
-                # Navigate to the page containing the form
+
                 browser_manager.safe_get(url)
 
-                # Attempt to fill out the form and submit it
                 try:
                     for field_name, field_value in data.items():
                         try:
@@ -371,7 +350,6 @@ class LFIScanner(BaseScanner):
                         except Exception as e:
                             self.logger.debug(f"Could not fill field {field_name}: {e}")
 
-                    # Try to submit the form
                     forms = browser.find_elements(By.TAG_NAME, "form")
                     if forms:
                         forms[0].submit()
@@ -380,7 +358,7 @@ class LFIScanner(BaseScanner):
                             {
                                 "text": content,
                                 "status_code": 200,
-                            },  # Assume 200 if form submitted
+                            },
                             url,
                             "POST",
                             param_name,
@@ -394,7 +372,6 @@ class LFIScanner(BaseScanner):
                     f"Browser error for POST to {url}, falling back to requests: {e}"
                 )
 
-            # Fall back to requests
             response = self.session.post(
                 url, data=data, headers=self.headers, timeout=10, allow_redirects=False
             )
@@ -406,7 +383,7 @@ class LFIScanner(BaseScanner):
         self, response, url: str, method: str, param_name: str, payload: str
     ):
         """Check if response indicates successful LFI"""
-        # Handle both requests Response objects and our custom dict format from browser tests
+
         if hasattr(response, "text"):
             content = response.text.lower()
         else:
@@ -418,7 +395,6 @@ class LFIScanner(BaseScanner):
                 is_vulnerable = True
                 break
 
-        # If vulnerable, add to the list of vulnerable endpoints
         if is_vulnerable:
             vulnerability = {
                 "url": url,
@@ -429,7 +405,6 @@ class LFIScanner(BaseScanner):
                 "severity": "high",
             }
 
-            # Add only if not already added for this URL and parameter
             if not any(
                 v["url"] == url and v["parameter"] == param_name
                 for v in self.vulnerable_endpoints
@@ -441,14 +416,13 @@ class LFIScanner(BaseScanner):
 
     def _extract_evidence(self, content: str) -> str:
         """Extract a snippet of evidence from the response content"""
-        # Try to find the most relevant portion of the content as evidence
+
         for pattern in self.SUCCESS_PATTERNS:
             match = re.search(pattern, content, re.IGNORECASE)
             if match:
-                # Get a window of text around the match
+
                 start = max(0, match.start() - 50)
                 end = min(len(content), match.end() + 50)
                 return content[start:end]
 
-        # Default: return a short portion of the content
         return content[:200] if len(content) > 200 else content

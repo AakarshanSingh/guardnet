@@ -15,7 +15,6 @@ class User(Base):
     password_hash = Column(Text, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    # Relationships
     websites = relationship(
         "Website", back_populates="user", cascade="all, delete-orphan"
     )

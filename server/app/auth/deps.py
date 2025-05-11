@@ -13,7 +13,7 @@ from app.database.base import get_db
 from app.models.user import User
 from app.auth.schemas import TokenPayload
 
-# OAuth2 password bearer token URL
+
 oauth2_scheme = OAuth2PasswordBearer(
     tokenUrl=f"{settings.API_V1_STR}/login",
     auto_error=False,
@@ -36,7 +36,7 @@ async def get_current_user(
         )
 
     try:
-        # Decode JWT token
+
         payload = jwt.decode(
             token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
         )
@@ -49,7 +49,6 @@ async def get_current_user(
                 headers={"WWW-Authenticate": "Bearer"},
             )
 
-        # Get user from database using UUID
         user = db.query(User).filter(User.id == uuid.UUID(token_data.sub)).first()
 
         if not user:

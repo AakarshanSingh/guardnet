@@ -29,7 +29,6 @@ def success_response(
     if data is not None:
         content["data"] = data
 
-    # Use CustomJSONEncoder to handle UUID and datetime serialization
     json_content = json.dumps(content, cls=CustomJSONEncoder)
     return JSONResponse(
         status_code=status_code,
@@ -61,7 +60,6 @@ def error_response(
     if errors:
         content["errors"] = errors
 
-    # Use CustomJSONEncoder to handle UUID and datetime serialization
     json_content = json.dumps(content, cls=CustomJSONEncoder)
     return JSONResponse(
         status_code=status_code,

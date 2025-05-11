@@ -30,7 +30,7 @@ def create_user(
     Create a new user.
     """
     try:
-        # Check if user with this email already exists
+
         user = db.query(User).filter(User.email == user_in.email).first()
         if user:
             return error_response(
@@ -38,7 +38,6 @@ def create_user(
                 status_code=status.HTTP_400_BAD_REQUEST,
             )
 
-        # Create new user with UUID
         user = User(
             name=user_in.name,
             email=user_in.email,
@@ -48,15 +47,13 @@ def create_user(
         db.commit()
         db.refresh(user)
 
-        # Create a serializable user object
         user_data = {
-            "id": str(user.id),  # Convert UUID to string
+            "id": str(user.id),
             "name": user.name,
             "email": user.email,
             "created_at": user.created_at.isoformat() if user.created_at else None,
         }
 
-        # Generate access token for immediate login after registration
         access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
         token_data = {
             "access_token": utils.create_access_token(
@@ -97,24 +94,21 @@ def login(
     Returns an access token for future requests.
     """
     try:
-        # Extract email and password from JSON data
+
         email = user_data.email
         password = user_data.password
 
-        # Authenticate user
         user = db.query(User).filter(User.email == email).first()
         if not user or not utils.verify_password(password, user.password_hash):
             return unauthorized_response(message="Incorrect email or password")
 
-        # Create serializable user data
         user_data = {
-            "id": str(user.id),  # Convert UUID to string
+            "id": str(user.id),
             "name": user.name,
             "email": user.email,
             "created_at": user.created_at.isoformat() if user.created_at else None,
         }
 
-        # Create access token
         access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
         token_data = {
             "access_token": utils.create_access_token(
@@ -151,7 +145,7 @@ def get_current_user(
     Get current user information.
     """
     try:
-        # Create serializable user data
+
         user_data = {
             "id": str(current_user.id),
             "name": current_user.name,
@@ -180,7 +174,7 @@ def logout(
     """
     Logout user.
     """
-    # Note: For JWT tokens, actual logout is handled client-side by removing the token
+
     return success_response(message="Successfully logged out")
 
 
@@ -196,7 +190,7 @@ def change_password(
     Change user password.
     """
     try:
-        # Verify current password
+
         if not utils.verify_password(
             password_data.current_password, current_user.password_hash
         ):
@@ -205,13 +199,11 @@ def change_password(
                 status_code=status.HTTP_400_BAD_REQUEST,
             )
 
-        # Update password
         current_user.password_hash = utils.get_password_hash(password_data.new_password)
         db.add(current_user)
         db.commit()
         db.refresh(current_user)
 
-        # Create serializable user data
         user_data = {
             "id": str(current_user.id),
             "name": current_user.name,
@@ -221,7 +213,6 @@ def change_password(
             ),
         }
 
-        # Generate new access token after password change
         access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
         token_data = {
             "access_token": utils.create_access_token(
@@ -260,7 +251,7 @@ def validate_token(
     Useful for frontend to check if token is still valid.
     """
     try:
-        # Create serializable user data
+
         user_data = {
             "id": str(current_user.id),
             "name": current_user.name,
@@ -270,7 +261,6 @@ def validate_token(
             ),
         }
 
-        # Return the serialized user object along with token validity
         token_data = {
             "valid": True,
             "user": user_data,

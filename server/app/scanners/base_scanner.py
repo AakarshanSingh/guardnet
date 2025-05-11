@@ -11,7 +11,6 @@ class BaseScanner(ABC):
     Provides common functionality and defines the scanner interface.
     """
 
-    # Scanner metadata - override in subclasses
     name = "Base Scanner"
     description = "Base scanner class"
 
@@ -26,7 +25,7 @@ class BaseScanner(ABC):
         self.target_url = target_url
         self.cookies = cookies
         self.logger = logging.getLogger(f"{__name__}.{self.__class__.__name__}")
-        self.progress = 0  # Progress percentage (0-100)
+        self.progress = 0
 
     @abstractmethod
     def scan(self) -> Dict[str, Any]:
@@ -51,7 +50,6 @@ class BaseScanner(ABC):
         try:
             results = self.scan()
 
-            # Add scanner metadata to results
             results["scanner"] = self.name
             results["target_url"] = self.target_url
             results["scan_time_ms"] = self._get_time() - start_time

@@ -58,7 +58,7 @@ class ScanBase(BaseModel):
     website_id: int
 
     class Config:
-        json_encoders = {UUID: str}  # Ensure UUIDs are serialized as strings
+        json_encoders = {UUID: str}
 
 
 class ScanCreate(ScanBase):
@@ -97,7 +97,7 @@ class ScanStatusResponse(BaseModel):
 
     id: int
     status: str
-    progress: Optional[float] = None  # 0-100%
+    progress: Optional[float] = None
     started_at: Optional[datetime] = None
     completed_at: Optional[datetime] = None
     current_scanner: Optional[str] = None
@@ -259,4 +259,4 @@ class DirectScanCreate(BaseModel):
     scan_types: Optional[List[str]] = None
 
     class Config:
-        json_encoders = {UUID: str}  # Ensure UUIDs are serialized as strings
+        json_encoders = {UUID: str}

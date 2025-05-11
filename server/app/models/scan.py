@@ -11,14 +11,11 @@ class Scan(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, index=True, default=uuid.uuid4)
     website_id = Column(UUID(as_uuid=True), ForeignKey("websites.id"), nullable=False)
-    status = Column(
-        String(20), default="pending"
-    )  # pending, running, completed, failed
+    status = Column(String(20), default="pending")
     started_at = Column(DateTime, nullable=True)
     completed_at = Column(DateTime, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    # Relationships
     website = relationship("Website", back_populates="scans")
     wpscan_result = relationship(
         "WPScanResult",
@@ -66,7 +63,6 @@ class Scan(Base):
         )
 
 
-# WordPress Scan Results
 class WPScanResult(Base):
     __tablename__ = "wpscan_results"
 
@@ -78,14 +74,12 @@ class WPScanResult(Base):
     version_info = Column(Text, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    # Relationships
     scan = relationship("Scan", back_populates="wpscan_result")
 
     def __repr__(self):
         return f"<WPScanResult(id={self.id}, scan_id={self.scan_id})>"
 
 
-# XSS Results
 class XSSResult(Base):
     __tablename__ = "xss_results"
 
@@ -97,14 +91,12 @@ class XSSResult(Base):
     payloads_used = Column(JSON, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    # Relationships
     website_url = relationship("WebsiteUrl", back_populates="xss_results")
 
     def __repr__(self):
         return f"<XSSResult(id={self.id}, website_url_id={self.website_url_id})>"
 
 
-# SQLi Results
 class SQLiResult(Base):
     __tablename__ = "sqli_results"
 
@@ -117,14 +109,12 @@ class SQLiResult(Base):
     payloads_used = Column(JSON, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    # Relationships
     website_url = relationship("WebsiteUrl", back_populates="sqli_results")
 
     def __repr__(self):
         return f"<SQLiResult(id={self.id}, website_url_id={self.website_url_id})>"
 
 
-# LFI Results
 class LFIResult(Base):
     __tablename__ = "lfi_results"
 
@@ -133,14 +123,12 @@ class LFIResult(Base):
     vulnerable_endpoints = Column(JSON, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    # Relationships
     scan = relationship("Scan", back_populates="lfi_result")
 
     def __repr__(self):
         return f"<LFIResult(id={self.id}, scan_id={self.scan_id})>"
 
 
-# Command Injection Results
 class CommandInjectionResult(Base):
     __tablename__ = "command_injection_results"
 
@@ -150,14 +138,12 @@ class CommandInjectionResult(Base):
     commands_executed = Column(JSON, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    # Relationships
     scan = relationship("Scan", back_populates="cmd_injection_result")
 
     def __repr__(self):
         return f"<CommandInjectionResult(id={self.id}, scan_id={self.scan_id})>"
 
 
-# SSL Results
 class SSLResult(Base):
     __tablename__ = "ssl_results"
 
@@ -168,14 +154,12 @@ class SSLResult(Base):
     certificate_details = Column(JSON, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    # Relationships
     scan = relationship("Scan", back_populates="ssl_result")
 
     def __repr__(self):
         return f"<SSLResult(id={self.id}, scan_id={self.scan_id})>"
 
 
-# DNS Results
 class DNSResult(Base):
     __tablename__ = "dns_results"
 
@@ -185,14 +169,12 @@ class DNSResult(Base):
     misconfigurations = Column(JSON, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    # Relationships
     scan = relationship("Scan", back_populates="dns_result")
 
     def __repr__(self):
         return f"<DNSResult(id={self.id}, scan_id={self.scan_id})>"
 
 
-# Open Ports Results
 class OpenPortsResult(Base):
     __tablename__ = "open_ports_results"
 
@@ -202,14 +184,12 @@ class OpenPortsResult(Base):
     services_detected = Column(JSON, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    # Relationships
     scan = relationship("Scan", back_populates="open_ports_result")
 
     def __repr__(self):
         return f"<OpenPortsResult(id={self.id}, scan_id={self.scan_id})>"
 
 
-# Zone Transfer Results
 class ZoneTransferResult(Base):
     __tablename__ = "zone_transfer_results"
 
@@ -219,14 +199,12 @@ class ZoneTransferResult(Base):
     issues_found = Column(JSON, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    # Relationships
     scan = relationship("Scan", back_populates="zone_transfer_result")
 
     def __repr__(self):
         return f"<ZoneTransferResult(id={self.id}, scan_id={self.scan_id})>"
 
 
-# Directory Scanning Results
 class DirectoryScanningResult(Base):
     __tablename__ = "directory_scanning_results"
 
@@ -236,7 +214,6 @@ class DirectoryScanningResult(Base):
     sensitive_files_found = Column(JSON, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    # Relationships
     scan = relationship("Scan", back_populates="directory_scanning_result")
 
     def __repr__(self):

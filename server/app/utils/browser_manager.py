@@ -24,8 +24,8 @@ class BrowserManager:
     """
 
     MAX_RETRIES = 3
-    RETRY_DELAY = 2 
-    REQUEST_PAUSE = 1 
+    RETRY_DELAY = 2
+    REQUEST_PAUSE = 1
 
     def __init__(self):
         self._browser = None
@@ -68,16 +68,16 @@ class BrowserManager:
         if self._browser is None:
             return self._create_browser_with_retry()
         else:
-            # Check if browser is still responsive
+
             try:
-                # Simple operation to check if browser is alive
+
                 _ = self._browser.window_handles
                 return self._browser
             except (WebDriverException, Exception) as e:
                 logger.warning(
                     f"Browser instance has crashed or is unresponsive, creating new instance: {str(e)}"
                 )
-                self.close_browser()  # Clean up any remaining resources
+                self.close_browser()
                 return self._create_browser_with_retry()
 
     def _create_browser_with_retry(self) -> webdriver.Chrome:
@@ -95,13 +95,11 @@ class BrowserManager:
                 logger.warning(
                     f"Browser creation attempt {retries}/{self.MAX_RETRIES} failed: {str(e)}"
                 )
-                # Wait before retrying
+
                 time.sleep(self.RETRY_DELAY)
 
-                # Force kill any remaining chromedriver processes before retry
                 self._force_kill_browser_processes()
 
-        # If we get here, all retries failed
         logger.error(f"Failed to create browser after {self.MAX_RETRIES} attempts")
         if last_exception:
             raise RuntimeError(
@@ -135,15 +133,14 @@ class BrowserManager:
         if self._browser is not None:
             try:
                 logger.info("Closing browser instance")
-                # Check if browser is still alive before attempting to quit
+
                 try:
-                    # Short timeout for connection attempts
+
                     self._browser.set_page_load_timeout(5)
 
-                    # Use a very brief operation to test if session is valid
                     try:
                         _ = self._browser.window_handles
-                        # If we get here, browser is responsive
+
                         self._browser.quit()
                         logger.info("Browser quit command executed successfully")
                     except (InvalidSessionIdException, NoSuchWindowException) as e:
@@ -157,9 +154,9 @@ class BrowserManager:
                     TimeoutException,
                     WebDriverException,
                 ) as e:
-                    # These exceptions indicate the browser is already closed or unreachable
+
                     logger.warning(f"Browser connection failed during close: {str(e)}")
-                    # Ensure any remaining processes are terminated
+
                     self._force_kill_browser_processes()
 
             except Exception as e:
@@ -172,19 +169,18 @@ class BrowserManager:
     def _force_kill_browser_processes(self):
         """Force kill any orphaned Chrome processes as a last resort"""
         try:
-            # This is Windows-specific
+
             if os.name == "nt":
                 logger.info("Attempting to force kill Chrome driver processes")
                 os.system("taskkill /f /im chromedriver.exe >nul 2>&1")
-                # Don't kill chrome.exe as it might affect user's browser sessions
-                # We only target ChromeDriver processes
+
         except Exception as e:
             logger.error(f"Failed to force kill browser processes: {str(e)}")
 
     def refresh_browser(self):
         """Force refresh the browser instance by closing and creating a new one"""
         self.close_browser()
-        # Add a small delay before creating a new browser
+
         time.sleep(1)
         return self.get_browser()
 
@@ -199,19 +195,18 @@ class BrowserManager:
         Returns:
             bool: True if navigation was successful, False otherwise
         """
-        for attempt in range(2):  # Try twice before giving up
+        for attempt in range(2):
             try:
                 browser = self.get_browser()
                 browser.set_page_load_timeout(timeout)
                 browser.get(url)
 
-                # Add mandatory pause after each request to prevent overwhelming the browser
                 time.sleep(self.REQUEST_PAUSE)
 
                 return True
             except TimeoutException:
                 logger.warning(f"Page load timeout for URL: {url}")
-                time.sleep(self.REQUEST_PAUSE)  # Pause on error too
+                time.sleep(self.REQUEST_PAUSE)
                 return False
             except (
                 WebDriverException,
@@ -220,15 +215,15 @@ class BrowserManager:
                 MaxRetryError,
             ) as e:
                 logger.error(f"Browser connection error navigating to {url}: {str(e)}")
-                time.sleep(self.REQUEST_PAUSE)  # Pause on error too
-                if attempt == 0:  # Only refresh on first attempt
+                time.sleep(self.REQUEST_PAUSE)
+                if attempt == 0:
                     logger.info("Refreshing browser and retrying...")
                     self.refresh_browser()
                 else:
                     return False
             except Exception as e:
                 logger.error(f"Unexpected error navigating to {url}: {str(e)}")
-                time.sleep(self.REQUEST_PAUSE)  # Pause on error too
+                time.sleep(self.REQUEST_PAUSE)
                 return False
 
         return False
@@ -248,15 +243,13 @@ class BrowserManager:
             browser = self.get_browser()
             result = browser.execute_script(script, *args)
 
-            # Add mandatory pause after execution
             time.sleep(self.REQUEST_PAUSE)
 
             return result
         except Exception as e:
             logger.error(f"Error executing script: {str(e)}")
-            time.sleep(self.REQUEST_PAUSE)  # Pause on error too
+            time.sleep(self.REQUEST_PAUSE)
             return None
 
 
-# Create a single instance of the browser manager
 browser_manager = BrowserManager()

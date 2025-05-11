@@ -16,7 +16,7 @@ from app.utils.browser_manager import browser_manager
 from app.utils.api.json_encoder import CustomJSONEncoder
 from urllib3.exceptions import NewConnectionError, MaxRetryError
 
-# Set up logging
+
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
 )
@@ -27,7 +27,7 @@ app = FastAPI(
     openapi_url="/openapi.json",
     docs_url="/docs",
     redoc_url="/redoc",
-    json_encoder=CustomJSONEncoder, 
+    json_encoder=CustomJSONEncoder,
 )
 
 app.add_middleware(

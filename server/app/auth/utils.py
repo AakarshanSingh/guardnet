@@ -7,11 +7,10 @@ from passlib.context import CryptContext
 
 from app.core.config import settings
 
-# Suppress the specific bcrypt warning
-# This fixes the warning: "(trapped) error reading bcrypt version"
+
 warnings.filterwarnings("ignore", message=".*error reading bcrypt version.*")
 
-# Password hashing context
+
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
