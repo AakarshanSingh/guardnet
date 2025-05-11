@@ -153,6 +153,53 @@ npm run dev
 - Understand and respect the scope of testing you are authorized to perform.
 - Always follow responsible disclosure practices if you discover vulnerabilities
 
+## 🏗️ System Design
+
+GuardNet follows a modular architecture designed for maintainability and scalability:
+
+![System Design Diagram](./images/System%20Design.png)
+
+The system is divided into:
+- **Frontend**: User interface for submitting URLs and viewing results
+- **Web Crawler**: Scans websites and saves results to text files
+- **Scan Command Center**: Orchestrates various security tests
+- **Attack Pods**: Individual vulnerability scanners (WordPress, XSS, SQL Injection, etc.)
+- **Data Harbor**: Storage and reporting system for scan results
+
+## 🎥 Video Demo
+
+A demonstration of GuardNet in action can be found here:
+
+[Watch the Demo Video](./video/G54.mp4)
+
+## 📂 Project Structure
+
+```
+guardnet/
+├── client/                  # Frontend React application
+│   ├── public/              # Static assets
+│   └── src/                 # Source files
+│       ├── assets/          # Images and other assets
+│       ├── components/      # React components
+│       │   ├── auth/        # Authentication components
+│       │   ├── common/      # Shared UI components
+│       │   └── dashboard/   # Dashboard components
+│       ├── context/         # React context providers
+│       └── pages/           # Application pages
+├── server/                  # Backend FastAPI application
+│   ├── app/                 # Application code
+│   │   ├── api/             # API endpoints
+│   │   ├── auth/            # Authentication logic
+│   │   ├── core/            # Core application logic
+│   │   ├── database/        # Database configurations
+│   │   ├── models/          # SQLAlchemy models
+│   │   ├── scanners/        # Various vulnerability scanners
+│   │   └── utils/           # Utility functions
+│   └── docs/                # API documentation
+├── images/                  # Project images and diagrams
+└── video/                   # Project video demonstrations
+```
+
 ## 📝 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
