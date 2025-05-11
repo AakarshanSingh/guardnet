@@ -9,7 +9,7 @@
 
 GuardNet is a comprehensive website vulnerability scanner designed to help identify security issues in web applications. This tool performs multiple security scans to detect common vulnerabilities such as XSS, SQL injection, DNS vulnerabilities, and more.
 
-## ✨ Features
+## Features
 
 - **Multiple Vulnerability Scanners**:
   - Cross-Site Scripting (XSS) Detection
@@ -33,7 +33,7 @@ GuardNet is a comprehensive website vulnerability scanner designed to help ident
   - User-specific scan history
   - Role-based access control
 
-## 🚀 Tech Stack
+## Tech Stack
 
 ### Frontend
 - React 19
@@ -52,14 +52,14 @@ GuardNet is a comprehensive website vulnerability scanner designed to help ident
 - Selenium (for dynamic scanning)
 - BeautifulSoup4 (for HTML parsing)
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Node.js 18.0+ and npm/yarn
 - Python 3.10+
 - PostgreSQL database
 - (Optional) Docker and Docker Compose for containerized deployment
 
-## 🔧 Installation
+## Installation
 
 ### Clone the repository
 ```bash
@@ -126,7 +126,7 @@ npm install
 npm run dev
 ```
 
-## 🔍 Usage
+## Usage
 
 1. Access the frontend at `http://localhost:5173`
 2. Register for an account or log in
@@ -134,7 +134,7 @@ npm run dev
 4. Select the scan types you want to perform
 5. Start the scan and view the results in the dashboard
 
-## 📊 Scan Types
+## Scan Types
 
 - **XSS Scanner**: Detects cross-site scripting vulnerabilities
 - **SQL Injection Scanner**: Tests for SQL injection points
@@ -146,14 +146,14 @@ npm run dev
 - **SSL Scanner**: Checks for SSL/TLS configuration issues
 - **WordPress Scanner**: Identifies WordPress-specific vulnerabilities
 
-## 🔒 Security Notes
+## Security Notes
 
 - This tool should only be used on websites you own or have explicit permission to test
 - Unauthorized security testing may be illegal in many jurisdictions
 - Understand and respect the scope of testing you are authorized to perform.
 - Always follow responsible disclosure practices if you discover vulnerabilities
 
-## 🏗️ System Design
+## System Design
 
 GuardNet follows a modular architecture designed for maintainability and scalability:
 
@@ -166,13 +166,13 @@ The system is divided into:
 - **Attack Pods**: Individual vulnerability scanners (WordPress, XSS, SQL Injection, etc.)
 - **Data Harbor**: Storage and reporting system for scan results
 
-## 🎥 Video Demo
+## Video Demo
 
 A demonstration of GuardNet in action can be found here:
 
 [Watch the Demo Video](./video/G54.mp4)
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 guardnet/
@@ -200,6 +200,12 @@ guardnet/
 └── video/                   # Project video demonstrations
 ```
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Authors
+
+- [@AakarshanSingh](https://github.com/AakarshanSingh)
+- [@Aditya3403](https://github.com/Aditya3403)
+- [@Aayush-303](https://github.com/Aayush-303)
