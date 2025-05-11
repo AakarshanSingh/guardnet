@@ -1,6 +1,6 @@
 import React from 'react';
 import { Vulnerability } from './VulnerabilityItem';
-import { formatToIST } from '../../../context/ScanContext';
+import { formatDateTime } from '../../../context/ScanContext';
 
 interface OverviewTabProps {
   vulnerabilities: Vulnerability[];
@@ -104,7 +104,7 @@ const OverviewTab: React.FC<OverviewTabProps> = ({
                 <div>
                   <h4 className="text-sm font-medium text-indigo-800">Scan Created</h4>
                   <p className="text-xs text-indigo-500">
-                    {scan.created_at && formatToIST(scan.created_at)}
+                    {scan.created_at && formatDateTime(scan.created_at)}
                   </p>
                 </div>
               </div>
@@ -115,9 +115,9 @@ const OverviewTab: React.FC<OverviewTabProps> = ({
                   <h4 className="text-sm font-medium text-indigo-800">Scan Started</h4>
                   <p className="text-xs text-indigo-500">
                     {scan.summary?.scan_started_at 
-                      ? formatToIST(scan.summary.scan_started_at) 
+                      ? formatDateTime(scan.summary.scan_started_at) 
                       : scan.started_at 
-                        ? formatToIST(scan.started_at) 
+                        ? formatDateTime(scan.started_at) 
                         : 'Pending'
                     }
                   </p>
@@ -138,9 +138,9 @@ const OverviewTab: React.FC<OverviewTabProps> = ({
                   </h4>
                   <p className="text-xs text-indigo-500">
                     {scan.summary?.scan_completed_at 
-                      ? formatToIST(scan.summary.scan_completed_at)
+                      ? formatDateTime(scan.summary.scan_completed_at)
                       : scan.completed_at 
-                        ? formatToIST(scan.completed_at) 
+                        ? formatDateTime(scan.completed_at) 
                         : (scan.status === 'failed' || scan.summary?.scan_status === 'failed')
                           ? 'Error occurred' 
                           : 'Pending'

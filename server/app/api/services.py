@@ -147,7 +147,6 @@ class ScanService:
         This method is designed to be called from FastAPI's BackgroundTasks
         or directly, but should not be awaited when used with BackgroundTasks
         """
-        # Default scan types if none provided
         if not scan_types:
             scan_types = [
                 "wordpress",
@@ -161,20 +160,17 @@ class ScanService:
                 "xss",
                 "sqli",
             ]
-
         try:
-            # Get scan
+
             scan = db.query(Scan).filter(Scan.id == scan_id).first()
             if not scan:
                 logger.error(f"Scan with ID {scan_id} not found")
                 return
 
-            # Update scan status
             scan.status = "running"
             scan.started_at = datetime.utcnow()
             db.commit()
 
-            # Get website
             website = db.query(Website).filter(Website.id == scan.website_id).first()
             if not website:
                 logger.error(f"Website with ID {scan.website_id} not found")
@@ -182,16 +178,12 @@ class ScanService:
                 db.commit()
                 return
 
-            # Run each scanner - we can't use await here because this function is meant to run in a background task
             current_scanner = "initializing"
 
             try:
-                # Identify which scan types need crawling
                 needs_crawling = any(
                     scan_type in scan_types for scan_type in ["xss", "sqli", "lfi"]
                 )
-
-                # MODIFIED SCAN ORDER: Run non-crawler scanners first, then run crawler-based scanners last
 
                 # 1. WordPress scan
                 if "wordpress" in scan_types:

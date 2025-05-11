@@ -3,10 +3,37 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { AuthContext } from './AuthContext';
 
-// Helper function to convert timestamps to local time zone
-export const formatToIST = (timestamp: string | undefined): string => {
+/**
+ * Helper function to convert timestamps from the database (UTC) to the user's local time zone
+ */
+export const formatDateTime = (timestamp: string | undefined): string => {
   if (!timestamp) return 'N/A';
   
+  try {
+    // PostgreSQL timestamps from Docker are in UTC
+    // Ensure we're explicitly parsing it as UTC
+    const date = new Date(timestamp + 'Z');
+    
+    // Check if the date is valid
+    if (isNaN(date.getTime())) {
+      // Try without the Z suffix as a fallback
+      const fallbackDate = new Date(timestamp);
+      if (isNaN(fallbackDate.getTime())) {
+        return 'Invalid date';
+      }
+      // Use the fallback date
+      return formatWithOptions(fallbackDate);
+    }
+    
+    return formatWithOptions(date);
+  } catch (error) {
+    console.error('Error formatting date:', error);
+    return 'Invalid date';
+  }
+};
+
+// Helper function to format the date with consistent options
+const formatWithOptions = (date: Date): string => {
   const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'short',
@@ -14,10 +41,73 @@ export const formatToIST = (timestamp: string | undefined): string => {
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit',
-    hour12: true
+    hour12: true,
+    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
   };
+    return new Intl.DateTimeFormat(undefined, options).format(date);
+};
+
+/**
+ * Format a timestamp to a relative time string like "3 minutes ago"
+ */
+export const getRelativeTimeString = (timestamp: string | undefined): string => {
+  if (!timestamp) return 'N/A';
   
-  return new Date(timestamp).toLocaleString(undefined, options);
+  try {
+    // PostgreSQL timestamps from Docker are in UTC
+    // Ensure we're explicitly parsing it as UTC
+    const date = new Date(timestamp + 'Z');
+    
+    // Check if the date is valid
+    if (isNaN(date.getTime())) {
+      // Try without the Z suffix as a fallback
+      const fallbackDate = new Date(timestamp);
+      if (isNaN(fallbackDate.getTime())) {
+        return 'Invalid date';
+      }
+      // Use the fallback date for calculation
+      return calculateRelativeTime(fallbackDate);
+    }
+    
+    return calculateRelativeTime(date);
+  } catch (error) {
+    console.error('Error calculating relative time:', error);
+    return 'Unknown time';
+  }
+};
+
+// Helper function to calculate relative time
+const calculateRelativeTime = (date: Date): string => {
+  const now = new Date();
+  const diffMs = now.getTime() - date.getTime();
+  const diffSeconds = Math.floor(diffMs / 1000);
+  
+  if (diffSeconds < 60) {
+    return diffSeconds === 1 ? '1 second ago' : `${diffSeconds} seconds ago`;
+  }
+  
+  const diffMinutes = Math.floor(diffSeconds / 60);
+  if (diffMinutes < 60) {
+    return diffMinutes === 1 ? '1 minute ago' : `${diffMinutes} minutes ago`;
+  }
+  
+  const diffHours = Math.floor(diffMinutes / 60);
+  if (diffHours < 24) {
+    return diffHours === 1 ? '1 hour ago' : `${diffHours} hours ago`;
+  }
+  
+  const diffDays = Math.floor(diffHours / 24);
+  if (diffDays < 30) {
+    return diffDays === 1 ? '1 day ago' : `${diffDays} days ago`;
+  }
+  
+  const diffMonths = Math.floor(diffDays / 30);
+  if (diffMonths < 12) {
+    return diffMonths === 1 ? '1 month ago' : `${diffMonths} months ago`;
+  }
+  
+  const diffYears = Math.floor(diffMonths / 12);
+  return diffYears === 1 ? '1 year ago' : `${diffYears} years ago`;
 };
 
 // Define types
@@ -86,7 +176,6 @@ const ScanProvider = ({ children }: { children: ReactNode }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const { isAuthenticated } = useContext(AuthContext);
 
-  // Submit a new scan
   const submitScan = async (
     url: string,
     cookies?: string
@@ -270,7 +359,7 @@ const ScanProvider = ({ children }: { children: ReactNode }) => {
           });
         }
 
-        // Process SQL injection data if available
+        // Process SQL injection data if availableD
         if (scanData.sqli) {
           transformedResults.push({
             id: `sqli-${scanId}`,

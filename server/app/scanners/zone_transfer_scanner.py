@@ -29,11 +29,9 @@ class ZoneTransferScanner(BaseScanner):
 
     def _is_ip_address(self, hostname: str) -> bool:
         """Check if hostname is an IP address"""
-        # Simple pattern for IPv4 addresses
-        ip_pattern = re.compile(r'^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$')
+        ip_pattern = re.compile(r"^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$")
         match = ip_pattern.match(hostname)
         if match:
-            # Further validate each octet is between 0 and 255
             for octet in match.groups():
                 if int(octet) > 255:
                     return False
@@ -45,9 +43,10 @@ class ZoneTransferScanner(BaseScanner):
         self.progress = 10
 
         try:
-            # If we're dealing with an IP address, skip zone transfer checks
             if self.is_ip:
-                self.logger.info(f"Skipping zone transfer scan for IP address: {self.hostname}")
+                self.logger.info(
+                    f"Skipping zone transfer scan for IP address: {self.hostname}"
+                )
                 self.progress = 100
                 return {
                     "hostname": self.hostname,
@@ -55,10 +54,9 @@ class ZoneTransferScanner(BaseScanner):
                     "nameservers": [],
                     "transferable_domains": [],
                     "issues_found": [],
-                    "message": "Zone transfer scan skipped for IP addresses"
+                    "message": "Zone transfer scan skipped for IP addresses",
                 }
 
-            # Get nameservers
             nameservers = self._get_nameservers()
             self.progress = 40
 
@@ -71,10 +69,9 @@ class ZoneTransferScanner(BaseScanner):
                     "nameservers": [],
                     "transferable_domains": [],
                     "issues_found": [],
-                    "message": "No nameservers found to test"
+                    "message": "No nameservers found to test",
                 }
 
-            # Check each nameserver for zone transfer
             transferable_domains = []
             issues_found = []
 
@@ -91,7 +88,9 @@ class ZoneTransferScanner(BaseScanner):
                             }
                         )
                 except Exception as e:
-                    self.logger.warning(f"Error checking zone transfer for nameserver {ns}: {e}")
+                    self.logger.warning(
+                        f"Error checking zone transfer for nameserver {ns}: {e}"
+                    )
 
             self.progress = 100
 
@@ -122,10 +121,9 @@ class ZoneTransferScanner(BaseScanner):
     def _get_nameservers(self) -> List[str]:
         """Get nameservers for the domain"""
         try:
-            # Handle potential timeouts better
             dns.resolver.default_resolver.timeout = 5
             dns.resolver.default_resolver.lifetime = 10
-            
+
             answers = dns.resolver.resolve(self.hostname, "NS")
             return [rdata.target.to_text().rstrip(".") for rdata in answers]
         except dns.resolver.NXDOMAIN:
@@ -147,19 +145,19 @@ class ZoneTransferScanner(BaseScanner):
     def _check_zone_transfer(self, nameserver: str) -> bool:
         """Check if zone transfer is allowed on a nameserver"""
         try:
-            # Set a short timeout for transfer attempts
             zone = dns.zone.from_xfr(
                 dns.query.xfr(nameserver, self.hostname, timeout=10, lifetime=20)
             )
 
-            # If no exception occurred, zone transfer is allowed
             self.logger.warning(
                 f"Zone transfer allowed on {nameserver} for {self.hostname}"
             )
             return True
 
         except dns.xfr.TransferError:
-            self.logger.info(f"Zone transfer not allowed on {nameserver} (transfer error)")
+            self.logger.info(
+                f"Zone transfer not allowed on {nameserver} (transfer error)"
+            )
             return False
         except ConnectionRefusedError:
             self.logger.info(f"Connection refused by nameserver {nameserver}")

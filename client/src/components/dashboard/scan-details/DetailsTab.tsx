@@ -1,5 +1,5 @@
 import React, { JSX } from 'react';
-import { formatToIST } from '../../../context/ScanContext';
+import { formatDateTime } from '../../../context/ScanContext';
 import DNSInformation from './DNSInformation';
 import PortInformation from './PortInformation';
 import DirectoryScan from './DirectoryScan';
@@ -97,11 +97,10 @@ const DetailsTab: React.FC<DetailsTabProps> = ({
               <h4 className="text-sm font-medium text-indigo-600">Status</h4>
               <p className="text-indigo-900">{currentScan.status.charAt(0).toUpperCase() + currentScan.status.slice(1)}</p>
             </div>
-            
-            <div>
+              <div>
               <h4 className="text-sm font-medium text-indigo-600">Created At</h4>
               <p className="text-indigo-900">
-                {currentScan.created_at && formatToIST(currentScan.created_at)}
+                {currentScan.created_at && formatDateTime(currentScan.created_at)}
               </p>
             </div>
             
@@ -109,7 +108,7 @@ const DetailsTab: React.FC<DetailsTabProps> = ({
               <div>
                 <h4 className="text-sm font-medium text-indigo-600">Started At</h4>
                 <p className="text-indigo-900">
-                  {formatToIST(currentScan.started_at)}
+                  {formatDateTime(currentScan.started_at)}
                 </p>
               </div>
             )}
@@ -118,7 +117,7 @@ const DetailsTab: React.FC<DetailsTabProps> = ({
               <div>
                 <h4 className="text-sm font-medium text-indigo-600">Completed At</h4>
                 <p className="text-indigo-900">
-                  {formatToIST(currentScan.completed_at)}
+                  {formatDateTime(currentScan.completed_at)}
                 </p>
               </div>
             )}

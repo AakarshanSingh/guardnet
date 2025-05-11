@@ -106,29 +106,24 @@ class WebCrawler:
                         logger.warning(
                             f"Failed to set individual cookie {name}: {str(cookie_error)}"
                         )
-                        # Continue with other cookies
 
-            # Refresh to apply cookies
             browser.refresh()
             logger.info(f"Cookies process completed for domain: {self.base_domain}")
 
         except Exception as e:
             logger.error(f"Error setting cookies: {str(e)}")
-            # Continue with crawling even if cookies fail
 
     def start_crawl(self):
         """Start the crawling process with multiple threads"""
         self.set_cookies()
-        self.url_queue.put((self.base_url, 0))  # (url, depth)
+        self.url_queue.put((self.base_url, 0))
 
-        # Create and start worker threads
         for i in range(self.threads_count):
             worker = threading.Thread(target=self._crawl_worker, name=f"crawler-{i}")
             worker.daemon = True
             worker.start()
             self.workers.append(worker)
 
-        # Wait for all threads to complete
         for worker in self.workers:
             worker.join()
 
@@ -139,27 +134,22 @@ class WebCrawler:
         """Worker thread for crawling pages"""
         while self.scanning:
             try:
-                # Get the next URL to process with a timeout
                 url, depth = self.url_queue.get(timeout=5)
 
-                # Check if we've reached max pages
                 with self.lock:
                     if len(self.visited_urls) >= self.max_pages:
                         self.scanning = False
                         self.url_queue.task_done()
                         break
 
-                # Skip if already visited or depth exceeded
                 if url in self.visited_urls or depth > self.max_depth:
                     self.url_queue.task_done()
                     continue
 
-                # Process the page
                 self._process_page(url, depth)
                 self.url_queue.task_done()
 
             except Empty:
-                # No more URLs in the queue, check if all work is done
                 with self.lock:
                     if self.url_queue.empty():
                         break
@@ -171,7 +161,6 @@ class WebCrawler:
         """Process a single page: extract links, forms, and inputs"""
         logger.info(f"Crawling: {url} (depth: {depth})")
 
-        # Mark as visited to avoid duplicate processing
         with self.lock:
             self.visited_urls.add(url)
 
@@ -182,20 +171,17 @@ class WebCrawler:
             return
 
         try:
-            # Allow dynamic content to load
+
             time.sleep(1)
 
-            # Get the current page's content
             page_content = browser.page_source
             soup = BeautifulSoup(page_content, "html.parser")
 
-            # Process the page content
             self._extract_links(soup, url, depth)
             self._extract_forms(soup, url)
             self._extract_inputs(soup, url)
             self._extract_api_endpoints(page_content, url)
 
-            # Check for URL parameters
             parsed_url = urlparse(url)
             if parsed_url.query:
                 params = dict(parse_qsl(parsed_url.query))

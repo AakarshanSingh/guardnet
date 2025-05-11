@@ -81,7 +81,6 @@ class SSLScanner(BaseScanner):
                         OpenSSL.crypto.FILETYPE_ASN1, cert_binary
                     )
 
-                    # Extract certificate information
                     cert_details = {
                         "subject": {
                             component[0][1]: component[1]

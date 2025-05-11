@@ -5,7 +5,6 @@ import uvicorn
 
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from sqlalchemy.exc import SQLAlchemyError
 from app.api.endpoints import router as api_router
@@ -28,7 +27,7 @@ app = FastAPI(
     openapi_url="/openapi.json",
     docs_url="/docs",
     redoc_url="/redoc",
-    json_encoder=CustomJSONEncoder,  # Use custom JSON encoder for handling UUIDs
+    json_encoder=CustomJSONEncoder, 
 )
 
 app.add_middleware(

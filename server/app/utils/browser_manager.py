@@ -1,9 +1,7 @@
 import os
 import logging
 import time
-import urllib.parse
 import urllib3
-from typing import Optional
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
@@ -26,8 +24,8 @@ class BrowserManager:
     """
 
     MAX_RETRIES = 3
-    RETRY_DELAY = 2  # seconds
-    REQUEST_PAUSE = 1  # seconds to pause after each request
+    RETRY_DELAY = 2 
+    REQUEST_PAUSE = 1 
 
     def __init__(self):
         self._browser = None
@@ -35,11 +33,10 @@ class BrowserManager:
         self._initialize_options()
 
     def _initialize_options(self):
-        """Initialize Chrome options for headless browsing"""
+        """Initialize Chrome options"""
         self._options = Options()
-        # Use headless mode for production, uncomment for deployment
-        # self._options.add_argument("--headless=new")  # Updated headless syntax
         self._options.add_argument("--disable-gpu")
+        self._options.add_argument("--headless")
         self._options.add_argument("--no-sandbox")
         self._options.add_argument("--disable-dev-shm-usage")
         self._options.add_argument("--disable-extensions")
@@ -48,16 +45,13 @@ class BrowserManager:
         self._options.add_argument("--ignore-ssl-errors")
         self._options.add_argument("--disable-popup-blocking")
         self._options.add_argument("--window-size=1920,1080")
-        # Add more specific options to prevent connection issues
         self._options.add_argument("--disable-application-cache")
         self._options.add_argument("--disable-web-security")
         self._options.add_argument("--disable-logging")
         self._options.add_argument("--disable-background-networking")
-        # Settings to help with connection pool issues
         self._options.add_argument("--dns-prefetch-disable")
         self._options.add_argument("--disable-features=NetworkService")
         self._options.add_argument("--force-device-scale-factor=1")
-        # Keep-alive settings to manage connections better
         self._options.add_argument("--disable-features=IsolateOrigins,site-per-process")
         self._options.add_argument(
             "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
@@ -121,13 +115,11 @@ class BrowserManager:
         try:
             logger.info("Creating new browser instance")
 
-            # Create Service with extra parameters to help with connection issues
             service = Service(log_path=os.devnull)
 
             self._browser = webdriver.Chrome(options=self._options, service=service)
-            self._browser.set_page_load_timeout(30)  # 30 seconds timeout for page loads
+            self._browser.set_page_load_timeout(30)
 
-            # Set default connection settings
             self._browser.execute_cdp_cmd(
                 "Network.setCacheDisabled", {"cacheDisabled": True}
             )

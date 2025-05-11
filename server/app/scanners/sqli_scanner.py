@@ -140,23 +140,15 @@ class SQLiScanner(BaseScanner):
         try:
             self.progress = 20
 
-            # Check if we have injectable targets from coordinator
             if self.injectable_targets:
-                self.logger.info(
-                    f"Using {len(self.injectable_targets)} targets provided by coordinator"
-                )
-                # Transform the targets into the format _test_parameters expects
+                self.logger.info(f"Using {len(self.injectable_targets)} targets provided by coordinator")
                 endpoints = self._prepare_injectable_params()
             else:
-                # Fall back to finding parameters ourselves if no targets provided
-                self.logger.info(
-                    "No targets from coordinator, finding injectable parameters"
-                )
+                self.logger.info("No targets from coordinator, finding injectable parameters")
                 endpoints = self._find_injectable_params()
 
             self.progress = 30
 
-            # Test each parameter for SQL injection
             if endpoints:
                 self._test_parameters(endpoints)
 

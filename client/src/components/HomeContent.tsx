@@ -28,7 +28,7 @@ const HomeContent = () => {
 
         <div className='max-w-3xl mx-auto text-center relative'>
           <h1 className='text-4xl md:text-5xl font-bold text-indigo-900 mb-6 animate-slideInUp'>
-            Protect Your Website with Advanced Security Scanning
+            Scan your website for Potential Vulnerabilities
           </h1>
           <p
             className='text-xl text-indigo-700 mb-10 max-w-2xl mx-auto animate-fadeIn'
@@ -118,16 +118,16 @@ const HomeContent = () => {
                     strokeLinecap='round'
                     strokeLinejoin='round'
                     strokeWidth={2}
-                    d='M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'
+                    d='M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z'
                   />
                 </svg>
               </div>
               <h3 className='text-xl font-bold text-indigo-900 mb-2'>
-                Malware Detection
+                SSL/TLS Certificate Validation
               </h3>
               <p className='text-indigo-700'>
-                Identify malicious code, hidden backdoors, and other threats
-                that could compromise your website and user data.
+                Verify your encryption protocols, detect expired certificates, and ensure secure 
+                connections between your website and visitors.
               </p>
             </div>
 

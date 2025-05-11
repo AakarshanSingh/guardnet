@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router';
-import { Scan } from '../../context/ScanContext';
-import { formatDistanceToNow } from 'date-fns';
+import { Scan, formatDateTime } from '../../context/ScanContext';
 
 interface ScanCardProps {
   scan: Scan;
@@ -43,12 +42,11 @@ const ScanCard: React.FC<ScanCardProps> = ({ scan }) => {
           {scan.status.charAt(0).toUpperCase() + scan.status.slice(1)}
         </span>
       </div>
-      
-      <div className="flex items-center text-xs text-indigo-500 mb-4">
+        <div className="flex items-center text-xs text-indigo-500 mb-4">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        {formatDistanceToNow(new Date(scan.created_at), { addSuffix: true })}
+        {formatDateTime(scan.created_at)}
       </div>
       
       <div className="flex flex-wrap gap-2 mb-4">
@@ -56,11 +54,10 @@ const ScanCard: React.FC<ScanCardProps> = ({ scan }) => {
           Full Scan
         </span>
       </div>
-      
-      <div className="mt-4 pt-2 border-t border-indigo-50 flex justify-between items-center">
+        <div className="mt-4 pt-2 border-t border-indigo-50 flex justify-between items-center">
         <span className="text-xs text-indigo-500">
           {scan.completed_at ? (
-            <>Completed {formatDistanceToNow(new Date(scan.completed_at), { addSuffix: true })}</>
+            <>Completed {formatDateTime(scan.completed_at)}</>
           ) : scan.status === 'running' ? (
             <>Scan in progress...</>
           ) : scan.status === 'pending' ? (
